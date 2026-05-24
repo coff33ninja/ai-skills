@@ -108,6 +108,7 @@ The `name` and `description` are the primary match keys tools use to decide when
 | **break-repetitive-patterns** | Detects repetitive questions; breaks trained logic with proactive alternatives | | | |
 | **playwright** | Browser automation: navigation, forms, screenshots, data extraction via CLI | ✅ | ✅ | ✅ |
 | **project-backup-status** | Timestamped backups + repo status check before risky edits | | | |
+| **requirements-clarify** | Structured Q&A before ambiguous tasks — one question at a time, multiple choice, assumption surfacing, confirmation step | | | |
 | **safe-code-modifications** | Never removes imports/items without verifying usage across modules | | | |
 | **screenshot** | Cross-platform desktop screenshot capture (macOS/Linux/Windows) | ✅ | ✅ | |
 | **security-best-practices** | Language/framework security reviews and secure-by-default coding | | | ✅ |
