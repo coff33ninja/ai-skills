@@ -1,0 +1,4 @@
+interface:
+  display_name: "Todo Bootstrap"
+  short_description: "Create and maintain project TODO lists"
+  default_prompt: "Use $todo-bootstrap to add or refresh a checkbox-based project TODO list and keep it current."

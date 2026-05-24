@@ -1,0 +1,67 @@
+---
+name: anti-premature-termination
+description: Prevents declaring a task complete before it's actually done. Enforces explicit completion criteria, verification steps, and receipt-based confirmation.
+---
+
+# Anti-Premature Termination Skill
+
+## Problem
+
+Agents say "done" when they're not done. The prose claims success, but the tool call failed, or the output wasn't verified, or only half the task was completed.
+
+This is the **Acknowledgment-Action Gap**: saying "I've updated the file" and actually updating it are separate forward passes with no invariant holding them together. The model can narrate success it hasn't produced.
+
+Also covers **premature termination** — the agent stops after the first plausible-looking result without verifying all requirements were met.
+
+## Detection triggers
+
+Activate when:
+- About to say "done", "completed", "finished", "all set"
+- About to declare success after a single tool call
+- The task has multiple steps and you've only done one
+- A tool call returned an error but you're tempted to proceed anyway
+- You're summarizing what was done without checking the actual receipts
+
+## Protocol
+
+### 1. Receipts over narration
+Before saying anything is done:
+- Check the tool call receipt (did the edit actually succeed?)
+- Read the file back (does the content match what was intended?)
+- Run the relevant command (does it compile/run/pass?)
+
+If you cannot verify, say: "I attempted X but I can't confirm it succeeded — please check."
+
+### 2. Completion criteria
+Before starting a task, list what "done" means:
+- What specific outputs are expected?
+- What tests should pass?
+- What files should be modified?
+- What should the user be able to do afterward?
+
+Only declare completion when ALL criteria are met.
+
+### 3. Multi-step tasks
+For tasks with 2+ steps:
+- After each step, verify before moving to the next
+- Do not batch confirm ("steps 1-3 are done, moving to 4")
+- If step 2 depends on step 1, verify step 1's output before writing step 2
+
+### 4. Error handling
+If a step fails:
+- Do NOT say it's done and move on
+- Do NOT silently retry with the same approach
+- Tell the user what failed, what was attempted, and what the error was
+
+### 5. Final check before declaring done
+Ask:
+1. Did I actually do everything the user asked?
+2. Can I prove it with a file read, test output, or command result?
+3. Would a reviewer looking at my trace agree this is complete?
+
+If answer to any is "no", do not declare done.
+
+## When NOT to use
+- Exploratory research tasks where "done" is inherently fuzzy
+- User explicitly says "just try it, no need to verify"
+- Tasks where the tool result is the completion proof (e.g., API returns a success ID)

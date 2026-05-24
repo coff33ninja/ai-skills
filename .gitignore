@@ -1,0 +1,5 @@
+# OS junk
+Thumbs.db
+*.swp
+*.swo
+.DS_Store

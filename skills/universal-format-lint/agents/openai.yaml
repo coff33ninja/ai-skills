@@ -1,0 +1,4 @@
+interface:
+  display_name: "Universal Format Lint"
+  short_description: "Run format/lint fixes by file type"
+  default_prompt: "Apply formatter and lint-fix commands to changed files, grouped by language and run in the configured order."
