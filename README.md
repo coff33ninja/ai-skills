@@ -110,6 +110,7 @@ The `name` and `description` are the primary match keys tools use to decide when
 | **project-backup-status** | Timestamped backups + repo status check before risky edits | | | |
 | **requirements-clarify** | Structured Q&A before ambiguous tasks — one question at a time, multiple choice, assumption surfacing, confirmation step | | | |
 | **code-collaborate-qa** | Code-focused Q&A for code review, bug diagnosis, and implementation suggestions — developer intent, reproduction steps, trade-offs, confirmation gate | | | |
+| **dont-kill-tokens** | Token-efficient tool use — minimal reads, batched calls, zero comments, no postambles, one-word answers when sufficient | | | |
 | **safe-code-modifications** | Never removes imports/items without verifying usage across modules | | | |
 | **screenshot** | Cross-platform desktop screenshot capture (macOS/Linux/Windows) | ✅ | ✅ | |
 | **security-best-practices** | Language/framework security reviews and secure-by-default coding | | | ✅ |
