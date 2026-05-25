@@ -83,14 +83,14 @@ Copies skill folders into every AI tool's **global** skill path under `%USERPROF
 
 ### Phase 2 — Convert to rules/instructions (`-ConvertRules`)
 
-Generates tool-specific rule and instruction files from SKILL.md content. Project-root outputs only when `-ProjectRoot` is specified (Cursor, Windsurf, and Copilot skip with a warning otherwise). Phase 2 does not run in `-DryRun` mode.
+Generates tool-specific rule and instruction files from SKILL.md content. When `-ProjectRoot` is specified, files go to the project directory; otherwise they fall back to global user-profile paths. Phase 2 does not run in `-DryRun` mode.
 
-| Tool | Format | Global output | Project output |
+| Tool | Format | Global output (no `-ProjectRoot`) | Project output (with `-ProjectRoot`) |
 |---|---|---|---|
 | **Codex CLI** | `AGENTS.md` | `~\.codex\AGENTS.md` | `$ProjectRoot\AGENTS.md` |
-| **GitHub Copilot** | `copilot-instructions.md` | — | `$ProjectRoot\.github\copilot-instructions.md` |
-| **Cursor IDE** | `.mdc` rules (one per skill) | — | `$ProjectRoot\.cursor\rules\skill-*.mdc` |
-| **Windsurf** | `.md` rules (one per skill) | — | `$ProjectRoot\.windsurf\rules\skill-*.md` |
+| **GitHub Copilot** | `copilot-instructions.md` | `~\.copilot\copilot-instructions.md` | `$ProjectRoot\.github\copilot-instructions.md` |
+| **Cursor IDE** | `.mdc` rules (one per skill) | `~\.cursor\rules\skill-*.mdc` | `$ProjectRoot\.cursor\rules\skill-*.mdc` |
+| **Windsurf** | `.md` rules (one per skill) | `~\.codeium\windsurf\rules\skill-*.md` | `$ProjectRoot\.windsurf\rules\skill-*.md` |
 
 ### Tool filtering
 
@@ -99,7 +99,8 @@ The `-Tool` parameter limits both phases to specific tools. Accepts: `Agents`, `
 - **Omitted** (default): all tools
 - **Specified**: only matching tools get Phase 1 sync + Phase 2 rule generation
 - **`-DryRun`**: Phase 1 shows what would be synced; Phase 2 is skipped entirely
-- Examples: `-Tool Cursor` (syncs `~\.cursor\skills\` + generates `.cursor\rules\`),
+- **`-ProjectRoot`**: When set, Phase 2 writes tool rules to the project directory; otherwise rules go to global user-profile paths (`~\.cursor\rules\`, `~\.codeium\windsurf\rules\`, etc.)
+- Examples: `-Tool Cursor` (syncs to `~\.cursor\skills\` + generates rules in `~\.cursor\rules\`),
   `-Tool Cursor,Claude,Cline` (three tools),
   `-Tool Codex,Copilot -ConvertRules -ProjectRoot "C:\Project"` (project rules for Codex + Copilot only)
 
