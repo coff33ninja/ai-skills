@@ -35,7 +35,7 @@ E:\SCRIPTS\AI_skills\
 ## Usage
 
 ```powershell
-# Sync SKILL.md files to all tool skill paths
+# Sync SKILL.md files to ALL tool skill paths (global/user-profile only)
 .\sync-skills.ps1
 
 # Preview without copying
@@ -43,41 +43,52 @@ E:\SCRIPTS\AI_skills\
 
 # Sync skills AND generate rule/instruction files for tools with custom formats
 .\sync-skills.ps1 -ConvertRules
+
+# Sync skills to global paths + generate rules into a specific project directory
+# Phase 1 still only writes to global paths (~\.tool\skills).
+# Phase 2 writes rules to $ProjectRoot\.cursor\rules\ etc.
+.\sync-skills.ps1 -ConvertRules -ProjectRoot "C:\MyProject"
 ```
 
 ## What it does
 
-### Phase 1 — Sync SKILL.md directories
+### Phase 1 — Sync SKILL.md directories (global paths only)
 
-Copies skill folders into every AI tool's skill path. Overwrites existing copies to keep everything in sync.
+Copies skill folders into every AI tool's **global** skill path under `%USERPROFILE%` (e.g. `C:\Users\You\.cursor\skills\`). `-ProjectRoot` has no effect on Phase 1 — it always writes to the same user-profile locations.
 
-| Tool | Global path | Project path (C:\Cleaning) |
+| Tool | Path |
 |---|---|---|
-| Universal / OpenCode | `~\.agents\skills` | — |
-| Claude Code | `~\.claude\skills` | `\.claude\skills` |
-| Codex CLI | `~\.codex\skills` | `\.codex\skills` |
-| GitHub Copilot | `~\.copilot\skills` | `\.github\skills` |
-| Cursor IDE | `~\.cursor\skills` | `\.cursor\skills` |
-| Gemini CLI | `~\.gemini\skills` | `\.gemini\skills` |
-| Antigravity | `~\.gemini\antigravity\skills` | — |
-| Kiro | `~\.kiro\skills` | `\.kiro\skills` |
-| Windsurf | `~\.codeium\windsurf\skills` | `\.windsurf\skills` |
+| Universal / OpenCode | `~\.agents\skills` |
+| Claude Code | `~\.claude\skills` |
+| Codex CLI | `~\.codex\skills` |
+| GitHub Copilot | `~\.copilot\skills` |
+| Cursor IDE | `~\.cursor\skills` |
+| Gemini CLI | `~\.gemini\skills` |
+| Antigravity | `~\.gemini\antigravity\skills` |
+| Kiro | `~\.kiro\skills` |
+| Windsurf | `~\.codeium\windsurf\skills` |
+| Continue | `~\.continue\skills` |
+| Augment | `~\.augment\skills` |
+| Tabnine | `~\.tabnine\agent\skills` |
+| Cline | `~\.cline\skills` |
+| Roo Code | `~\.roo\skills` |
 
 ### Phase 2 — Convert to rules/instructions (`-ConvertRules`)
 
-Generates tool-specific rule and instruction files from SKILL.md content:
+Generates tool-specific rule and instruction files from SKILL.md content. Project-root outputs only when `-ProjectRoot` is specified.
 
-| Tool | Format | Output |
-|---|---|---|
-| **Codex CLI** | `AGENTS.md` | `~\.codex\AGENTS.md` + `C:\Cleaning\AGENTS.md` |
-| **GitHub Copilot** | `copilot-instructions.md` | `C:\Cleaning\.github\copilot-instructions.md` |
-| **Cursor IDE** | `.mdc` rules (one per skill) | `C:\Cleaning\.cursor\rules\skill-*.mdc` |
-| **Windsurf** | `.md` rules (one per skill) | `C:\Cleaning\.windsurf\rules\skill-*.md` |
+| Tool | Format | Global output | Project output |
+|---|---|---|---|
+| **Codex CLI** | `AGENTS.md` | `~\.codex\AGENTS.md` | `$ProjectRoot\AGENTS.md` |
+| **GitHub Copilot** | `copilot-instructions.md` | — | `$ProjectRoot\.github\copilot-instructions.md` |
+| **Cursor IDE** | `.mdc` rules (one per skill) | — | `$ProjectRoot\.cursor\rules\skill-*.mdc` |
+| **Windsurf** | `.md` rules (one per skill) | — | `$ProjectRoot\.windsurf\rules\skill-*.md` |
 
 ## Workflow
 
 1. Add/edit a `SKILL.md` in `skills\<name>\`
-2. Run `.\sync-skills.ps1` (or `.\sync-skills.ps1 -ConvertRules` for rules too)
+ 2. Run `.\sync-skills.ps1` — synced to all global tool paths.
+    Add `-ConvertRules` to also generate rule files. Add `-ProjectRoot <path>` to write project-level rules (e.g. `.cursor\rules\`, `.github\copilot-instructions.md`) into a specific project directory.
 3. All AI tools pick it up on next launch
 
 ## Skill Format
