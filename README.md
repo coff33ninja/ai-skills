@@ -5,7 +5,7 @@ Central repository for AI agent skill definitions. Edit skills here, then push t
 ## Structure
 
 ```
-E:\SCRIPTS\AI_skills\
+.
 ├── sync-skills.ps1        # Push skills + convert to rules
 ├── skills\                # Source of truth — edit SKILL.md files here
 │   ├── anti-cascade-collapse\
@@ -17,8 +17,12 @@ E:\SCRIPTS\AI_skills\
 │   ├── anti-sycophancy\
 │   ├── anti-tool-sprawl\
 │   ├── break-repetitive-patterns\
+│   ├── code-collaborate-qa\
+│   ├── dont-kill-tokens\
+│   ├── os-awareness\
 │   ├── playwright\
 │   ├── project-backup-status\
+│   ├── requirements-clarify\
 │   ├── safe-code-modifications\
 │   ├── screenshot\
 │   ├── security-best-practices\
@@ -79,7 +83,7 @@ Copies skill folders into every AI tool's **global** skill path under `%USERPROF
 
 ### Phase 2 — Convert to rules/instructions (`-ConvertRules`)
 
-Generates tool-specific rule and instruction files from SKILL.md content. Project-root outputs only when `-ProjectRoot` is specified.
+Generates tool-specific rule and instruction files from SKILL.md content. Project-root outputs only when `-ProjectRoot` is specified (Cursor, Windsurf, and Copilot skip with a warning otherwise). Phase 2 does not run in `-DryRun` mode.
 
 | Tool | Format | Global output | Project output |
 |---|---|---|---|
@@ -94,6 +98,7 @@ The `-Tool` parameter limits both phases to specific tools. Accepts: `Agents`, `
 
 - **Omitted** (default): all tools
 - **Specified**: only matching tools get Phase 1 sync + Phase 2 rule generation
+- **`-DryRun`**: Phase 1 shows what would be synced; Phase 2 is skipped entirely
 - Examples: `-Tool Cursor` (syncs `~\.cursor\skills\` + generates `.cursor\rules\`),
   `-Tool Cursor,Claude,Cline` (three tools),
   `-Tool Codex,Copilot -ConvertRules -ProjectRoot "C:\Project"` (project rules for Codex + Copilot only)

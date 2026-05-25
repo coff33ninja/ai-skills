@@ -41,7 +41,7 @@ function Parse-SkillFrontmatter {
     $mdPath = Join-Path $SkillPath "SKILL.md"
     if (-not (Test-Path $mdPath)) { return $null }
     $content = Get-Content -LiteralPath $mdPath -Raw
-    if ($content -match '(?s)^---\s*\n(.*?)\n---\s*\n(.*)') {
+    if ($content -match '(?s)^---\s*\r?\n(.*?)\r?\n---\s*\r?\n(.*)') {
         $yamlBlock = $matches[1]
         $body = $matches[2].Trim()
         $name = ""
@@ -52,10 +52,22 @@ function Parse-SkillFrontmatter {
         } elseif ($yamlBlock -match '(?m)^description:\s*(.+?)$') {
             $description = $matches[1].Trim()
         }
-        $description = $description -replace '\s*\|$' -replace '\s*>$'
         return @{ Name = $name; Description = $description; Body = $body }
     }
     return $null
+}
+
+# ─── Helper: write UTF-8 without BOM (cross-PS-version) ─────────────
+function Set-Utf8NoBom {
+    param([string]$Path, [string]$Value)
+    $utf8 = New-Object System.Text.UTF8Encoding $false
+    [System.IO.File]::WriteAllText($Path, $Value, $utf8)
+}
+
+# ─── Helper: sanitize a string for use in filenames ────────────────
+function Get-SafeFileName {
+    param([string]$Name)
+    return $Name -replace '[^\w\-\.]', '_'
 }
 
 # ═════════════════════════════════════════════════════════════════════
@@ -134,7 +146,7 @@ if ($ConvertRules -and -not $DryRun) {
         # --- Helper: pick first N chars of body as summary ---
         function Get-BodySummary {
             param([string]$Body, [int]$MaxChars = 500)
-            $text = $Body -replace '#+', '' -replace '\*+', '' -replace '`+', ''
+            $text = $Body -replace '(?m)^#+\s*', '' -replace '\*\*?', '' -replace '`[^`\r\n]*`', ''
             $text = $text.Trim()
             if ($text.Length -le $MaxChars) { return $text }
             return $text.Substring(0, $MaxChars) + "..."
@@ -168,12 +180,12 @@ if ($ConvertRules -and -not $DryRun) {
 
             $codexGlobalDir = "$env:USERPROFILE\.codex"
             if (-not (Test-Path $codexGlobalDir)) { New-Item -ItemType Directory -Path $codexGlobalDir -Force | Out-Null }
-            Set-Content -LiteralPath (Join-Path $codexGlobalDir "AGENTS.md") -Value $agentsMdContent -Encoding utf8
+            Set-Utf8NoBom -Path (Join-Path $codexGlobalDir "AGENTS.md") -Value $agentsMdContent
             Write-Host "  [Codex] Generated global AGENTS.md" -ForegroundColor Green
 
             if ($ProjectRoot) {
                 $projAgentsMd = Join-Path $ProjectRoot "AGENTS.md"
-                Set-Content -LiteralPath $projAgentsMd -Value $agentsMdContent -Encoding utf8
+                Set-Utf8NoBom -Path $projAgentsMd -Value $agentsMdContent
                 Write-Host "  [Codex] Generated project AGENTS.md at $ProjectRoot" -ForegroundColor Green
             }
         }
@@ -203,57 +215,69 @@ if ($ConvertRules -and -not $DryRun) {
             if ($ProjectRoot) {
                 $copilotDir = Join-Path $ProjectRoot ".github"
                 if (-not (Test-Path $copilotDir)) { New-Item -ItemType Directory -Path $copilotDir -Force | Out-Null }
-                Set-Content -LiteralPath (Join-Path $copilotDir "copilot-instructions.md") -Value ($copilotLines -join "`r`n") -Encoding utf8
+                Set-Utf8NoBom -Path (Join-Path $copilotDir "copilot-instructions.md") -Value ($copilotLines -join "`r`n")
                 Write-Host "  [Copilot] Generated .github\copilot-instructions.md" -ForegroundColor Green
+            } else {
+                Write-Host "  [Copilot] Skipped -ProjectRoot not provided (needed for .github\copilot-instructions.md)" -ForegroundColor Yellow
             }
         }
 
         # ────────────────────────────────────────────────────────────
         #  2c — Cursor: .mdc rule files (one per skill)
         # ────────────────────────────────────────────────────────────
-        if ($activeTools -contains "Cursor" -and $ProjectRoot) {
-            $cursorRulesDir = Join-Path $ProjectRoot ".cursor\rules"
-            if (-not (Test-Path $cursorRulesDir)) { New-Item -ItemType Directory -Path $cursorRulesDir -Force | Out-Null }
-            Get-ChildItem -LiteralPath $cursorRulesDir -Filter "skill-*.mdc" -ErrorAction SilentlyContinue | Remove-Item -Force
+        if ($activeTools -contains "Cursor") {
+            if ($ProjectRoot) {
+                $cursorRulesDir = Join-Path $ProjectRoot ".cursor\rules"
+                if (-not (Test-Path $cursorRulesDir)) { New-Item -ItemType Directory -Path $cursorRulesDir -Force | Out-Null }
+                Get-ChildItem -LiteralPath $cursorRulesDir -Filter "skill-*.mdc" -ErrorAction SilentlyContinue | Remove-Item -Force
 
-            foreach ($s in $ParsedSkills) {
-                $escapedDesc = $s.Description -replace '"', '""'
-                $lines = New-Object System.Collections.Generic.List[string]
-                $lines.Add("---")
-                $lines.Add("description: `"$escapedDesc`"")
-                $lines.Add("alwaysApply: false")
-                $lines.Add("---")
-                $lines.Add("")
-                $lines.Add("# $($s.Name)")
-                $lines.Add("")
-                $lines.Add($s.Body)
-                Set-Content -LiteralPath (Join-Path $cursorRulesDir "skill-$($s.Name).mdc") -Value ($lines -join "`r`n") -Encoding utf8
+                foreach ($s in $ParsedSkills) {
+                    $safeName = Get-SafeFileName -Name $s.Name
+                    $escapedDesc = $s.Description -replace '"', '""'
+                    $lines = New-Object System.Collections.Generic.List[string]
+                    $lines.Add("---")
+                    $lines.Add("description: `"$escapedDesc`"")
+                    $lines.Add("alwaysApply: false")
+                    $lines.Add("---")
+                    $lines.Add("")
+                    $lines.Add("# $($s.Name)")
+                    $lines.Add("")
+                    $lines.Add($s.Body)
+                    Set-Utf8NoBom -Path (Join-Path $cursorRulesDir "skill-$safeName.mdc") -Value ($lines -join "`r`n")
+                }
+                Write-Host "  [Cursor] Generated $($ParsedSkills.Count) .mdc rule files in .cursor\rules\" -ForegroundColor Green
+            } else {
+                Write-Host "  [Cursor] Skipped -ProjectRoot not provided (needed for .cursor\rules\)" -ForegroundColor Yellow
             }
-            Write-Host "  [Cursor] Generated $($ParsedSkills.Count) .mdc rule files in .cursor\rules\" -ForegroundColor Green
         }
 
         # ────────────────────────────────────────────────────────────
         #  2d — Windsurf: .md rule files (one per skill)
         # ────────────────────────────────────────────────────────────
-        if ($activeTools -contains "Windsurf" -and $ProjectRoot) {
-            $windsurfRulesDir = Join-Path $ProjectRoot ".windsurf\rules"
-            if (-not (Test-Path $windsurfRulesDir)) { New-Item -ItemType Directory -Path $windsurfRulesDir -Force | Out-Null }
-            Get-ChildItem -LiteralPath $windsurfRulesDir -Filter "skill-*.md" -ErrorAction SilentlyContinue | Remove-Item -Force
+        if ($activeTools -contains "Windsurf") {
+            if ($ProjectRoot) {
+                $windsurfRulesDir = Join-Path $ProjectRoot ".windsurf\rules"
+                if (-not (Test-Path $windsurfRulesDir)) { New-Item -ItemType Directory -Path $windsurfRulesDir -Force | Out-Null }
+                Get-ChildItem -LiteralPath $windsurfRulesDir -Filter "skill-*.md" -ErrorAction SilentlyContinue | Remove-Item -Force
 
-            foreach ($s in $ParsedSkills) {
-                $escapedDesc = $s.Description -replace '"', '""'
-                $lines = New-Object System.Collections.Generic.List[string]
-                $lines.Add("---")
-                $lines.Add("trigger: model_decision")
-                $lines.Add("description: `"$escapedDesc`"")
-                $lines.Add("---")
-                $lines.Add("")
-                $lines.Add("# $($s.Name)")
-                $lines.Add("")
-                $lines.Add($s.Body)
-                Set-Content -LiteralPath (Join-Path $windsurfRulesDir "skill-$($s.Name).md") -Value ($lines -join "`r`n") -Encoding utf8
+                foreach ($s in $ParsedSkills) {
+                    $safeName = Get-SafeFileName -Name $s.Name
+                    $escapedDesc = $s.Description -replace '"', '""'
+                    $lines = New-Object System.Collections.Generic.List[string]
+                    $lines.Add("---")
+                    $lines.Add("trigger: model_decision")
+                    $lines.Add("description: `"$escapedDesc`"")
+                    $lines.Add("---")
+                    $lines.Add("")
+                    $lines.Add("# $($s.Name)")
+                    $lines.Add("")
+                    $lines.Add($s.Body)
+                    Set-Utf8NoBom -Path (Join-Path $windsurfRulesDir "skill-$safeName.md") -Value ($lines -join "`r`n")
+                }
+                Write-Host "  [Windsurf] Generated $($ParsedSkills.Count) .md rule files in .windsurf\rules\" -ForegroundColor Green
+            } else {
+                Write-Host "  [Windsurf] Skipped -ProjectRoot not provided (needed for .windsurf\rules\)" -ForegroundColor Yellow
             }
-            Write-Host "  [Windsurf] Generated $($ParsedSkills.Count) .md rule files in .windsurf\rules\" -ForegroundColor Green
         }
 
         Write-Host ""
