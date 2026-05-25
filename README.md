@@ -44,6 +44,10 @@ E:\SCRIPTS\AI_skills\
 # Sync skills AND generate rule/instruction files for tools with custom formats
 .\sync-skills.ps1 -ConvertRules
 
+# Only sync to specific tools (Phase 1 + Phase 2)
+.\sync-skills.ps1 -Tool Cursor,Claude,Cline
+.\sync-skills.ps1 -ConvertRules -Tool Codex,Copilot -ProjectRoot "C:\MyProject"
+
 # Sync skills to global paths + generate rules into a specific project directory
 # Phase 1 still only writes to global paths (~\.tool\skills).
 # Phase 2 writes rules to $ProjectRoot\.cursor\rules\ etc.
@@ -84,11 +88,21 @@ Generates tool-specific rule and instruction files from SKILL.md content. Projec
 | **Cursor IDE** | `.mdc` rules (one per skill) | — | `$ProjectRoot\.cursor\rules\skill-*.mdc` |
 | **Windsurf** | `.md` rules (one per skill) | — | `$ProjectRoot\.windsurf\rules\skill-*.md` |
 
+### Tool filtering
+
+The `-Tool` parameter limits both phases to specific tools. Accepts: `Agents`, `Claude`, `Codex`, `Copilot`, `Cursor`, `Gemini`, `Antigravity`, `Kiro`, `Windsurf`, `Continue`, `Augment`, `Tabnine`, `Cline`, `RooCode`.
+
+- **Omitted** (default): all tools
+- **Specified**: only matching tools get Phase 1 sync + Phase 2 rule generation
+- Examples: `-Tool Cursor` (syncs `~\.cursor\skills\` + generates `.cursor\rules\`),
+  `-Tool Cursor,Claude,Cline` (three tools),
+  `-Tool Codex,Copilot -ConvertRules -ProjectRoot "C:\Project"` (project rules for Codex + Copilot only)
+
 ## Workflow
 
 1. Add/edit a `SKILL.md` in `skills\<name>\`
- 2. Run `.\sync-skills.ps1` — synced to all global tool paths.
-    Add `-ConvertRules` to also generate rule files. Add `-ProjectRoot <path>` to write project-level rules (e.g. `.cursor\rules\`, `.github\copilot-instructions.md`) into a specific project directory.
+2. Run `.\sync-skills.ps1` — synced to all global tool paths.
+   Use `-Tool Cursor,Copilot` to target specific tools instead. Add `-ConvertRules` to also generate rule files. Add `-ProjectRoot <path>` to write project-level rules into a specific project directory.
 3. All AI tools pick it up on next launch
 
 ## Skill Format
