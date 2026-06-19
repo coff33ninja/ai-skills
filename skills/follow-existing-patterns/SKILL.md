@@ -1,0 +1,65 @@
+---
+name: follow-existing-patterns
+description: Enforces that all new code, docs, and config match the existing codebase conventions, structure, and style — preventing inconsistent implementations that get reworked each session.
+---
+
+# Follow Existing Patterns Skill
+
+## Problem it solves
+
+Each session produces code that looks different from what's already in the codebase. New commands don't match existing command patterns, docs use different formatting, menu items have inconsistent descriptions. This accumulates into a mess that gets rewritten every session.
+
+Root cause: writing code based on assumptions rather than reading the existing conventions first.
+
+## Protocol
+
+### 1. Before writing any new code, doc, or config
+
+Read the existing patterns:
+
+- **For a new command**: Read 2-3 existing command implementations end-to-end. Note the structure: error handling style, status prefix format (`[+]`/`[!]`/`[-]`/`[ERROR]`), verification steps, prompt patterns, flow order.
+- **For docs**: Read the existing doc sections. Note heading levels, flow description format, code block style, table formatting.
+- **For menu items**: Read the existing menu formatting. Note numbering, indentation, description style.
+
+### 2. Pattern checklist before implementing
+
+Verify your planned implementation matches:
+
+- **Structure** — Same label format (`:command`), same sections (header, description, steps, verification, next step)
+- **Error handling** — Same `%errorlevel%` check style, same `pause` / `goto :end` pattern
+- **Status messages** — Same prefix usage: `[*]` for actions, `[+]` success, `[!]` warning, `[-]` info, `[ERROR]` failure
+- **User interaction** — Same prompt style (`set /p "var=Prompt? (Y/n): "`), same `if /i "!var!"=="n"` pattern
+- **Non-blocking windows** — Same `start "Title" cmd /c "command & pause"` + `pause` pattern if used
+- **Verification** — Same command-after-command verification with status reporting
+- **Cancel windows** — Same `timeout /t N /nobreak >nul` duration and placement
+
+### 3. For each new addition, cite which existing pattern you followed
+
+In your response, specify: "Followed pattern from `:existing_label`" so the user can verify consistency without re-explaining.
+
+### 4. When renaming or restructuring
+
+Do not change existing patterns. If an existing pattern is wrong, add the new thing correctly and note the inconsistency — do not fix both at once.
+
+## Detection triggers
+
+Activate when:
+- Adding a new command, menu option, or doc section
+- Writing any new code in an existing file
+- User has previously corrected inconsistencies in the session
+
+## When NOT to use
+- Greenfield projects with no existing code
+- User explicitly requests a different style from existing patterns
+
+
+## Cross-references
+
+- **anti-sycophancy** — Following patterns prevents repeated corrections that trigger sycophancy loops.
+- **universal-format-lint** — Both enforce consistency. follow-existing-patterns covers code structure and style; universal-format-lint covers formatting and lint rules.
+- **dont-kill-tokens** — Reading existing patterns first reduces trial-and-error, saving tokens.
+
+
+- **self-validate** — After implementing, validate that the new code actually matches the patterns.
+
+- **audit-project** — Use audit to verify the project consistently follows its own patterns across all files.

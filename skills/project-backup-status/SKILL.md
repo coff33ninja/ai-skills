@@ -90,3 +90,11 @@ When the user gives broad ownership of a repo, or asks for major feature work, r
 2. create timestamped backup
 3. proceed with implementation
 4. update status tracker
+
+## Cross-references
+
+- **self-validate** — Validate backups actually exist and are correct.
+
+- **anti-premature-termination** — Backing up is a prerequisite before risky work.
+
+- **audit-project** — Audit should check backup status as part of project health.

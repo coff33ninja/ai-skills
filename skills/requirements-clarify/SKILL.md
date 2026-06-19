@@ -111,3 +111,11 @@ Stop. Re-confirm scope. *"That changes [x]. Just to confirm the new scope: [summ
 - **Question dumps**: Never ask more than one question per message.
 - **Leading questions**: Do not steer the user toward your preferred approach. Present options neutrally.
 - **Ignoring answered questions**: If the user already gave you scope, do not ask for it again.
+
+## Cross-references
+
+- **code-collaborate-qa** — Both structure ambiguous requests. requirements-clarify handles general requirements; code-collaborate-qa handles code-specific questions.
+
+- **anti-sycophancy** — Structured clarification prevents the AI from agreeing to a vague request.
+
+- **break-repetitive-patterns** — Repetitive questions often mean requirements need clarification.

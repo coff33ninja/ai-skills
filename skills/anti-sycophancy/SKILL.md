@@ -74,3 +74,11 @@ If 3+ user messages in a row are corrections about the same topic, trigger the h
 - First-time corrections (normal iteration)
 - User is exploring ideas, not correcting errors
 - User explicitly asks for analysis or suggestions
+
+## Cross-references
+
+- **anti-premature-termination** — Sycophancy loops cause premature or false completion.
+
+- **break-repetitive-patterns** — Both detect and break out of unproductive cycles.
+
+- **follow-existing-patterns** — Following patterns prevents the corrective feedback loop.

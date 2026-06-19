@@ -60,3 +60,9 @@ Key differences to track:
 When spawning a subagent via `task`, include the OS info in the prompt so the subagent doesn't have to re-detect.
 
 *Example: "The host OS is Windows 11 (pwsh). Use PowerShell syntax and Windows paths."*
+
+## Cross-references
+
+- **anti-global-install** — OS detection prevents wrong install paths on Windows.
+
+- **portable-self-contained** — Portable environment setup depends on OS-aware paths.

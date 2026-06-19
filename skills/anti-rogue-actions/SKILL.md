@@ -62,3 +62,11 @@ If a plan has multiple destructive steps, confirm EACH step. An initial "yes" is
 - Non-destructive queries
 - User explicitly says "do it, don't ask" and the action is low-risk
 - Operations in clearly isolated/sandboxed environments
+
+## Cross-references
+
+- **anti-library-hallucination** — A wrong package suggestion can lead to destructive actions.
+
+- **anti-phantom-symbols** — Invented APIs can cause runtime failures that cascade.
+
+- **security-best-practices** — Safety bounds and permission checks are security concerns.

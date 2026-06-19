@@ -110,3 +110,11 @@ If cache and project are on different drives, tools may warn about hardlink fall
 - [ ] Not modifying system Python / Node / etc.?
 - [ ] Cache directory redirected off C drive if this is a big dependency?
 - [ ] Using the SAME package manager the project already uses (npm vs yarn, pip vs uv)?
+
+## Cross-references
+
+- **portable-self-contained** — Both enforce using project-local environments over global installs.
+
+- **os-awareness** — OS-aware install paths are critical to avoiding global installs on Windows.
+
+- **audit-project** — Audit detects global installs that violate this rule.

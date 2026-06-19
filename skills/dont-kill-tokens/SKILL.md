@@ -72,3 +72,9 @@ description: Enforces token-efficient tool use. Prevents wasteful reads, redunda
 Imagine each response costs $0.01 per token. Would you still write that sentence? Would you still run that grep? Would you still ask that question?
 
 If not, don't do it.
+
+## Cross-references
+
+- **anti-tool-sprawl** — Both prevent wasteful tool use. dont-kill-tokens covers output and reads; anti-tool-sprawl covers over-tooling.
+
+- **universal-format-lint** — Formatting is best batched to save tokens.

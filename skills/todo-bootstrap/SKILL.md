@@ -77,3 +77,11 @@ If you are unsure whether something is complete, leave it unchecked and phrase i
 When the user asks for changes, reviews, fixes, or next steps, update the TODO if it is the repo's chosen tracker. Add new checked items for work completed in the current task and unchecked items for newly discovered gaps that materially matter.
 
 Avoid rewriting the whole list every turn. Prefer small, surgical updates.
+
+## Cross-references
+
+- **anti-premature-termination** — TODO checklists serve as completion criteria.
+
+- **project-backup-status** — TODO checklists help track backup and restoration steps.
+
+- **audit-project** — Audit findings should be tracked in TODO items.

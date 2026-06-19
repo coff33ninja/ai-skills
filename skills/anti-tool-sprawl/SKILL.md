@@ -62,3 +62,11 @@ After each tool call, ask:
 - First call to understand the problem (always gather initial context)
 - Sequential operations that genuinely need different tools
 - User explicitly asks to retry or dig deeper
+
+## Cross-references
+
+- **dont-kill-tokens** — Both reduce unnecessary context consumption.
+
+- **anti-premature-termination** — Tool sprawl causes wasted context leading to premature termination.
+
+- **self-validate** — Validation after operations catches failures caused by over-tooling.

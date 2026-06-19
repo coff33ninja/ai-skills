@@ -65,3 +65,11 @@ If answer to any is "no", do not declare done.
 - Exploratory research tasks where "done" is inherently fuzzy
 - User explicitly says "just try it, no need to verify"
 - Tasks where the tool result is the completion proof (e.g., API returns a success ID)
+
+## Cross-references
+
+- **self-validate** — Run validation as part of completion verification criteria.
+
+- **project-backup-status** — Backup before changes is a completion criterion.
+
+- **anti-tool-sprawl** — Premature termination is often caused by tool sprawl wasting context.

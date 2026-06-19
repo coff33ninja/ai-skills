@@ -129,3 +129,13 @@ The skill can be invoked explicitly with `/verify-and-cite` or should be applied
 ---
 
 *This skill embodies the principle that reducing hallucinations requires systematic verification, transparent sourcing, and honest communication about the limits of one's knowledge.*
+
+## Cross-references
+
+- **anti-library-hallucination** — Both require verification. verify-and-cite covers facts and sources; anti-library-hallucination covers package/library existence.
+
+- **anti-phantom-symbols** — Both prevent fabricating things that don't exist.
+
+- **self-validate** — Both require verification of correctness.
+
+- **audit-project** — Audit findings must cite specific evidence.

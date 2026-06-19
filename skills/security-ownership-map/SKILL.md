@@ -204,3 +204,11 @@ Use `references/neo4j-import.md` when you need to load the CSVs into Neo4j. It i
 - `bus_factor_hotspots` in `summary.json` lists sensitive files with low bus factor; `orphaned_sensitive_code` is the stale subset.
 - If `git log` is too large, narrow with `--since` or `--until`.
 - Compare `summary.json` against CODEOWNERS to highlight ownership drift.
+
+## Cross-references
+
+- **security-best-practices** — Ownership data helps assign security remediation work.
+
+- **security-threat-model** — Owners of sensitive code should be involved in threat modeling.
+
+- **audit-project** — Audit can flag orphaned security-sensitive code.

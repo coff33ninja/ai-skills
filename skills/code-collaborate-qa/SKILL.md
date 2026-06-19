@@ -112,3 +112,11 @@ After the Q&A, summarize before acting:
 - **Overwhelming with options**: Present at most 3 approaches. More than that is noise.
 - **Ignoring the developer's context**: They may already have tried things or have constraints they haven't mentioned. Ask.
 - **Skipping reproduction**: For bugs, always try to get reproduction steps first. Without them, you're guessing.
+
+## Cross-references
+
+- **requirements-clarify** — Both handle ambiguous requests. code-collaborate-qa is for code-specific Q&A; requirements-clarify is for general requirements.
+
+- **safe-code-modifications** — Code review should verify safe modification patterns.
+
+- **follow-existing-patterns** — Code review should check against existing codebase patterns.

@@ -16,11 +16,15 @@ Central repository for AI agent skill definitions. Edit skills here, then push t
 │   ├── anti-rogue-actions\
 │   ├── anti-sycophancy\
 │   ├── anti-tool-sprawl\
+│   ├── audit-project\
 │   ├── break-repetitive-patterns\
 │   ├── code-collaborate-qa\
 │   ├── dont-kill-tokens\
+│   ├── follow-existing-patterns\
+│   ├── no-dead-code-removal\
 │   ├── os-awareness\
 │   ├── playwright\
+│   ├── portable-self-contained\
 │   ├── project-backup-status\
 │   ├── requirements-clarify\
 │   ├── safe-code-modifications\
@@ -28,6 +32,7 @@ Central repository for AI agent skill definitions. Edit skills here, then push t
 │   ├── security-best-practices\
 │   ├── security-ownership-map\
 │   ├── security-threat-model\
+│   ├── self-validate\
 │   ├── todo-bootstrap\
 │   ├── universal-format-lint\
 │   ├── unused-import-implementation\
@@ -136,18 +141,23 @@ The `name` and `description` are the primary match keys tools use to decide when
 | **anti-rogue-actions** | Prevents absurd/destructive outcomes; enforces bounds, permissions, sanity checks | | | |
 | **anti-sycophancy** | Prevents compensatory sycophancy, fix loops — hard resets after 2+ failed corrections | | | |
 | **anti-tool-sprawl** | Prevents over-tooling, spam, bloat; lean selection + progress detection | | | |
+| **audit-project** | Runs a systematic audit of a project — checking dependency health, security vulnerabilities, config integrity, code consistency, disk usage, and environment portability. Produces a report with findings prioritized by severity. | | | |
 | **break-repetitive-patterns** | Detects repetitive questions; breaks trained logic with proactive alternatives | | | |
-| **playwright** | Browser automation: navigation, forms, screenshots, data extraction via CLI | ✅ | ✅ | ✅ |
-| **project-backup-status** | Timestamped backups + repo status check before risky edits | | | |
-| **requirements-clarify** | Structured Q&A before ambiguous tasks — one question at a time, multiple choice, assumption surfacing, confirmation step | | | |
 | **code-collaborate-qa** | Code-focused Q&A for code review, bug diagnosis, and implementation suggestions — developer intent, reproduction steps, trade-offs, confirmation gate | | | |
 | **dont-kill-tokens** | Token-efficient tool use — minimal reads, batched calls, zero comments, no postambles, one-word answers when sufficient | | | |
+| **follow-existing-patterns** | Enforces that all new code, docs, and config match the existing codebase conventions, structure, and style — preventing inconsistent implementations that get reworked each session. | | | |
+| **no-dead-code-removal** | Never remove dead code you added. Refactor it into something useful instead. Deletion is not an option for code you wrote in this session. | | | |
 | **os-awareness** | OS detection and session memory — prevents Linux-isms on Windows, wrong path separators, incorrect shebangs, incompatible shell syntax | | | |
+| **playwright** | Browser automation: navigation, forms, screenshots, data extraction via CLI | ✅ | ✅ | ✅ |
+| **portable-self-contained** | Keeps all dependencies, SDKs, virtual environments, and tooling inside the project directory. Prevents polluting the OS drive (especially C: with <30% free) by using project-local installs. Always checks disk space and documents the setup. | | | |
+| **project-backup-status** | Timestamped backups + repo status check before risky edits | | | |
+| **requirements-clarify** | Structured Q&A before ambiguous tasks — one question at a time, multiple choice, assumption surfacing, confirmation step | | | |
 | **safe-code-modifications** | Never removes imports/items without verifying usage across modules | | | |
 | **screenshot** | Cross-platform desktop screenshot capture (macOS/Linux/Windows) | ✅ | ✅ | |
 | **security-best-practices** | Language/framework security reviews and secure-by-default coding | | | ✅ |
 | **security-ownership-map** | Git-based security ownership topology, bus factor, CSV/JSON export | ✅ | | ✅ |
 | **security-threat-model** | Repository-grounded threat modeling with mitigations | | | ✅ |
+| **self-validate** | After any batch of changes (edits, skill updates, cross-references, docs), runs systematic validation to catch inconsistencies, missing references, broken links, and syntax errors before declaring done. Prevents the need for follow-up corrections. | | | |
 | **todo-bootstrap** | Creates/refreshes Markdown TODO checklists grounded in actual codebase | | | |
 | **universal-format-lint** | Formatter + lint-fixer per file type (Python, JS/TS, Markdown, YAML, PS1, sh) | | | |
 | **unused-import-implementation** | Infers intent and implements missing use instead of deleting unused imports | | | |

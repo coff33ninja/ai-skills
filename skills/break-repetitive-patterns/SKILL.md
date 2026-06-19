@@ -130,3 +130,9 @@ This skill works best when:
 ---
 
 *This skill embodies the principle that sometimes the best way forward is to step back and approach the problem with fresh eyes and current information.*
+
+## Cross-references
+
+- **anti-sycophancy** — Both address repetitive loops. break-repetitive-patterns handles user-side patterns; anti-sycophancy handles model-side agreement loops.
+
+- **requirements-clarify** — When user asks repetitive questions, they may need requirements clarification instead.

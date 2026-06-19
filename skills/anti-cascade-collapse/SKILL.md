@@ -54,3 +54,11 @@ Before delivering a final result:
 - Single-step tasks (no cascade possible)
 - Steps that are genuinely independent
 - User explicitly says "ignore the earlier constraint"
+
+## Cross-references
+
+- **anti-premature-termination** — Both prevent cascade failure. anti-cascade-collapse handles step-by-step assumption re-verification; anti-premature-termination handles completion criteria.
+
+- **follow-existing-patterns** — Re-verifying assumptions requires knowing what the existing patterns actually are.
+
+- **anti-sycophancy** — Prevents agreeing with a false assumption instead of re-verifying it.

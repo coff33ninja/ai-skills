@@ -96,3 +96,11 @@ This skill follows your requested guidelines by:
 2. Providing specific methods to check if items are truly obsolete
 3. Including guidance on checking cross-module usage
 4. Focusing on safe removal processes
+
+## Cross-references
+
+- **no-dead-code-removal** — Direct overlap. safe-code-modifications verifies usage before removal; no-dead-code-removal says refactor instead of delete.
+
+- **unused-import-implementation** — When an import is flagged unused, this completes the intended usage instead of removing it.
+
+- **anti-phantom-symbols** — Verifying symbol existence before modification prevents phantom symbol errors.

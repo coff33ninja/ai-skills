@@ -57,3 +57,11 @@ When asked for a "library from 2025" or a "fast XML parser":
 - Standard library modules (os, sys, json, etc.)
 - Packages already in the project's dependencies
 - Well-known packages you've verified exist recently
+
+## Cross-references
+
+- **verify-and-cite** — Both require verification before suggesting a library/fact.
+
+- **anti-phantom-symbols** — Both prevent invented APIs. This one covers package names; anti-phantom-symbols covers symbols within them.
+
+- **anti-rogue-actions** — Suggesting a real but wrong package can cause destructive side effects.

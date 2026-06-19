@@ -81,3 +81,11 @@ For mixed-language repos, use this default sequence:
 2. JS/TS + docs/data formats: `prettier --write` -> `eslint --fix`
 3. PowerShell: `Invoke-Formatter` -> `Invoke-ScriptAnalyzer -Fix`
 4. Shell: `shfmt -w` -> `shellcheck`
+
+## Cross-references
+
+- **dont-kill-tokens** — Batched formatting saves tokens.
+
+- **follow-existing-patterns** — Formatting should match project conventions.
+
+- **self-validate** — Syntax validation complements linting.

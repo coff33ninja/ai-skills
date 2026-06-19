@@ -45,3 +45,11 @@ When applying this skill, report:
 - Implemented use case
 - Validation performed
 - Any imports removed and explicit reason
+
+## Cross-references
+
+- **no-dead-code-removal** — Both address code you added that seems unused. unused-import-implementation completes the intended usage; no-dead-code-removal prevents deletion.
+
+- **safe-code-modifications** — Both verify an import is truly unused before acting.
+
+- **anti-phantom-symbols** — Intended usage should reference real symbols.

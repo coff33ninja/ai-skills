@@ -53,3 +53,11 @@ Add an explicit note: "I used `X.Y()` — please verify this exists in version Z
 - Standard library builtins (these are stable)
 - Methods you've verified exist via existing project usage
 - Code in the same file you're editing (self-referential is fine)
+
+## Cross-references
+
+- **verify-and-cite** — Both verify existence before referencing.
+
+- **anti-library-hallucination** — Both prevent fabrication. This one covers internal symbols; anti-library-hallucination covers package names.
+
+- **safe-code-modifications** — Verifying symbol usage overlaps with safe removal checks.

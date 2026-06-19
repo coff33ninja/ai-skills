@@ -1,0 +1,36 @@
+name: Update README catalog
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "skills/**"
+
+permissions:
+  contents: write
+
+jobs:
+  update-readme:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update README catalog
+        shell: pwsh
+        run: |
+          .\scripts\update-readme-catalog.ps1
+
+      - name: Commit changes
+        shell: pwsh
+        run: |
+          $status = git status --porcelain README.md
+          if ($status) {
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add README.md
+            git commit -m "Auto-update README catalog after skill changes"
+            git push
+            Write-Host "README updated and pushed." -ForegroundColor Green
+          } else {
+            Write-Host "No README changes to commit." -ForegroundColor Green
+          }

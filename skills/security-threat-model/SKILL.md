@@ -79,3 +79,11 @@ Deliver an actionable AppSec-grade threat model that is specific to the reposito
 - Optional controls/asset list: `references/security-controls-and-assets.md`
 
 Only load the reference files you need. Keep the final result concise, grounded, and reviewable.
+
+## Cross-references
+
+- **security-best-practices** — Threat model findings drive security practice priorities.
+
+- **security-ownership-map** — Owners of components in the threat model should be identified.
+
+- **audit-project** — Audit findings may surface trust boundaries and assets for threat modeling.
