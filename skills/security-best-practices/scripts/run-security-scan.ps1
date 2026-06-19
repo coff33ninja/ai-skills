@@ -17,15 +17,15 @@ $report = @"
 
 $findings = @()
 
-# Check for common security issues
+# Check for common security issues — use single-quoted patterns to avoid quote soup
 $patterns = @(
-    @{Pattern='(api[_-]?key|apikey|secret|token|password|passwd|credential)\s*[:=]\s*["'"']\w{8,}["'"']'; Severity='HIGH'; Desc='Hardcoded credential'}
+    @{Pattern="(api[_-]?key|apikey|secret|token|password|passwd|credential)\s*[:=]\s*[""']\w{8,}[""']"; Severity='HIGH'; Desc='Hardcoded credential'}
     @{Pattern='Invoke-Expression|iex\s|eval\s|exec\(|os\.system|subprocess\.call'; Severity='HIGH'; Desc='Code execution risk'}
     @{Pattern='(SELECT|INSERT|UPDATE|DELETE).*\+.*(input|param|arg|var)'; Severity='MEDIUM'; Desc='Possible SQL injection'}
-    @{Pattern='(http://)[^s]'; Severity='LOW'; Desc='Unencrypted HTTP (not HTTPS)'}
+    @{Pattern='http://[^s]'; Severity='LOW'; Desc='Unencrypted HTTP (not HTTPS)'}
 )
 
-$files = Get-ChildItem -LiteralPath $resolved -Recurse -File | Where-Object { $_.Extension -match '\.(ps1|py|js|ts|go|rs|java|cs|php|sh)$' -and $_.FullName -notmatch '\\\.(git|venv|node_modules)' }
+$files = Get-ChildItem -LiteralPath $resolved -Recurse -File | Where-Object { $_.Extension -match '\.(ps1|py|js|ts|go|rs|java|cs|php|sh)$' -and $_.FullName -notmatch '\\.(git|venv|node_modules)' }
 
 foreach ($file in $files) {
     $content = Get-Content -LiteralPath $file.FullName -Raw -ErrorAction SilentlyContinue

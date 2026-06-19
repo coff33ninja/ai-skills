@@ -28,7 +28,7 @@ $results += [PSCustomObject]@{ Check = "Disk usage"; Status = "$([math]::Round($
 if (Test-Path (Join-Path $ProjectPath ".git")) {
     Push-Location $ProjectPath
     $stashed = git stash list 2>$null | Measure-Object | Select-Object -ExpandProperty Count
-    $ahead = git rev-list --count @{u}..HEAD 2>$null
+    $ahead = git rev-list --count '@{u}..HEAD' 2>$null
     if (-not $ahead) { $ahead = 0 }
     $results += [PSCustomObject]@{ Check = "Git: stashes"; Status = "$stashed stash(es)"; Found = $true }
     $results += [PSCustomObject]@{ Check = "Git: commits ahead"; Status = "$ahead ahead of remote"; Found = $true }
