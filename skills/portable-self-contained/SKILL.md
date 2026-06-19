@@ -139,3 +139,4 @@ Activate when:
 - **audit-project** — Run an audit to detect environment portability violations (global installs, hardcoded paths, missing setup docs).
 
 - **toolchain-fallback** — Toolchain detection and fallback install scripts must follow the scripts/ folder convention defined in portable-self-contained section 6.
+- **playwright** — The Playwright CLI skill previously bundled its wrapper script. Per section 6, tooling scripts should live in the project's `scripts/` or `tools/` directory and be installed on-demand (via npx), not copied with the skill.
