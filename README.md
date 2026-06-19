@@ -133,38 +133,38 @@ The `name` and `description` are the primary match keys tools use to decide when
 ## Skill Catalog
 
 | Skill | Description | Scripts | Assets | Refs |
-|---|---|---|---|---|
-| **anti-cascade-collapse** | Prevents order-gap hallucination — re-verifies assumptions at each step to avoid cascade failure | | | |
-| **anti-global-install** | Never installs tools globally; uses project-local environments (venv, node_modules, etc.) | | | |
-| **anti-library-hallucination** | Prevents suggesting non-existent packages, fabricated libs, typosquatting risks | | | |
-| **anti-phantom-symbols** | Prevents invented APIs, imports, methods — verifies symbols against actual codebase | | | |
-| **anti-premature-termination** | Enforces explicit completion criteria, verification steps before declaring done | | | |
-| **anti-rogue-actions** | Prevents absurd/destructive outcomes; enforces bounds, permissions, sanity checks | | | |
-| **anti-sycophancy** | Prevents compensatory sycophancy, fix loops — hard resets after 2+ failed corrections | | | |
-| **anti-tool-sprawl** | Prevents over-tooling, spam, bloat; lean selection + progress detection | | | |
-| **audit-project** | Runs a systematic audit of a project — checking dependency health, security vulnerabilities, config integrity, code consistency, disk usage, and environment portability. Produces a report with findings prioritized by severity. | | | |
-| **break-repetitive-patterns** | Detects repetitive questions; breaks trained logic with proactive alternatives | | | |
-| **code-collaborate-qa** | Code-focused Q&A for code review, bug diagnosis, and implementation suggestions — developer intent, reproduction steps, trade-offs, confirmation gate | | | |
-| **dont-kill-tokens** | Token-efficient tool use — minimal reads, batched calls, zero comments, no postambles, one-word answers when sufficient | | | |
-| **follow-existing-patterns** | Enforces that all new code, docs, and config match the existing codebase conventions, structure, and style — preventing inconsistent implementations that get reworked each session. | | | |
-| **no-dead-code-removal** | Never remove dead code you added. Refactor it into something useful instead. Deletion is not an option for code you wrote in this session. | | | |
-| **os-awareness** | OS detection and session memory — prevents Linux-isms on Windows, wrong path separators, incorrect shebangs, incompatible shell syntax | | | |
-| **playwright** | Browser automation: navigation, forms, screenshots, data extraction via CLI | ✅ | ✅ | ✅ |
-| **portable-self-contained** | Keeps all dependencies, SDKs, virtual environments, and tooling inside the project directory. Prevents polluting the OS drive (especially C: with <30% free) by using project-local installs. Always checks disk space and documents the setup. | | | |
-| **project-backup-status** | Timestamped backups + repo status check before risky edits | | | |
-| **requirements-clarify** | Structured Q&A before ambiguous tasks — one question at a time, multiple choice, assumption surfacing, confirmation step | | | |
-| **safe-code-modifications** | Never removes imports/items without verifying usage across modules | | | |
+|---|---|---|---|---|---|
+| **anti-cascade-collapse** | Prevents order-gap hallucination — re-verifies assumptions at each step to avoid cascade failure | ✅ | | |
+| **anti-global-install** | Never installs tools globally; uses project-local environments (venv, node_modules, etc.) | ✅ | | |
+| **anti-library-hallucination** | Prevents suggesting non-existent packages, fabricated libs, typosquatting risks | ✅ | | |
+| **anti-phantom-symbols** | Prevents invented APIs, imports, methods — verifies symbols against actual codebase | ✅ | | |
+| **anti-premature-termination** | Enforces explicit completion criteria, verification steps before declaring done | ✅ | | |
+| **anti-rogue-actions** | Prevents absurd/destructive outcomes; enforces bounds, permissions, sanity checks | ✅ | | |
+| **anti-sycophancy** | Prevents compensatory sycophancy, fix loops — hard resets after 2+ failed corrections | ✅ | | |
+| **anti-tool-sprawl** | Prevents over-tooling, spam, bloat; lean selection + progress detection | ✅ | | |
+| **audit-project** | Runs a systematic audit of a project — checking dependency health, security vulnerabilities, config integrity, code consistency, disk usage, and environment portability. Produces a report with findings prioritized by severity. | ✅ | | |
+| **break-repetitive-patterns** | Detects repetitive questions; breaks trained logic with proactive alternatives | ✅ | | |
+| **code-collaborate-qa** | Code-focused Q&A for code review, bug diagnosis, and implementation suggestions — developer intent, reproduction steps, trade-offs, confirmation gate | ✅ | | |
+| **dont-kill-tokens** | Token-efficient tool use — minimal reads, batched calls, zero comments, no postambles, one-word answers when sufficient | ✅ | | |
+| **follow-existing-patterns** | Enforces that all new code, docs, and config match the existing codebase conventions, structure, and style — preventing inconsistent implementations that get reworked each session. | ✅ | | |
+| **no-dead-code-removal** | Never remove dead code you added. Refactor it into something useful instead. Deletion is not an option for code you wrote in this session. | ✅ | | |
+| **os-awareness** | OS detection and session memory — prevents Linux-isms on Windows, wrong path separators, incorrect shebangs, incompatible shell syntax | ✅ | | |
+| **playwright** | Browser automation: navigation, forms, screenshots, data extraction via CLI | | ✅ | ✅ |
+| **portable-self-contained** | Keeps all dependencies, SDKs, virtual environments, and tooling inside the project directory. Prevents polluting the OS drive (especially C: with <30% free) by using project-local installs. Always checks disk space and documents the setup. | ✅ | | |
+| **project-backup-status** | Timestamped backups + repo status check before risky edits | ✅ | | |
+| **requirements-clarify** | Structured Q&A before ambiguous tasks — one question at a time, multiple choice, assumption surfacing, confirmation step | ✅ | | |
+| **safe-code-modifications** | Never removes imports/items without verifying usage across modules | ✅ | | |
 | **screenshot** | Cross-platform desktop screenshot capture (macOS/Linux/Windows) | ✅ | ✅ | |
-| **security-best-practices** | Language/framework security reviews and secure-by-default coding | | | ✅ |
+| **security-best-practices** | Language/framework security reviews and secure-by-default coding | ✅ | | ✅ |
 | **security-ownership-map** | Git-based security ownership topology, bus factor, CSV/JSON export | ✅ | | ✅ |
-| **security-threat-model** | Repository-grounded threat modeling with mitigations | | | ✅ |
-| **self-validate** | After any batch of changes (edits, skill updates, cross-references, docs), runs systematic validation to catch inconsistencies, missing references, broken links, and syntax errors before declaring done. Prevents the need for follow-up corrections. | | | |
-| **todo-bootstrap** | Creates/refreshes Markdown TODO checklists grounded in actual codebase | | | |
-| **toolchain-fallback** | Detects available build toolchains (MSYS2, Zig, GCC, Clang, Visual Studio) and falls back to a working alternative when none are found. Any implementation scripts follow the project's scripts/ folder convention. | | | |
-| **universal-format-lint** | Formatter + lint-fixer per file type (Python, JS/TS, Markdown, YAML, PS1, sh) | | | |
-| **unused-import-implementation** | Infers intent and implements missing use instead of deleting unused imports | | | |
-| **verify-and-cite** | Reduces hallucinations via verification, sourcing, uncertainty expression | | | |
-| **yeet** | Stage, commit, push, and open a draft PR in one flow via `gh` | | ✅ | |
+| **security-threat-model** | Repository-grounded threat modeling with mitigations | ✅ | | ✅ |
+| **self-validate** | After any batch of changes (edits, skill updates, cross-references, docs), runs systematic validation to catch inconsistencies, missing references, broken links, and syntax errors before declaring done. Prevents the need for follow-up corrections. | ✅ | | |
+| **todo-bootstrap** | Creates/refreshes Markdown TODO checklists grounded in actual codebase | ✅ | | |
+| **toolchain-fallback** | Detects available build toolchains (MSYS2, Zig, GCC, Clang, Visual Studio) and falls back to a working alternative when none are found. Any implementation scripts follow the project's scripts/ folder convention. | ✅ | | |
+| **universal-format-lint** | Formatter + lint-fixer per file type (Python, JS/TS, Markdown, YAML, PS1, sh) | ✅ | | |
+| **unused-import-implementation** | Infers intent and implements missing use instead of deleting unused imports | ✅ | | |
+| **verify-and-cite** | Reduces hallucinations via verification, sourcing, uncertainty expression | ✅ | | |
+| **yeet** | Stage, commit, push, and open a draft PR in one flow via `gh` | ✅ | ✅ | |
 
 ---
 
