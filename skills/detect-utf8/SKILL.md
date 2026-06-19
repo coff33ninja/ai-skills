@@ -36,7 +36,17 @@ The bundled script checks these in order:
    - Windows: `chcp 65001` or `[Console]::OutputEncoding = [System.Text.Encoding]::UTF8`
    - Unix: set `LANG=en_US.UTF-8` or `LC_ALL=en_US.UTF-8`
 3. If round-trip fails, use ASCII-safe alternatives or explicit byte encoding
-4. Log the encoding state alongside other environment metadata
+4. Apply UTF-8 to all subsequent operations when supported:
+   - Set `$PSDefaultParameterValues['*:Encoding'] = 'utf8'` for all file/cmdlet operations
+   - Use `-Encoding utf8` explicitly on every `Out-File`, `Set-Content`, `Export-Csv`, and similar cmdlets
+   - Pass `[System.Text.UTF8Encoding]::new($false)` to .NET file APIs for BOM-free UTF-8
+   - On Unix, ensure `LANG` or `LC_ALL` ends with `.UTF-8` before running scripts
+5. For scripts generated in this session, include an explicit encoding declaration:
+   - PowerShell: `#Requires -Version 7` + use `-Encoding utf8` on all file writes
+   - Python: `# -*- coding: utf-8 -*-` or `sys.stdout.reconfigure(encoding='utf-8')`
+   - Node.js: `// encoding: utf-8` or use `fs.writeFileSync(path, data, 'utf8')`
+6. Log the encoding state alongside other environment metadata
+7. If `-Apply` was used, re-run detection after any shell/code-page reset to confirm UTF-8 is still active
 
 ## When NOT to use
 
@@ -59,6 +69,7 @@ Run the detection:
 .ai_scripts\check-utf8.ps1                    # human-readable report
 .ai_scripts\check-utf8.ps1 -Json              # JSON for programmatic use
 .ai_scripts\check-utf8.ps1 -Quiet             # exit code only (0 = UTF-8 OK)
+.ai_scripts\check-utf8.ps1 -Apply             # detect + apply UTF-8 to session
 ```
 
 ## Cross-references

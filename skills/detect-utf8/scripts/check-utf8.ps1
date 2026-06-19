@@ -1,6 +1,7 @@
 param(
     [switch]$Json,
-    [switch]$Quiet
+    [switch]$Quiet,
+    [switch]$Apply
 )
 
 $results = @{
@@ -87,4 +88,22 @@ if ($utf8Ok) {
 } else {
     Write-Host "[-] UTF-8 NOT fully supported." -ForegroundColor Yellow
     Write-Host "    Run 'chcp 65001' (Windows) or set LANG=en_US.UTF-8 (Unix)."
+}
+
+if ($Apply) {
+    $applied = @()
+    $OutputEncoding = [System.Text.Encoding]::UTF8
+    $applied += "`$OutputEncoding = UTF8"
+    [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+    $applied += "[Console]::OutputEncoding = UTF8"
+    if ($utf8Ok) {
+        $PSDefaultParameterValues['*:Encoding'] = 'utf8'
+        $applied += "`$PSDefaultParameterValues['*:Encoding'] = 'utf8'"
+    }
+    if ($results.ContainsKey("WindowsCodePage") -and $results.WindowsCodePage -ne 65001) {
+        $null = chcp 65001 2>$null
+        $applied += "chcp 65001"
+    }
+    Write-Host "`n[+] Applied to session: $($applied -join ', ')" -ForegroundColor Green
+    exit $(if ($utf8Ok) { 0 } else { 1 })
 }
