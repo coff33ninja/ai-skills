@@ -138,3 +138,5 @@ Activate when user says:
 - **portable-self-contained** — Audit checks environment portability against the rules in portable-self-contained.
 - **follow-existing-patterns** — Audit should check whether project code follows its own established patterns.
 - **verify-and-cite** — Audit findings must cite specific evidence (file paths, versions, command output).
+
+- **toolchain-fallback** — Audit should check that toolchain detection is part of the project's setup and CI configuration.

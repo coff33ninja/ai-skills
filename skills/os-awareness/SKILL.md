@@ -66,3 +66,5 @@ When spawning a subagent via `task`, include the OS info in the prompt so the su
 - **anti-global-install** — OS detection prevents wrong install paths on Windows.
 
 - **portable-self-contained** — Portable environment setup depends on OS-aware paths.
+
+- **toolchain-fallback** — Toolchain paths and fallback strategies differ per OS; OS-aware detection is required.

@@ -118,3 +118,5 @@ If cache and project are on different drives, tools may warn about hardlink fall
 - **os-awareness** — OS-aware install paths are critical to avoiding global installs on Windows.
 
 - **audit-project** — Audit detects global installs that violate this rule.
+
+- **toolchain-fallback** — Fallback toolchain installs must avoid global/system paths, using project-local or user-scoped locations instead.

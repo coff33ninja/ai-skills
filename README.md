@@ -34,6 +34,7 @@ Central repository for AI agent skill definitions. Edit skills here, then push t
 │   ├── security-threat-model\
 │   ├── self-validate\
 │   ├── todo-bootstrap\
+│   ├── toolchain-fallback\
 │   ├── universal-format-lint\
 │   ├── unused-import-implementation\
 │   ├── verify-and-cite\
@@ -159,6 +160,7 @@ The `name` and `description` are the primary match keys tools use to decide when
 | **security-threat-model** | Repository-grounded threat modeling with mitigations | | | ✅ |
 | **self-validate** | After any batch of changes (edits, skill updates, cross-references, docs), runs systematic validation to catch inconsistencies, missing references, broken links, and syntax errors before declaring done. Prevents the need for follow-up corrections. | | | |
 | **todo-bootstrap** | Creates/refreshes Markdown TODO checklists grounded in actual codebase | | | |
+| **toolchain-fallback** | Detects available build toolchains (MSYS2, Zig, GCC, Clang, Visual Studio) and falls back to a working alternative when none are found. Any implementation scripts follow the project's scripts/ folder convention. | | | |
 | **universal-format-lint** | Formatter + lint-fixer per file type (Python, JS/TS, Markdown, YAML, PS1, sh) | | | |
 | **unused-import-implementation** | Infers intent and implements missing use instead of deleting unused imports | | | |
 | **verify-and-cite** | Reduces hallucinations via verification, sourcing, uncertainty expression | | | |

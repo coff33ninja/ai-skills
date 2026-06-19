@@ -137,3 +137,5 @@ Activate when:
 
 
 - **audit-project** — Run an audit to detect environment portability violations (global installs, hardcoded paths, missing setup docs).
+
+- **toolchain-fallback** — Toolchain detection and fallback install scripts must follow the scripts/ folder convention defined in portable-self-contained section 6.
