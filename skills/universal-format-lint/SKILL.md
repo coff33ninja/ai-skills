@@ -86,6 +86,17 @@ For mixed-language repos, use this default sequence:
 3. PowerShell: `Invoke-Formatter` -> `Invoke-ScriptAnalyzer -Fix`
 4. Shell: `shfmt -w` -> `shellcheck`
 
+## Bundled lint script
+
+A bundled script at `scripts/format-lint.ps1` (PowerShell) auto-runs formatters per file extension group:
+
+```powershell
+.\scripts\format-lint.ps1 -Files file.py,file.js,file.md
+.\scripts\format-lint.ps1 -Files file.py,file.js -DryRun
+```
+
+Groups files by extension and runs the correct tool chain for each: Python (isort → black → ruff), JS/TS (prettier → eslint), docs/data (prettier), PowerShell (Formatter → ScriptAnalyzer), shell (shfmt → shellcheck).
+
 ## Cross-references
 
 - **dont-kill-tokens** — Batched formatting saves tokens.

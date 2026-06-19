@@ -63,3 +63,14 @@ Activate when:
 - **self-validate** — After implementing, validate that the new code actually matches the patterns.
 
 - **audit-project** — Use audit to verify the project consistently follows its own patterns across all files.
+- **self-validate** — Validate that new code matches existing patterns after implementation.
+
+## Bundled pattern checker
+
+A bundled script at `scripts/check-patterns.ps1` (PowerShell) detects code style inconsistencies:
+
+```powershell
+.\scripts\check-patterns.ps1 -ProjectPath ".\"
+```
+
+Checks: mixed indentation (tabs vs spaces per extension), inconsistent license headers, mixed naming conventions (snake_case vs camelCase). Reports all issues found.

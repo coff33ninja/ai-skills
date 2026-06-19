@@ -140,3 +140,14 @@ Activate when:
 
 - **toolchain-fallback** — Toolchain detection and fallback install scripts must follow the scripts/ folder convention defined in portable-self-contained section 6.
 - **playwright** — The Playwright CLI skill previously bundled its wrapper script. Per section 6, tooling scripts should live in the project's `scripts/` or `tools/` directory and be installed on-demand (via npx), not copied with the skill.
+- **anti-global-install** — The portability checker detects global installs that violate project-local rules.
+
+## Bundled portability checker
+
+A bundled script at `scripts/check-portability.ps1` (PowerShell) audits a project's environment portability:
+
+```powershell
+.\scripts\check-portability.ps1 -ProjectPath ".\"
+```
+
+Checks: drive free space, `.venv/` existence, `node_modules/` (if package.json present), `scripts/` directory, SETUP.md, `.gitignore` coverage. Exits with non-zero on issues.

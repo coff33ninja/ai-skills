@@ -120,3 +120,14 @@ If cache and project are on different drives, tools may warn about hardlink fall
 - **audit-project** — Audit detects global installs that violate this rule.
 
 - **toolchain-fallback** — Fallback toolchain installs must avoid global/system paths, using project-local or user-scoped locations instead.
+- **portable-self-contained** — Both enforce project-local installs. anti-global-install's scanner detects violations.
+
+## Bundled detection script
+
+A bundled script at `scripts/detect-global-installs.ps1` (PowerShell) scans for global packages:
+
+```powershell
+.\scripts\detect-global-installs.ps1
+```
+
+Scans: npm global packages, pip --user installs, cargo --root installs, dotnet global tools. Reports each with source path and recommends project-local alternatives.

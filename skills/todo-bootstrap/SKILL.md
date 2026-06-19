@@ -82,6 +82,15 @@ When the user asks for changes, reviews, fixes, or next steps, update the TODO i
 
 Avoid rewriting the whole list every turn. Prefer small, surgical updates.
 
+## 7. Automated TODO script
+
+A bundled script at `scripts/todo.ps1` (PowerShell) manages TODO files:
+
+```powershell
+.\scripts\todo.ps1 -Path ".\" -Action create   # create a TODO.md
+.\scripts\todo.ps1 -Path ".\" -Action check    # count completed/pending
+```
+
 ## Cross-references
 
 - **anti-premature-termination** — TODO checklists serve as completion criteria.

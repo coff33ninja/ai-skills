@@ -91,3 +91,16 @@ The `-InstallMissing` flag allows the same script to work both locally (where yo
 - **os-awareness** — Toolchain detection paths and fallback logic differ by OS (MSYS2 on Windows, apt/homebrew on Linux/macOS).
 - **audit-project** — The audit should include toolchain availability as part of environment portability checks.
 - **anti-global-install** — Fallback installs (e.g. Zig) must use project-local or user-scoped paths, never system-wide.
+- **self-validate** — Validate that the installed toolchain actually works after fallback install.
+
+## Bundled detection script
+
+A bundled script at `scripts/ensure-toolchain.ps1` (PowerShell) automates detection and fallback install:
+
+```powershell
+.\scripts\ensure-toolchain.ps1                    # detect only
+.\scripts\ensure-toolchain.ps1 -InstallMissing     # install zig if nothing found
+.\scripts\ensure-toolchain.ps1 -DryRun             # preview without changes
+```
+
+Checks: MSYS2, Zig, Clang, GCC, Visual Studio, Make/Ninja. Reports `[+]`/`[-]` status for each.

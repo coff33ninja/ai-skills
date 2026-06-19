@@ -68,3 +68,15 @@ When spawning a subagent via `task`, include the OS info in the prompt so the su
 - **portable-self-contained** — Portable environment setup depends on OS-aware paths.
 
 - **toolchain-fallback** — Toolchain paths and fallback strategies differ per OS; OS-aware detection is required.
+- **anti-global-install** — OS detection determines correct install paths vs global defaults.
+
+## Bundled OS detection script
+
+A bundled script at `scripts/detect-os.ps1` (PowerShell) returns the host OS environment:
+
+```powershell
+.\scripts\detect-os.ps1                    # human-readable report
+.\scripts\detect-os.ps1 -Json              # JSON for programmatic use
+```
+
+Returns: platform (Windows/macOS/Linux), shell, path separator, case sensitivity, line ending convention, and syntax notes for each OS.

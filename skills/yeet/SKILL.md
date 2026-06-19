@@ -31,6 +31,17 @@ agent:
 - Write the PR description to a temp file with real newlines (e.g. pr-body.md ... EOF) and run pr-body.md to avoid \\n-escaped markdown.
 - PR description (markdown) must be detailed prose covering the issue, the cause and effect on users, the root cause, the fix, and any tests or checks used to validate.
 
+## Bundled automation script
+
+A bundled script at `scripts/yeet.ps1` (PowerShell) automates the full workflow:
+
+```powershell
+.\scripts\yeet.ps1 -Description "add dark mode toggle"
+.\scripts\yeet.ps1 -Description "fix auth race" -Draft
+```
+
+Handles: branch creation (if on main), staging, commit, push, and PR open via `gh`. Uses `-DryRun` to preview without side effects.
+
 ## Cross-references
 
 - **project-backup-status** — Run backup before yeeting to safeguard against push/PR failures.
