@@ -84,6 +84,20 @@ Deliver an actionable AppSec-grade threat model that is specific to the reposito
 
 Only load the reference files you need. Keep the final result concise, grounded, and reviewable.
 
+## Bundled Script
+
+Copy `generate-threat-model.ps1` to your project's `.ai_scripts/` directory:
+
+```powershell
+cp <skill-path>/security-threat-model/scripts/generate-threat-model.ps1 .ai_scripts/
+```
+
+Generates a STRIDE-based threat model template with trust boundaries, assets, attacker capabilities, and mitigations:
+
+```powershell
+.ai_scripts\generate-threat-model.ps1 -SystemName "MyApi" -OutputFile THREAT_MODEL.md
+```
+
 ## Cross-references
 
 - **security-best-practices** — Threat model findings drive security practice priorities.

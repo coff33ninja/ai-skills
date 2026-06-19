@@ -66,6 +66,21 @@ If answer to any is "no", do not declare done.
 - User explicitly says "just try it, no need to verify"
 - Tasks where the tool result is the completion proof (e.g., API returns a success ID)
 
+## Bundled Script
+
+Copy `check-completion.ps1` to your project's `.ai_scripts/` directory:
+
+```powershell
+cp <skill-path>/anti-premature-termination/scripts/check-completion.ps1 .ai_scripts/
+```
+
+Scans a TODO.md and reports incomplete items — use before declaring a task done:
+
+```powershell
+.ai_scripts\check-completion.ps1 -TodoFile .ai_scripts\TODO.md
+.ai_scripts\check-completion.ps1 -TodoFile TODO.md -TaskDescription "deploy"
+```
+
 ## Cross-references
 
 - **self-validate** — Run validation as part of completion verification criteria.

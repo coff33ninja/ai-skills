@@ -113,6 +113,20 @@ After the Q&A, summarize before acting:
 - **Ignoring the developer's context**: They may already have tried things or have constraints they haven't mentioned. Ask.
 - **Skipping reproduction**: For bugs, always try to get reproduction steps first. Without them, you're guessing.
 
+## Bundled Script
+
+Copy `qa-template.ps1` to your project's `.ai_scripts/` directory:
+
+```powershell
+cp <skill-path>/code-collaborate-qa/scripts/qa-template.ps1 .ai_scripts/
+```
+
+Generates a structured code review checklist for a project directory:
+
+```powershell
+.ai_scripts\qa-template.ps1 -ProjectPath src/ -FileFilter "*.py" -OutputFile QA_REVIEW.md
+```
+
 ## Cross-references
 
 - **requirements-clarify** — Both handle ambiguous requests. code-collaborate-qa is for code-specific Q&A; requirements-clarify is for general requirements.

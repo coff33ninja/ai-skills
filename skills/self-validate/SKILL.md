@@ -111,3 +111,10 @@ A bundled script is at `scripts/validate.ps1` (PowerShell). It automates cross-r
 ```
 
 The script exits with a non-zero code if issues are found, suitable for CI/gate checks.
+
+To use as a project-local tool:
+
+```powershell
+cp <skill-path>/self-validate/scripts/validate.ps1 .ai_scripts/
+.ai_scripts\validate.ps1 -SkillsDir "."
+```

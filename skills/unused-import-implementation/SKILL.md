@@ -50,6 +50,20 @@ When applying this skill, report:
 - Validation performed
 - Any imports removed and explicit reason
 
+## Bundled Script
+
+Copy `find-unused-imports.ps1` to your project's `.ai_scripts/` directory:
+
+```powershell
+cp <skill-path>/unused-import-implementation/scripts/find-unused-imports.ps1 .ai_scripts/
+```
+
+Scans Python/JS/TS files for unused imports, then suggests implementation paths based on nearby comments, function names, and TODOs:
+
+```powershell
+.ai_scripts\find-unused-imports.ps1 -ProjectPath src/ -FileFilter "*.py"
+```
+
 ## Cross-references
 
 - **no-dead-code-removal** — Both address code you added that seems unused. unused-import-implementation completes the intended usage; no-dead-code-removal prevents deletion.

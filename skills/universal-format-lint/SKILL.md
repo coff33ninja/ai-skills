@@ -97,6 +97,13 @@ A bundled script at `scripts/format-lint.ps1` (PowerShell) auto-runs formatters 
 
 Groups files by extension and runs the correct tool chain for each: Python (isort → black → ruff), JS/TS (prettier → eslint), docs/data (prettier), PowerShell (Formatter → ScriptAnalyzer), shell (shfmt → shellcheck).
 
+To use as a project-local tool:
+
+```powershell
+cp <skill-path>/universal-format-lint/scripts/format-lint.ps1 .ai_scripts/
+.ai_scripts\format-lint.ps1 -Files file.py,file.js,file.md
+```
+
 ## Cross-references
 
 - **dont-kill-tokens** — Batched formatting saves tokens.

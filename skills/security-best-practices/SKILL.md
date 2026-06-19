@@ -89,6 +89,20 @@ When assigning an ID for some resource, which will then be used by exposed to th
 
 While TLS is important for production deployments, most development work will be with TLS disabled or provided by some out-of-scope TLS proxy. Due to this, be very careful about not reporting lack of TLS as a security issue. Also be very careful around use of "secure" cookies. They should only be set if the application will actually be over TLS. If they are set on non-TLS applications (such as when deployed for local dev or testing), it will break the application. You can provide a env or other flag to override setting secure as a way to keep it off until on a TLS production deployment. Additionally avoid recommending HSTS. It is dangerous to use without full understanding of the lasting impacts (can cause major outages and user lockout) and it is not generally recommended for the scope of projects being reviewed by codex.
 
+## Bundled Scripts
+
+Copy `run-security-scan.ps1` to your project's `.ai_scripts/` directory:
+
+```powershell
+cp <skill-path>/security-best-practices/scripts/run-security-scan.ps1 .ai_scripts/
+```
+
+Scans the project for hardcoded secrets, code execution risks, SQL injection patterns, and unencrypted HTTP:
+
+```powershell
+.ai_scripts\run-security-scan.ps1 -ProjectPath src/ -ReportFile SECURITY_REPORT.md
+```
+
 ## Cross-references
 
 - **audit-project** — Audit findings should be remediated using security best practices.

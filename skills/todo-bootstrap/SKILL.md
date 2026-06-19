@@ -91,6 +91,13 @@ A bundled script at `scripts/todo.ps1` (PowerShell) manages TODO files:
 .\scripts\todo.ps1 -Path ".\" -Action check    # count completed/pending
 ```
 
+To use as a project-local tool:
+
+```powershell
+cp <skill-path>/todo-bootstrap/scripts/todo.ps1 .ai_scripts/
+.ai_scripts\todo.ps1 -Path "." -Action check
+```
+
 ## Cross-references
 
 - **anti-premature-termination** — TODO checklists serve as completion criteria.

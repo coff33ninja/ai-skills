@@ -152,3 +152,10 @@ A bundled script at `scripts/audit.ps1` (PowerShell) automates a subset of audit
 ```
 
 Checks include: npm audit (if package.json found), cargo audit (if Cargo.toml found), config file validity, disk usage, and git health (stashes, commits ahead).
+
+To use as a project-local tool:
+
+```powershell
+cp <skill-path>/audit-project/scripts/audit.ps1 .ai_scripts/
+.ai_scripts\audit.ps1 -ProjectPath "."
+```

@@ -55,6 +55,21 @@ Before delivering a final result:
 - Steps that are genuinely independent
 - User explicitly says "ignore the earlier constraint"
 
+## Bundled Script
+
+Copy `check-assumptions.ps1` to your project's `.ai_scripts/` directory:
+
+```powershell
+# From skill source
+cp <skill-path>/anti-cascade-collapse/scripts/check-assumptions.ps1 .ai_scripts/
+```
+
+Analyzes a task script or plan to ensure each step has explicit verification checks:
+
+```powershell
+.ai_scripts\check-assumptions.ps1 -FilePath .ai_scripts\TODO.md
+```
+
 ## Cross-references
 
 - **anti-premature-termination** — Both prevent cascade failure. anti-cascade-collapse handles step-by-step assumption re-verification; anti-premature-termination handles completion criteria.

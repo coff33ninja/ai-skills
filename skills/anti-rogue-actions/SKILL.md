@@ -63,6 +63,21 @@ If a plan has multiple destructive steps, confirm EACH step. An initial "yes" is
 - User explicitly says "do it, don't ask" and the action is low-risk
 - Operations in clearly isolated/sandboxed environments
 
+## Bundled Script
+
+Copy `sanity-check.ps1` to your project's `.ai_scripts/` directory:
+
+```powershell
+cp <skill-path>/anti-rogue-actions/scripts/sanity-check.ps1 .ai_scripts/
+```
+
+Pre-execution guard that flags destructive commands, missing targets, and broad scopes:
+
+```powershell
+.ai_scripts\sanity-check.ps1 -Command "Remove-Item -Recurse src/" -MaxItems 50
+.ai_scripts\sanity-check.ps1 -Action "delete" -Target "prod-db" -DryRun
+```
+
 ## Cross-references
 
 - **anti-library-hallucination** — A wrong package suggestion can lead to destructive actions.

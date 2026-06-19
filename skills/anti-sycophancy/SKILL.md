@@ -75,6 +75,20 @@ If 3+ user messages in a row are corrections about the same topic, trigger the h
 - User is exploring ideas, not correcting errors
 - User explicitly asks for analysis or suggestions
 
+## Bundled Script
+
+Copy `check-consistency.ps1` to your project's `.ai_scripts/` directory:
+
+```powershell
+cp <skill-path>/anti-sycophancy/scripts/check-consistency.ps1 .ai_scripts/
+```
+
+Scans a session log for correction/rejection patterns and flags when the loop threshold is breached:
+
+```powershell
+.ai_scripts\check-consistency.ps1 -LogFile session.log -MaxCorrections 2
+```
+
 ## Cross-references
 
 - **anti-premature-termination** — Sycophancy loops cause premature or false completion.

@@ -54,6 +54,21 @@ Add an explicit note: "I used `X.Y()` — please verify this exists in version Z
 - Methods you've verified exist via existing project usage
 - Code in the same file you're editing (self-referential is fine)
 
+## Bundled Script
+
+Copy `verify-symbols.ps1` to your project's `.ai_scripts/` directory:
+
+```powershell
+cp <skill-path>/anti-phantom-symbols/scripts/verify-symbols.ps1 .ai_scripts/
+```
+
+Scans project source files to confirm a symbol exists before writing code that depends on it:
+
+```powershell
+# Check symbols listed in a file
+.ai_scripts\verify-symbols.ps1 -SymbolsFile symbols.txt -ProjectPath src/
+```
+
 ## Cross-references
 
 - **verify-and-cite** — Both verify existence before referencing.

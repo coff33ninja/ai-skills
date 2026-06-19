@@ -203,6 +203,23 @@ Use this structure, add fields if needed:
 
 Use `references/neo4j-import.md` when you need to load the CSVs into Neo4j. It includes constraints, import Cypher, and visualization tips.
 
+## Bundled Scripts
+
+Copy the scripts to your project's `.ai_scripts/` directory:
+
+```powershell
+cp <skill-path>/security-ownership-map/scripts/run_ownership_map.py .ai_scripts/
+cp <skill-path>/security-ownership-map/scripts/query_ownership.py .ai_scripts/
+cp <skill-path>/security-ownership-map/scripts/community_maintainers.py .ai_scripts/
+```
+
+Usage from project-local location:
+
+```bash
+python3 .ai_scripts/run_ownership_map.py --repo . --out ownership-out
+python3 .ai_scripts/query_ownership.py --data-dir ownership-out summary --section orphaned_sensitive_code
+```
+
 ## Notes
 
 - `bus_factor_hotspots` in `summary.json` lists sensitive files with low bus factor; `orphaned_sensitive_code` is the stale subset.

@@ -96,6 +96,22 @@ Patterns:
 - If Linux capture fails, check `command -v scrot`, `command -v gnome-screenshot`, `command -v import`.
 - Always report the saved file path in the response.
 
+## Bundled Scripts
+
+Copy the scripts to your project's `.ai_scripts/` directory:
+
+```powershell
+cp <skill-path>/screenshot/scripts/take_screenshot.py .ai_scripts/
+cp <skill-path>/screenshot/scripts/take_screenshot.ps1 .ai_scripts/
+```
+
+Usage from project-local location:
+
+```bash
+python3 .ai_scripts/take_screenshot.py
+powershell -ExecutionPolicy Bypass .ai_scripts/take_screenshot.ps1 -Mode temp
+```
+
 ## Cross-references
 
 - **playwright** — Screenshots complement Playwright-based browser automation.

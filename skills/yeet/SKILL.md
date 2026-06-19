@@ -42,6 +42,13 @@ A bundled script at `scripts/yeet.ps1` (PowerShell) automates the full workflow:
 
 Handles: branch creation (if on main), staging, commit, push, and PR open via `gh`. Uses `-DryRun` to preview without side effects.
 
+To use as a project-local tool:
+
+```powershell
+cp <skill-path>/yeet/scripts/yeet.ps1 .ai_scripts/
+.ai_scripts\yeet.ps1 -Description "my feature" -Draft -DryRun
+```
+
 ## Cross-references
 
 - **project-backup-status** — Run backup before yeeting to safeguard against push/PR failures.

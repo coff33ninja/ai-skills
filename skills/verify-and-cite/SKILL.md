@@ -130,6 +130,21 @@ The skill can be invoked explicitly with `/verify-and-cite` or should be applied
 
 *This skill embodies the principle that reducing hallucinations requires systematic verification, transparent sourcing, and honest communication about the limits of one's knowledge.*
 
+## Bundled Script
+
+Copy `verify-claim.ps1` to your project's `.ai_scripts/` directory:
+
+```powershell
+cp <skill-path>/verify-and-cite/scripts/verify-claim.ps1 .ai_scripts/
+```
+
+Verifies a claim against a file or URL and returns confidence level:
+
+```powershell
+.ai_scripts\verify-claim.ps1 -Claim "function foo exists" -SourceFile src/foo.py
+.ai_scripts\verify-claim.ps1 -Url "https://example.com" -Json
+```
+
 ## Cross-references
 
 - **anti-library-hallucination** — Both require verification. verify-and-cite covers facts and sources; anti-library-hallucination covers package/library existence.

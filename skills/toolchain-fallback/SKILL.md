@@ -104,3 +104,10 @@ A bundled script at `scripts/ensure-toolchain.ps1` (PowerShell) automates detect
 ```
 
 Checks: MSYS2, Zig, Clang, GCC, Visual Studio, Make/Ninja. Reports `[+]`/`[-]` status for each.
+
+To use as a project-local tool:
+
+```powershell
+cp <skill-path>/toolchain-fallback/scripts/ensure-toolchain.ps1 .ai_scripts/
+.ai_scripts\ensure-toolchain.ps1 -InstallMissing
+```

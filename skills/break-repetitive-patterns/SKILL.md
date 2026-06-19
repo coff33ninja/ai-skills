@@ -131,6 +131,20 @@ This skill works best when:
 
 *This skill embodies the principle that sometimes the best way forward is to step back and approach the problem with fresh eyes and current information.*
 
+## Bundled Script
+
+Copy `detect-repetition.ps1` to your project's `.ai_scripts/` directory:
+
+```powershell
+cp <skill-path>/break-repetitive-patterns/scripts/detect-repetition.ps1 .ai_scripts/
+```
+
+Finds repeated normalized patterns in a session log — useful for detecting fixation loops:
+
+```powershell
+.ai_scripts\detect-repetition.ps1 -LogFile session.log
+```
+
 ## Cross-references
 
 - **anti-sycophancy** — Both address repetitive loops. break-repetitive-patterns handles user-side patterns; anti-sycophancy handles model-side agreement loops.

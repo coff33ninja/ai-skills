@@ -131,3 +131,10 @@ A bundled script at `scripts/detect-global-installs.ps1` (PowerShell) scans for 
 ```
 
 Scans: npm global packages, pip --user installs, cargo --root installs, dotnet global tools. Reports each with source path and recommends project-local alternatives.
+
+To use as a project-local tool:
+
+```powershell
+cp <skill-path>/anti-global-install/scripts/detect-global-installs.ps1 .ai_scripts/
+.ai_scripts\detect-global-installs.ps1
+```

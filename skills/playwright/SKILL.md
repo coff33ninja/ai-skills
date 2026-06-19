@@ -46,5 +46,7 @@ Or create a project-local alias / npm script (`package.json`):
 
 ## Cross-references
 
+## Cross-references
+
 - **screenshot** — Screenshot captures complement Playwright automation for visual verification.
 - **portable-self-contained** — Sections 3 (Node.js) and 6 (scripts/ folder) cover project-local tooling setup. Playwright should be called via npx or a project-local script, never bundled with the skill.

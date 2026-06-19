@@ -112,6 +112,20 @@ Stop. Re-confirm scope. *"That changes [x]. Just to confirm the new scope: [summ
 - **Leading questions**: Do not steer the user toward your preferred approach. Present options neutrally.
 - **Ignoring answered questions**: If the user already gave you scope, do not ask for it again.
 
+## Bundled Script
+
+Copy `clarify-requirements.ps1` to your project's `.ai_scripts/` directory:
+
+```powershell
+cp <skill-path>/requirements-clarify/scripts/clarify-requirements.ps1 .ai_scripts/
+```
+
+Generates a structured requirements template for a feature or task:
+
+```powershell
+.ai_scripts\clarify-requirements.ps1 -Topic "dark mode toggle" -OutputFile REQUIREMENTS.md
+```
+
 ## Cross-references
 
 - **code-collaborate-qa** — Both structure ambiguous requests. requirements-clarify handles general requirements; code-collaborate-qa handles code-specific questions.

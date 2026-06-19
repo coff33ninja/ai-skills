@@ -109,6 +109,13 @@ Options:
 - `-Exclude` — array of directories to exclude
 - `-DryRun` — preview what would be backed up without creating the archive
 
+To use this as a project-local tool, copy it to your project's `.ai_scripts/` directory:
+
+```powershell
+cp <skill-path>/project-backup-status/scripts/backup.ps1 .ai_scripts/
+.ai_scripts\backup.ps1 -RepoPath "." -BackupDir "backups"
+```
+
 ## Cross-references
 
 - **self-validate** — Validate backups actually exist and are correct.

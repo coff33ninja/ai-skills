@@ -80,3 +80,10 @@ A bundled script at `scripts/detect-os.ps1` (PowerShell) returns the host OS env
 ```
 
 Returns: platform (Windows/macOS/Linux), shell, path separator, case sensitivity, line ending convention, and syntax notes for each OS.
+
+To use as a project-local tool:
+
+```powershell
+cp <skill-path>/os-awareness/scripts/detect-os.ps1 .ai_scripts/
+.ai_scripts\detect-os.ps1 -Json
+```

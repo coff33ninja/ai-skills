@@ -74,3 +74,10 @@ A bundled script at `scripts/check-patterns.ps1` (PowerShell) detects code style
 ```
 
 Checks: mixed indentation (tabs vs spaces per extension), inconsistent license headers, mixed naming conventions (snake_case vs camelCase). Reports all issues found.
+
+To use as a project-local tool:
+
+```powershell
+cp <skill-path>/follow-existing-patterns/scripts/check-patterns.ps1 .ai_scripts/
+.ai_scripts\check-patterns.ps1 -ProjectPath "."
+```

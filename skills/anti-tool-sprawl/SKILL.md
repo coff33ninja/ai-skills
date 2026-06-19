@@ -63,6 +63,20 @@ After each tool call, ask:
 - Sequential operations that genuinely need different tools
 - User explicitly asks to retry or dig deeper
 
+## Bundled Script
+
+Copy `check-tool-usage.ps1` to your project's `.ai_scripts/` directory:
+
+```powershell
+cp <skill-path>/anti-tool-sprawl/scripts/check-tool-usage.ps1 .ai_scripts/
+```
+
+Analyzes a session log for excessive or redundant tool calls:
+
+```powershell
+.ai_scripts\check-tool-usage.ps1 -LogFile session.log -MaxToolCalls 20 -MaxUniqueTools 8
+```
+
 ## Cross-references
 
 - **dont-kill-tokens** — Both reduce unnecessary context consumption.

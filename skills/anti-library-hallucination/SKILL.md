@@ -58,6 +58,21 @@ When asked for a "library from 2025" or a "fast XML parser":
 - Packages already in the project's dependencies
 - Well-known packages you've verified exist recently
 
+## Bundled Script
+
+Copy `verify-package.ps1` to your project's `.ai_scripts/` directory:
+
+```powershell
+cp <skill-path>/anti-library-hallucination/scripts/verify-package.ps1 .ai_scripts/
+```
+
+Checks if a package name exists on npm/PyPI/Cargo/nuget/Go proxy before suggesting it:
+
+```powershell
+.ai_scripts\verify-package.ps1 -PackageName requests -Registry pypi
+.ai_scripts\verify-package.ps1 -PackageName zod -Registry npm
+```
+
 ## Cross-references
 
 - **verify-and-cite** — Both require verification before suggesting a library/fact.

@@ -151,3 +151,10 @@ A bundled script at `scripts/check-portability.ps1` (PowerShell) audits a projec
 ```
 
 Checks: drive free space, `.venv/` existence, `node_modules/` (if package.json present), `scripts/` directory, SETUP.md, `.gitignore` coverage. Exits with non-zero on issues.
+
+To use as a project-local tool:
+
+```powershell
+cp <skill-path>/portable-self-contained/scripts/check-portability.ps1 .ai_scripts/
+.ai_scripts\check-portability.ps1 -ProjectPath "."
+```

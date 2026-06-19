@@ -86,3 +86,24 @@ for label, test_fn in tests:
 - **safe-code-modifications** — Direct overlap on code removal safety. no-dead-code-removal says refactor instead of delete; safe-code-modifications says verify usage before any removal.
 - **unused-import-implementation** — When code you added is flagged as unused, this skill completes the intended usage instead of removing or leaving it dead.
 
+## Bundled Script
+
+Copy `check-dead-code.ps1` to your project's `.ai_scripts/` directory:
+
+```powershell
+cp <skill-path>/no-dead-code-removal/scripts/check-dead-code.ps1 .ai_scripts/
+```
+
+Checks session-logged files for cross-references and suggests refactoring paths — never flags for deletion:
+
+```powershell
+.ai_scripts\check-dead-code.ps1 -LogFile session.log -ProjectPath src/
+```
+
+## Cross-references
+
+- **safe-code-modifications** — Direct overlap on code removal safety. no-dead-code-removal says refactor instead of delete; safe-code-modifications says verify usage before any removal.
+- **unused-import-implementation** — When code you added is flagged as unused, this skill completes the intended usage instead of removing or leaving it dead.
+
+
+

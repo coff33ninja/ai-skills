@@ -73,6 +73,20 @@ Imagine each response costs $0.01 per token. Would you still write that sentence
 
 If not, don't do it.
 
+## Bundled Script
+
+Copy `check-tokens.ps1` to your project's `.ai_scripts/` directory:
+
+```powershell
+cp <skill-path>/dont-kill-tokens/scripts/check-tokens.ps1 .ai_scripts/
+```
+
+Estimates token count for a file and flags if it exceeds budget:
+
+```powershell
+.ai_scripts\check-tokens.ps1 -FilePath large_file.py -MaxTokens 4000
+```
+
 ## Cross-references
 
 - **anti-tool-sprawl** — Both prevent wasteful tool use. dont-kill-tokens covers output and reads; anti-tool-sprawl covers over-tooling.
