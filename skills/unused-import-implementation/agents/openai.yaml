@@ -1,4 +1,0 @@
-interface:
-  display_name: "Unused Import Implementation"
-  short_description: "Implement contextual use for unused imports"
-  default_prompt: "Analyze unused imports, infer intent from surrounding code, and implement a real use case instead of deleting imports by default."

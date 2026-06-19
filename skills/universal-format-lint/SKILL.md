@@ -1,6 +1,10 @@
 ---
 name: universal-format-lint
 description: Run language-appropriate formatter and lint-fix commands for changed files. Use when the user asks to format, lint, auto-fix, or clean code style across Python, JavaScript/TypeScript, Markdown, YAML/JSON, PowerShell, shell scripts, and similar files.
+agent:
+  display_name: "Universal Format Lint"
+  short_description: "Run format/lint fixes by file type"
+  default_prompt: "Apply formatter and lint-fix commands to changed files, grouped by language and run in the configured order."
 ---
 
 # Universal Format Lint

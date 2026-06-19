@@ -1,6 +1,10 @@
 ---
 name: "security-threat-model"
 description: "Repository-grounded threat modeling that enumerates trust boundaries, assets, attacker capabilities, abuse paths, and mitigations, and writes a concise Markdown threat model. Trigger only when the user explicitly asks to threat model a codebase or path, enumerate threats/abuse paths, or perform AppSec threat modeling. Do not trigger for general architecture summaries, code review, or non-security design work."
+agent:
+  display_name: "Security Threat Model"
+  short_description: "Repo-grounded threat modeling and abuse-path analysis"
+  default_prompt: "Use security-threat-model to create a repository-grounded threat model for this codebase with prioritized abuse paths and mitigations."
 ---
 
 # Threat Model Source Code Repo
@@ -87,3 +91,7 @@ Only load the reference files you need. Keep the final result concise, grounded,
 - **security-ownership-map** — Owners of components in the threat model should be identified.
 
 - **audit-project** — Audit findings may surface trust boundaries and assets for threat modeling.
+
+- **self-validate** — Validate that the threat model output matches the prompt template format.
+
+- **portable-self-contained** — Reference docs in references/ follow the project-local documentation convention.

@@ -1,6 +1,10 @@
 ---
 name: todo-bootstrap
 description: Create or refresh a project TODO checklist using Markdown checkboxes and keep it current as work progresses. Use when a repo has no TODO tracker, when the user asks for a backlog, roadmap, status checklist, or progress board, or when docs exist but do not yet include a canonical checkbox-based task list.
+agent:
+  display_name: "Todo Bootstrap"
+  short_description: "Create and maintain project TODO lists"
+  default_prompt: "Use todo-bootstrap to add or refresh a checkbox-based project TODO list and keep it current."
 ---
 
 # Todo Bootstrap

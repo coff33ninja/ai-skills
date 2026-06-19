@@ -99,3 +99,15 @@ Activate automatically after:
 - **universal-format-lint** — Syntax validation overlaps with linting and formatting checks.
 
 - **audit-project** — Both run systematic checks. audit-project is broader (deps, disk, git); self-validate focuses on change integrity in the current session.
+- **toolchain-fallback** — Run validation after toolchain install to confirm the fallback works.
+
+## Bundled validation script
+
+A bundled script is at `scripts/validate.ps1` (PowerShell). It automates cross-reference validation, frontmatter checks, and path resolution:
+
+```powershell
+.\scripts\validate.ps1 -SkillsDir "."
+.\scripts\validate.ps1 -SkillsDir "." -Fix
+```
+
+The script exits with a non-zero code if issues are found, suitable for CI/gate checks.

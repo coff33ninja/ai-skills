@@ -1,6 +1,10 @@
 ---
 name: unused-import-implementation
 description: Diagnose and resolve newly added but unused imports by inferring intent from surrounding code and implementing the missing use case. Use when linting or review reports an unused import and the import appears intentional or recent, and the goal is to complete behavior rather than remove code.
+agent:
+  display_name: "Unused Import Implementation"
+  short_description: "Implement contextual use for unused imports"
+  default_prompt: "Analyze unused imports, infer intent from surrounding code, and implement a real use case instead of deleting imports by default."
 ---
 
 # Unused Import Implementation

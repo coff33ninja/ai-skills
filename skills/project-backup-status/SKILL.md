@@ -1,6 +1,10 @@
 ---
 name: project-backup-status
-description: Create a timestamped project backup and inspect the repo's current status before making changes. Use when starting work in any project, before risky edits or refactors, when the user asks to back up or safeguard a codebase, or when continuity matters and Codex should read TODO/status docs before acting.
+description: Create a timestamped project backup and inspect the repo's current status before making changes. Use when starting work in any project, before risky edits or refactors, when the user asks to back up or safeguard a codebase, or when continuity matters and code tools should read TODO/status docs before acting.
+agent:
+  display_name: "Project Backup Status"
+  short_description: "Back up repos and read status first"
+  default_prompt: "Use project-backup-status to inspect repo status, create a timestamped backup, and continue safely."
 ---
 
 # Project Backup Status
@@ -91,6 +95,20 @@ When the user gives broad ownership of a repo, or asks for major feature work, r
 3. proceed with implementation
 4. update status tracker
 
+## 8. Automated backup script
+
+A bundled automation script is provided at `scripts/backup.ps1` (PowerShell):
+
+```powershell
+.\scripts\backup.ps1 -RepoPath ".\" -BackupDir "backups" -Exclude node_modules,dist,build,.next,coverage,.git
+```
+
+Options:
+- `-RepoPath` — project root (required)
+- `-BackupDir` — relative path for backups (default: `backups`)
+- `-Exclude` — array of directories to exclude
+- `-DryRun` — preview what would be backed up without creating the archive
+
 ## Cross-references
 
 - **self-validate** — Validate backups actually exist and are correct.
@@ -98,3 +116,5 @@ When the user gives broad ownership of a repo, or asks for major feature work, r
 - **anti-premature-termination** — Backing up is a prerequisite before risky work.
 
 - **audit-project** — Audit should check backup status as part of project health.
+
+- **toolchain-fallback** — Backups safeguard state before toolchain detection/install steps.

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Project Backup Status"
-  short_description: "Back up repos and read status first"
-  default_prompt: "Use $project-backup-status to inspect repo status, create a timestamped backup, and continue safely."

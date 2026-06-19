@@ -1,6 +1,10 @@
 ---
 name: "security-best-practices"
 description: "Perform language and framework specific security best-practice reviews and suggest improvements. Trigger only when the user explicitly requests security best practices guidance, a security review/report, or secure-by-default coding help. Trigger only for supported languages (python, javascript/typescript, go). Do not trigger for general code review, debugging, or non-security tasks."
+agent:
+  display_name: "Security Best Practices"
+  short_description: "Security reviews and secure-by-default guidance"
+  default_prompt: "Review this codebase for security best practices and suggest secure-by-default improvements."
 ---
 
 # Security Best Practices
@@ -92,3 +96,7 @@ While TLS is important for production deployments, most development work will be
 - **security-ownership-map** — Ownership analysis identifies who maintains security-sensitive code.
 
 - **security-threat-model** — Threat models inform which security practices to prioritize.
+
+- **self-validate** — Validate that security best-practice changes were applied correctly.
+
+- **follow-existing-patterns** — Security fixes must match the project's existing code style and patterns.

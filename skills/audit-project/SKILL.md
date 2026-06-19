@@ -140,3 +140,15 @@ Activate when user says:
 - **verify-and-cite** — Audit findings must cite specific evidence (file paths, versions, command output).
 
 - **toolchain-fallback** — Audit should check that toolchain detection is part of the project's setup and CI configuration.
+- **project-backup-status** — Audit should verify backup status and that backup scripts are in place.
+
+## Bundled audit script
+
+A bundled script at `scripts/audit.ps1` (PowerShell) automates a subset of audit checks:
+
+```powershell
+.\scripts\audit.ps1 -ProjectPath ".\"
+.\scripts\audit.ps1 -ProjectPath ".\" -Report
+```
+
+Checks include: npm audit (if package.json found), cargo audit (if Cargo.toml found), config file validity, disk usage, and git health (stashes, commits ahead).

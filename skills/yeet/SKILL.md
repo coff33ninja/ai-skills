@@ -1,6 +1,10 @@
 ---
 name: "yeet"
 description: "Use only when the user explicitly asks to stage, commit, push, and open a GitHub pull request in one flow using the GitHub CLI (`gh`)."
+agent:
+  display_name: "Yeet"
+  short_description: "Stage, commit, and open PR"
+  default_prompt: "Prepare this branch for review: stage intended changes, write a focused commit, and open a PR."
 ---
 
 ## Prerequisites

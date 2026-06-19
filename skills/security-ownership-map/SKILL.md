@@ -1,6 +1,10 @@
 ---
 name: "security-ownership-map"
 description: "Analyze git repositories to build a security ownership topology (people-to-file), compute bus factor and sensitive-code ownership, and export CSV/JSON for graph databases and visualization. Trigger only when the user explicitly wants a security-oriented ownership or bus-factor analysis grounded in git history (for example: orphaned sensitive code, security maintainers, CODEOWNERS reality checks for risk, sensitive hotspots, or ownership clusters). Do not trigger for general maintainer lists or non-security ownership questions."
+agent:
+  display_name: "Security Ownership Map"
+  short_description: "Map maintainers, bus factor, and sensitive code ownership"
+  default_prompt: "Use security-ownership-map to build a security ownership map for this repository and identify bus-factor risks in sensitive code."
 ---
 
 # Security Ownership Map
@@ -212,3 +216,7 @@ Use `references/neo4j-import.md` when you need to load the CSVs into Neo4j. It i
 - **security-threat-model** — Owners of sensitive code should be involved in threat modeling.
 
 - **audit-project** — Audit can flag orphaned security-sensitive code.
+
+- **toolchain-fallback** — Python scripts in scripts/ require an available Python toolchain.
+
+- **self-validate** — Validate that ownership map outputs are well-formed before reporting.
