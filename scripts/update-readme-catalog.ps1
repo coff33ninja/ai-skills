@@ -82,32 +82,32 @@ for ($i = 2; $i -lt $rowEnd; $i++) {
 $missingTable = $skillNames | Where-Object { $_ -notin $existingRows.Keys }
 $staleTable = $existingRows.Keys | Where-Object { $_ -notin $skillNames }
 
-if ($missingTable.Count -gt 0 -or $staleTable.Count -gt 0) {
-    if ($missingTable.Count -gt 0) {
-        Write-Host "Missing from table: $($missingTable -join ', ')" -ForegroundColor Yellow
-    }
-    if ($staleTable.Count -gt 0) {
-        Write-Host "Stale in table: $($staleTable -join ', ')" -ForegroundColor Yellow
-    }
+if ($missingTable.Count -gt 0) {
+    Write-Host "Missing from table: $($missingTable -join ', ')" -ForegroundColor Yellow
+}
+if ($staleTable.Count -gt 0) {
+    Write-Host "Stale in table: $($staleTable -join ', ')" -ForegroundColor Yellow
+}
 
-    # Rebuild all rows preserving header/separator, sorted by skill name
-    $newRows = @()
-    foreach ($s in $skillNames) {
-        if ($existingRows.ContainsKey($s)) {
-            $newRows += $existingRows[$s]
-        } else {
-            $d = Get-Desc $s
-            $extras = " | | | |"
-            if ($s -eq "playwright") { $extras = " | ✅ | ✅ | ✅" }
-            elseif ($s -eq "screenshot") { $extras = " | ✅ | ✅ |" }
-            elseif ($s -eq "yeet") { $extras = " | ✅ | |" }
-            elseif ($s -in @("security-best-practices","security-threat-model")) { $extras = " | | | ✅" }
-            elseif ($s -eq "security-ownership-map") { $extras = " | ✅ | | ✅" }
-            $newRows += "| **$s** | $d$extras"
-        }
-    }
+# Rebuild all rows from current filesystem state, sorted by skill name
+$newRows = @()
+foreach ($s in $skillNames) {
+    $d = Get-Desc $s
+    $skillDir = Join-Path $SkillsDir $s
+    $hasScripts = (Test-Path (Join-Path $skillDir "scripts")) -and @(Get-ChildItem (Join-Path $skillDir "scripts") -File).Count -gt 0
+    $hasAssets  = (Test-Path (Join-Path $skillDir "assets")) -and @(Get-ChildItem (Join-Path $skillDir "assets") -File).Count -gt 0
+    $hasRefs    = (Test-Path (Join-Path $skillDir "references")) -and @(Get-ChildItem (Join-Path $skillDir "references") -File).Count -gt 0
+    $cS = if ($hasScripts) { " ✅" } else { "" }
+    $cA = if ($hasAssets)  { " ✅" } else { "" }
+    $cR = if ($hasRefs)    { " ✅" } else { "" }
+    $extras = " |$cS |$cA |$cR |"
+    $newRows += "| **$s** | $d$extras"
+}
 
-    $newTableSection = $tableLines[0] + "`r`n" + $tableLines[1] + "`r`n" + ($newRows -join "`r`n")
+$newTableSection = $tableLines[0] + "`r`n" + $tableLines[1] + "`r`n" + ($newRows -join "`r`n")
+$oldTableSection = $tableLines[0..($rowEnd-1)] -join "`r`n"
+
+if ($oldTableSection -ne $newTableSection) {
     $readme = $beforeTable + $newTableSection + "`r`n" + $afterTable
     $changed = $true
 }

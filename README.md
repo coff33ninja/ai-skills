@@ -134,39 +134,37 @@ The `name` and `description` are the primary match keys tools use to decide when
 
 | Skill | Description | Scripts | Assets | Refs |
 |---|---|---|---|---|---|
-| **anti-cascade-collapse** | Prevents order-gap hallucination — re-verifies assumptions at each step to avoid cascade failure | ✅ | | |
-| **anti-global-install** | Never installs tools globally; uses project-local environments (venv, node_modules, etc.) | ✅ | | |
-| **anti-library-hallucination** | Prevents suggesting non-existent packages, fabricated libs, typosquatting risks | ✅ | | |
-| **anti-phantom-symbols** | Prevents invented APIs, imports, methods — verifies symbols against actual codebase | ✅ | | |
-| **anti-premature-termination** | Enforces explicit completion criteria, verification steps before declaring done | ✅ | | |
-| **anti-rogue-actions** | Prevents absurd/destructive outcomes; enforces bounds, permissions, sanity checks | ✅ | | |
-| **anti-sycophancy** | Prevents compensatory sycophancy, fix loops — hard resets after 2+ failed corrections | ✅ | | |
-| **anti-tool-sprawl** | Prevents over-tooling, spam, bloat; lean selection + progress detection | ✅ | | |
+| **anti-cascade-collapse** | Prevents order-gap hallucination — where the model detects a false premise when asked directly but misses it when embedded in a complex multi-step task. Enforces re-verification of assumptions at each step. | ✅ | | |
+| **anti-global-install** | Never install tools/packages into global system locations. Always detect and use the project's existing environment (venv, node_modules, target, vendor, etc.) or create a project-local one. Applies to all languages. | ✅ | | |
+| **anti-library-hallucination** | Prevents suggesting non-existent packages, fabricated library names, and invalid version pins. Also guards against typosquatting and slopsquatting risks. | ✅ | | |
+| **anti-phantom-symbols** | Prevents invented APIs, imports, methods, and class members that don't exist. Verifies every symbol against the project's actual codebase and framework docs before writing it. | ✅ | | |
+| **anti-premature-termination** | Prevents declaring a task complete before it's actually done. Enforces explicit completion criteria, verification steps, and receipt-based confirmation. | ✅ | | |
+| **anti-rogue-actions** | Prevents valid-looking API calls with absurd or destructive outcomes. Enforces business logic guardrails, parameter bounds, permission boundaries, and pre-execution sanity checks. | ✅ | | |
+| **anti-sycophancy** | Prevents Compensatory Sycophancy, Acknowledgment-Action Gap, and Infinite Fix Loops. Enforces hard resets after 2+ failed corrections. Ensures listening over validating. | ✅ | | |
+| **anti-tool-sprawl** | Prevents over-tooling, tool spam, context bloat, and convergence failure. Enforces lean tool selection, deduplication, step limits, and progress detection. | ✅ | | |
 | **audit-project** | Runs a systematic audit of a project — checking dependency health, security vulnerabilities, config integrity, code consistency, disk usage, and environment portability. Produces a report with findings prioritized by severity. | ✅ | | |
-| **break-repetitive-patterns** | Detects repetitive questions; breaks trained logic with proactive alternatives | ✅ | | |
-| **code-collaborate-qa** | Code-focused Q&A for code review, bug diagnosis, and implementation suggestions — developer intent, reproduction steps, trade-offs, confirmation gate | ✅ | | |
-| **dont-kill-tokens** | Token-efficient tool use — minimal reads, batched calls, zero comments, no postambles, one-word answers when sufficient | ✅ | | |
+| **break-repetitive-patterns** | Detects when user is asking repetitive questions and helps break out of trained logic patterns by triggering proactive research and alternative approaches. | ✅ | | |
+| **code-collaborate-qa** | Guides code-focused Q&A for code review, bug diagnosis, and implementation suggestions. Asks about developer intent, reproduction steps, constraints, and trade-offs before writing code or giving feedback. Use when the user asks for code review, bug fix help, refactoring suggestions, performance improvements, or implementation advice. Not for requirements gathering (use requirements-clarify instead). | ✅ | | |
+| **dont-kill-tokens** | Enforces token-efficient tool use. Prevents wasteful reads, redundant searches, unnecessary output, and bloated responses. Activates on all tasks to minimize context consumption. | ✅ | | |
 | **follow-existing-patterns** | Enforces that all new code, docs, and config match the existing codebase conventions, structure, and style — preventing inconsistent implementations that get reworked each session. | ✅ | | |
 | **no-dead-code-removal** | Never remove dead code you added. Refactor it into something useful instead. Deletion is not an option for code you wrote in this session. | ✅ | | |
-| **os-awareness** | OS detection and session memory — prevents Linux-isms on Windows, wrong path separators, incorrect shebangs, incompatible shell syntax | ✅ | | |
-| **playwright** | Browser automation: navigation, forms, screenshots, data extraction via CLI | | ✅ | ✅ |
+| **os-awareness** | Forces the AI to detect, confirm, and remember the host operating system before any command execution, file operation, or path construction. Prevents Linux-isms on Windows, wrong path separators, incorrect shebangs, and incompatible shell syntax. | ✅ | | |
+| **playwright** | Use when the task requires automating a real browser from the terminal (navigation, form filling, snapshots, screenshots, data extraction, UI-flow debugging) via `playwright-cli` invoked through npx in the project directory. | | | |
 | **portable-self-contained** | Keeps all dependencies, SDKs, virtual environments, and tooling inside the project directory. Prevents polluting the OS drive (especially C: with <30% free) by using project-local installs. Always checks disk space and documents the setup. | ✅ | | |
-| **project-backup-status** | Timestamped backups + repo status check before risky edits | ✅ | | |
-| **requirements-clarify** | Structured Q&A before ambiguous tasks — one question at a time, multiple choice, assumption surfacing, confirmation step | ✅ | | |
-| **safe-code-modifications** | Never removes imports/items without verifying usage across modules | ✅ | | |
-| **screenshot** | Cross-platform desktop screenshot capture (macOS/Linux/Windows) | ✅ | ✅ | |
-| **security-best-practices** | Language/framework security reviews and secure-by-default coding | ✅ | | ✅ |
-| **security-ownership-map** | Git-based security ownership topology, bus factor, CSV/JSON export | ✅ | | ✅ |
-| **security-threat-model** | Repository-grounded threat modeling with mitigations | ✅ | | ✅ |
+| **project-backup-status** | Create a timestamped project backup and inspect the repo's current status before making changes. Use when starting work in any project, before risky edits or refactors, when the user asks to back up or safeguard a codebase, or when continuity matters and code tools should read TODO/status docs before acting. | ✅ | | |
+| **requirements-clarify** | Runs a structured Q&A session before starting any ambiguous task. Asks one question at a time using multiple choice first, surfaces assumptions, confirms understanding. Use when the user gives vague requests, incomplete specs, conflicting goals, missing context, or says anything like "build this", "make it work", "fix it", "implement feature", "refactor this", "add functionality", or any task where you need to clarify scope, constraints, or requirements before starting work. Not for simple well-defined tasks. | ✅ | | |
+| **safe-code-modifications** | Ensures code modifications follow safe practices - never remove imports/items without verifying usage, check if truly obsolete, and confirm usage by other modules before removal. | ✅ | | |
+| **screenshot** | Use when the user explicitly asks for a desktop or system screenshot (full screen, specific app or window, or a pixel region), or when tool-specific capture capabilities are unavailable and an OS-level capture is needed. | ✅ | | |
+| **security-best-practices** | Perform language and framework specific security best-practice reviews and suggest improvements. Trigger only when the user explicitly requests security best practices guidance, a security review/report, or secure-by-default coding help. Trigger only for supported languages (python, javascript/typescript, go). Do not trigger for general code review, debugging, or non-security tasks. | ✅ | | ✅ |
+| **security-ownership-map** | Analyze git repositories to build a security ownership topology (people-to-file), compute bus factor and sensitive-code ownership, and export CSV/JSON for graph databases and visualization. Trigger only when the user explicitly wants a security-oriented ownership or bus-factor analysis grounded in git history (for example: orphaned sensitive code, security maintainers, CODEOWNERS reality checks for risk, sensitive hotspots, or ownership clusters). Do not trigger for general maintainer lists or non-security ownership questions. | ✅ | | ✅ |
+| **security-threat-model** | Repository-grounded threat modeling that enumerates trust boundaries, assets, attacker capabilities, abuse paths, and mitigations, and writes a concise Markdown threat model. Trigger only when the user explicitly asks to threat model a codebase or path, enumerate threats/abuse paths, or perform AppSec threat modeling. Do not trigger for general architecture summaries, code review, or non-security design work. | ✅ | | ✅ |
 | **self-validate** | After any batch of changes (edits, skill updates, cross-references, docs), runs systematic validation to catch inconsistencies, missing references, broken links, and syntax errors before declaring done. Prevents the need for follow-up corrections. | ✅ | | |
-| **todo-bootstrap** | Creates/refreshes Markdown TODO checklists grounded in actual codebase | ✅ | | |
+| **todo-bootstrap** | Create or refresh a project TODO checklist using Markdown checkboxes and keep it current as work progresses. Use when a repo has no TODO tracker, when the user asks for a backlog, roadmap, status checklist, or progress board, or when docs exist but do not yet include a canonical checkbox-based task list. | ✅ | | |
 | **toolchain-fallback** | Detects available build toolchains (MSYS2, Zig, GCC, Clang, Visual Studio) and falls back to a working alternative when none are found. Any implementation scripts follow the project's scripts/ folder convention. | ✅ | | |
-| **universal-format-lint** | Formatter + lint-fixer per file type (Python, JS/TS, Markdown, YAML, PS1, sh) | ✅ | | |
-| **unused-import-implementation** | Infers intent and implements missing use instead of deleting unused imports | ✅ | | |
-| **verify-and-cite** | Reduces hallucinations via verification, sourcing, uncertainty expression | ✅ | | |
-| **yeet** | Stage, commit, push, and open a draft PR in one flow via `gh` | ✅ | ✅ | |
-
----
+| **universal-format-lint** | Run language-appropriate formatter and lint-fix commands for changed files. Use when the user asks to format, lint, auto-fix, or clean code style across Python, JavaScript/TypeScript, Markdown, YAML/JSON, PowerShell, shell scripts, and similar files. | ✅ | | |
+| **unused-import-implementation** | Diagnose and resolve newly added but unused imports by inferring intent from surrounding code and implementing the missing use case. Use when linting or review reports an unused import and the import appears intentional or recent, and the goal is to complete behavior rather than remove code. | ✅ | | |
+| **verify-and-cite** | Reduces hallucinations by requiring verification, sourcing claims, and expressing appropriate uncertainty when information cannot be confirmed. | ✅ | | |
+| **yeet** | Use only when the user explicitly asks to stage, commit, push, and open a GitHub pull request in one flow using the GitHub CLI (`gh`). | ✅ | | |
 
 ## ⚠️ The Fine Print — Read or Regret
 
