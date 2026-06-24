@@ -27,6 +27,7 @@ Central repository for AI agent skill definitions. Edit skills here, then push t
 │   ├── playwright\
 │   ├── portable-self-contained\
 │   ├── project-backup-status\
+│   ├── release-changelog\
 │   ├── requirements-clarify\
 │   ├── safe-code-modifications\
 │   ├── screenshot\
@@ -34,6 +35,7 @@ Central repository for AI agent skill definitions. Edit skills here, then push t
 │   ├── security-ownership-map\
 │   ├── security-threat-model\
 │   ├── self-validate\
+│   ├── skill-loader\
 │   ├── todo-bootstrap\
 │   ├── toolchain-fallback\
 │   ├── universal-format-lint\
@@ -154,6 +156,7 @@ The `name` and `description` are the primary match keys tools use to decide when
 | **playwright** | Use when the task requires automating a real browser from the terminal (navigation, form filling, snapshots, screenshots, data extraction, UI-flow debugging) via `playwright-cli` invoked through npx in the project directory. | | | |
 | **portable-self-contained** | Keeps all dependencies, SDKs, virtual environments, and tooling inside the project directory. Prevents polluting the OS drive (especially C: with <30% free) by using project-local installs. Always checks disk space and documents the setup. | ✅ | | |
 | **project-backup-status** | Create a timestamped project backup and inspect the repo's current status before making changes. Use when starting work in any project, before risky edits or refactors, when the user asks to back up or safeguard a codebase, or when continuity matters and code tools should read TODO/status docs before acting. | ✅ | | |
+| **release-changelog** | Standardized release workflow — version bump, Keep a Changelog formatting, and CI/CD pipeline integration with auto-tagging and release automation. Works for any language (Python, Rust, Node, Go, etc.). Use when the user asks to cut a release, bump version, update changelog, or prepare release notes. | | | |
 | **requirements-clarify** | Runs a structured Q&A session before starting any ambiguous task. Asks one question at a time using multiple choice first, surfaces assumptions, confirms understanding. Use when the user gives vague requests, incomplete specs, conflicting goals, missing context, or says anything like "build this", "make it work", "fix it", "implement feature", "refactor this", "add functionality", or any task where you need to clarify scope, constraints, or requirements before starting work. Not for simple well-defined tasks. | ✅ | | |
 | **safe-code-modifications** | Ensures code modifications follow safe practices - never remove imports/items without verifying usage, check if truly obsolete, and confirm usage by other modules before removal. | ✅ | | |
 | **screenshot** | Use when the user explicitly asks for a desktop or system screenshot (full screen, specific app or window, or a pixel region), or when tool-specific capture capabilities are unavailable and an OS-level capture is needed. | ✅ | | |
@@ -161,6 +164,7 @@ The `name` and `description` are the primary match keys tools use to decide when
 | **security-ownership-map** | Analyze git repositories to build a security ownership topology (people-to-file), compute bus factor and sensitive-code ownership, and export CSV/JSON for graph databases and visualization. Trigger only when the user explicitly wants a security-oriented ownership or bus-factor analysis grounded in git history (for example: orphaned sensitive code, security maintainers, CODEOWNERS reality checks for risk, sensitive hotspots, or ownership clusters). Do not trigger for general maintainer lists or non-security ownership questions. | ✅ | | ✅ |
 | **security-threat-model** | Repository-grounded threat modeling that enumerates trust boundaries, assets, attacker capabilities, abuse paths, and mitigations, and writes a concise Markdown threat model. Trigger only when the user explicitly asks to threat model a codebase or path, enumerate threats/abuse paths, or perform AppSec threat modeling. Do not trigger for general architecture summaries, code review, or non-security design work. | ✅ | | ✅ |
 | **self-validate** | After any batch of changes (edits, skill updates, cross-references, docs), runs systematic validation to catch inconsistencies, missing references, broken links, and syntax errors before declaring done. Prevents the need for follow-up corrections. | ✅ | | |
+| **skill-loader** | When a skill is loaded, also loads all skills it cross-references, ensuring related instruction sets compose together automatically. Prevents gaps where a skill references another but that skill is never activated. | | | |
 | **todo-bootstrap** | Create or refresh a project TODO checklist using Markdown checkboxes and keep it current as work progresses. Use when a repo has no TODO tracker, when the user asks for a backlog, roadmap, status checklist, or progress board, or when docs exist but do not yet include a canonical checkbox-based task list. | ✅ | | |
 | **toolchain-fallback** | Detects available build toolchains (MSYS2, Zig, GCC, Clang, Visual Studio) and falls back to a working alternative when none are found. Any implementation scripts follow the project's scripts/ folder convention. | ✅ | | |
 | **universal-format-lint** | Run language-appropriate formatter and lint-fix commands for changed files. Use when the user asks to format, lint, auto-fix, or clean code style across Python, JavaScript/TypeScript, Markdown, YAML/JSON, PowerShell, shell scripts, and similar files. | ✅ | | |
