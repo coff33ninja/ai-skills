@@ -154,3 +154,5 @@ Verifies a claim against a file or URL and returns confidence level:
 - **self-validate** — Both require verification of correctness.
 
 - **audit-project** — Audit findings must cite specific evidence.
+- **release-changelog** — Before declaring a release done, verify the version number matches across the version file, changelog header, and CI configs. Cite each location.
+- **skill-loader** — Load this skill alongside verify-and-cite to ensure verification and accuracy skills (anti-library-hallucination, anti-phantom-symbols, self-validate, audit-project) are activated for fact-checking tasks.

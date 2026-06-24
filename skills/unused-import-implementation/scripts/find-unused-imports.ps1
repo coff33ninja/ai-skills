@@ -16,8 +16,8 @@ foreach ($file in $files) {
 
     $pattern = switch ($ext) {
         ".py"  { '(?m)^(?:import |from )\s+(\S+)' }
-        ".js"  { '(?m)^(?:import\s+.*\bfrom\s+|const\s+.*\brequire\()["'']([^"''\s;]+)' }
-        ".ts"  { '(?m)^(?:import\s+.*\bfrom\s+|import\s+type\s+.*\bfrom\s+|const\s+.*\brequire\()["'']([^"''\s;]+)' }
+        ".js"  { '(?m)^(?:import |const .* = require\()\s*["'"']?([^"'"'\s;]+)' }
+        ".ts"  { '(?m)^(?:import |import type |const .* = require\()\s*["'"']?([^"'"'\s;]+)' }
         ".go"  { '(?m)^\s*import\s+"([^"]+)"' }
         ".rs"  { '(?m)^(?:use |use )\s+([^;{]+)' }
         default { $null }

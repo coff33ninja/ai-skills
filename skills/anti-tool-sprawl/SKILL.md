@@ -84,3 +84,4 @@ Analyzes a session log for excessive or redundant tool calls:
 - **anti-premature-termination** — Tool sprawl causes wasted context leading to premature termination.
 
 - **self-validate** — Validation after operations catches failures caused by over-tooling.
+- **skill-loader** — Loading cross-referenced skills is a tool call. Batch them to avoid sprawl.

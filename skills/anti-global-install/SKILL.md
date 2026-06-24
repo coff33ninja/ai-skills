@@ -121,6 +121,7 @@ If cache and project are on different drives, tools may warn about hardlink fall
 
 - **toolchain-fallback** — Fallback toolchain installs must avoid global/system paths, using project-local or user-scoped locations instead.
 - **portable-self-contained** — Both enforce project-local installs. anti-global-install's scanner detects violations.
+- **skill-loader** — Load this skill alongside anti-global-install to ensure cross-referenced skills (portable-self-contained, os-awareness, audit-project, toolchain-fallback) are activated for comprehensive environment checks.
 
 ## Bundled detection script
 

@@ -109,3 +109,4 @@ Generates a STRIDE-based threat model template with trust boundaries, assets, at
 - **self-validate** — Validate that the threat model output matches the prompt template format.
 
 - **portable-self-contained** — Reference docs in references/ follow the project-local documentation convention.
+- **skill-loader** — Load this skill alongside security-threat-model to ensure related security skills (security-best-practices, security-ownership-map, audit-project, self-validate) are activated for threat modeling tasks.

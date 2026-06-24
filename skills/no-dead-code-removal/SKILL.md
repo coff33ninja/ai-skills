@@ -104,6 +104,4 @@ Checks session-logged files for cross-references and suggests refactoring paths 
 
 - **safe-code-modifications** — Direct overlap on code removal safety. no-dead-code-removal says refactor instead of delete; safe-code-modifications says verify usage before any removal.
 - **unused-import-implementation** — When code you added is flagged as unused, this skill completes the intended usage instead of removing or leaving it dead.
-
-
-
+- **skill-loader** — Load this skill alongside no-dead-code-removal to ensure safe-code-modifications and unused-import-implementation are activated before any removal or refactor decision.

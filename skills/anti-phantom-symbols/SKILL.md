@@ -76,3 +76,4 @@ Scans project source files to confirm a symbol exists before writing code that d
 - **anti-library-hallucination** — Both prevent fabrication. This one covers internal symbols; anti-library-hallucination covers package names.
 
 - **safe-code-modifications** — Verifying symbol usage overlaps with safe removal checks.
+- **skill-loader** — Load this skill alongside anti-phantom-symbols to ensure verification and safety skills (verify-and-cite, anti-library-hallucination, safe-code-modifications) are activated automatically.

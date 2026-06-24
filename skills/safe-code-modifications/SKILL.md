@@ -118,3 +118,4 @@ Scans a source file for imports and reports which have zero references — use t
 - **unused-import-implementation** — When an import is flagged unused, this completes the intended usage instead of removing it.
 
 - **anti-phantom-symbols** — Verifying symbol existence before modification prevents phantom symbol errors.
+- **skill-loader** — Load this skill alongside safe-code-modifications to ensure related skills (no-dead-code-removal, unused-import-implementation, anti-phantom-symbols) are activated before code modifications.

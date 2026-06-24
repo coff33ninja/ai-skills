@@ -71,3 +71,4 @@ Scans Python/JS/TS files for unused imports, then suggests implementation paths 
 - **safe-code-modifications** — Both verify an import is truly unused before acting.
 
 - **anti-phantom-symbols** — Intended usage should reference real symbols.
+- **skill-loader** — Load this skill alongside unused-import-implementation to ensure related skills (no-dead-code-removal, safe-code-modifications, anti-phantom-symbols) are activated when implementing unused imports.

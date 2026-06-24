@@ -64,6 +64,8 @@ Activate when:
 
 - **audit-project** — Use audit to verify the project consistently follows its own patterns across all files.
 - **self-validate** — Validate that new code matches existing patterns after implementation.
+- **release-changelog** — Before cutting a release, read 2-3 prior changelog entries to match the project's changelog style and versioning conventions.
+- **skill-loader** — Cross-referenced skills may have their own patterns. Follow the most specific one for the current subtask.
 
 ## Bundled pattern checker
 

@@ -100,6 +100,8 @@ Activate automatically after:
 
 - **audit-project** — Both run systematic checks. audit-project is broader (deps, disk, git); self-validate focuses on change integrity in the current session.
 - **toolchain-fallback** — Run validation after toolchain install to confirm the fallback works.
+- **release-changelog** — Validate release artifacts after cutting: version bump in the right file, changelog date/format correct, tag exists on remote, CI triggered.
+- **skill-loader** — After loading a skill and its cross-references, validate the combined instruction set is consistent.
 
 ## Bundled validation script
 

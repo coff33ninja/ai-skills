@@ -111,3 +111,5 @@ cp <skill-path>/universal-format-lint/scripts/format-lint.ps1 .ai_scripts/
 - **follow-existing-patterns** — Formatting should match project conventions.
 
 - **self-validate** — Syntax validation complements linting.
+- **release-changelog** — After writing a changelog entry, run the project's Markdown formatter to keep the changelog consistently styled.
+- **skill-loader** — Load this skill alongside universal-format-lint to ensure related skills (dont-kill-tokens, follow-existing-patterns, self-validate) are activated for efficient formatting tasks.

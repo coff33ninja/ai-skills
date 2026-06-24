@@ -125,3 +125,5 @@ cp <skill-path>/project-backup-status/scripts/backup.ps1 .ai_scripts/
 - **audit-project** — Audit should check backup status as part of project health.
 
 - **toolchain-fallback** — Backups safeguard state before toolchain detection/install steps.
+- **release-changelog** — Backup before starting a release to guard against accidental version bumps or destructive changelog rewrites.
+- **skill-loader** — Load this skill alongside project-backup-status to ensure related skills (self-validate, anti-premature-termination, audit-project, toolchain-fallback) are activated before and after backup operations.

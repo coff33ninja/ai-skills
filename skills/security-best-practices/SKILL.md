@@ -114,3 +114,4 @@ Scans the project for hardcoded secrets, code execution risks, SQL injection pat
 - **self-validate** — Validate that security best-practice changes were applied correctly.
 
 - **follow-existing-patterns** — Security fixes must match the project's existing code style and patterns.
+- **release-changelog** — Document security fixes under `### Security` in the changelog to make them visible to downstream users who need to prioritize patching.

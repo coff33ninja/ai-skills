@@ -92,3 +92,4 @@ Estimates token count for a file and flags if it exceeds budget:
 - **anti-tool-sprawl** — Both prevent wasteful tool use. dont-kill-tokens covers output and reads; anti-tool-sprawl covers over-tooling.
 
 - **universal-format-lint** — Formatting is best batched to save tokens.
+- **skill-loader** — Loading multiple cross-referenced skills consumes context. Be selective and batch loads.

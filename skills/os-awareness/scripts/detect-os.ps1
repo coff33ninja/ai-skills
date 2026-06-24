@@ -1,30 +1,32 @@
 param([switch]$Json)
 
 $os = [Environment]::OSVersion.Platform
+$isWindows = $os -eq [PlatformID]::Win32NT
+$isLinux = $os -eq [PlatformID]::Unix -and (Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion" -Name "CurrentBuild" -ErrorAction SilentlyContinue) -eq $null
+$isMacOS = (uname -s 2>$null) -eq "Darwin"
 
-# Use non-automatic variable names (avoid $isWindows/$isLinux which are PS built-ins)
-$winOS = $os -eq [PlatformID]::Win32NT
-$unameOut = if (Get-Command "uname" -ErrorAction SilentlyContinue) { & uname -s } else { "" }
-$macOS = $unameOut -eq "Darwin"
-$linuxOS = $unameOut -eq "Linux" -or ($os -eq [PlatformID]::Unix -and -not $macOS)
+# Use uname for more reliable detection
+$uname = if (Get-Command "uname" -ErrorAction SilentlyContinue) { uname -s } else { "" }
+if ($uname -eq "Darwin") { $isMacOS = $true; $isLinux = $false; $isWindows = $false }
+elseif ($uname -eq "Linux") { $isLinux = $true; $isWindows = $false; $isMacOS = $false }
 
 $info = @{
-    Platform = if ($winOS) { "Windows" } elseif ($macOS) { "macOS" } elseif ($linuxOS) { "Linux" } else { "Unknown" }
-    Shell = if ($winOS) { "PowerShell" } else { (Split-Path -Leaf ($env:SHELL -replace '\\','/')) }
-    PathSep = if ($winOS) { "\" } else { "/" }
-    CaseSensitive = if ($winOS) { $false } else { $true }
-    LineEnding = if ($winOS) { "CRLF" } else { "LF" }
+    Platform = if ($isWindows) { "Windows" } elseif ($isMacOS) { "macOS" } elseif ($isLinux) { "Linux" } else { "Unknown" }
+    Shell = if ($isWindows) { "PowerShell" } else { (Split-Path -Leaf ($env:SHELL -replace '\\','/')) }
+    PathSep = if ($isWindows) { "\" } else { "/" }
+    CaseSensitive = if ($isWindows) { $false } else { $true }
+    LineEnding = if ($isWindows) { "CRLF" } else { "LF" }
     Notes = @()
 }
 
-if ($winOS) { $info.Notes = @(
+if ($isWindows) { $info.Notes = @(
     "Use PowerShell cmdlets, not bash",
     "Paths: use \ or Join-Path",
     "Case-insensitive filesystem",
     "Executables: .exe, .ps1, .bat",
     "env: prefix for env vars (e.g. `$env:PATH`)"
 )}
-elseif ($macOS) { $info.Notes = @(
+elseif ($isMacOS) { $info.Notes = @(
     "Use zsh/bash, not PowerShell",
     "Paths: use /",
     "Case-sensitive (APFS can be case-insensitive)",
@@ -32,7 +34,7 @@ elseif ($macOS) { $info.Notes = @(
     "`$VAR for env vars",
     "screencapture for screenshots"
 )}
-elseif ($linuxOS) { $info.Notes = @(
+elseif ($isLinux) { $info.Notes = @(
     "Use bash, not PowerShell",
     "Paths: use /",
     "Case-sensitive filesystem",

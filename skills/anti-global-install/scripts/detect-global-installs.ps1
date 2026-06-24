@@ -1,7 +1,5 @@
 param([switch]$DryRun)
 
-function Test-Cmd { param([string]$Name) $null = Get-Command $Name -ErrorAction SilentlyContinue; return $? }
-
 Write-Host "=== Global Install Detection ===" -ForegroundColor Cyan
 $found = @()
 
@@ -12,21 +10,23 @@ try { $npmGlobal = npm list -g --depth=0 2>$null; if ($npmGlobal) { $found += @{
 try { $pipGlobal = pip list --user 2>$null; if ($pipGlobal) { $found += @{Type="pip --user"; Source="$(pip --version)"; Items=($pipGlobal | Select-Object -Skip 2 | ForEach-Object { ($_ -split "\s+")[0] }) } } catch {}
 
 # cargo global
-if (Test-Cmd "cargo") {
+if (Test-Command "cargo") {
     $cargoRoot = & cargo root 2>$null
     if ($cargoRoot) { $cargoBins = Get-ChildItem "$cargoRoot\bin" -ErrorAction SilentlyContinue; if ($cargoBins) { $found += @{Type="cargo --root"; Source=$cargoRoot; Items=$cargoBins.Name } } }
 }
 
 # dotnet global
-try { $dotnetTools = dotnet tool list -g 2>$null; if ($dotnetTools) { $found += @{Type="dotnet tool -g"; Source="dotnet"; Items=($dotnetTools | Select-Object -Skip 2 | ForEach-Object { ($_ -split "\s+")[0] }) } } } catch {}
+try { $dotnetTools = dotnet tool list -g 2>$null; if ($dotnetTools) { $found += @{Type="dotnet tool -g"; Source="dotnet"; Items=($dotnetTools | Select-Object -Skip 2 | ForEach-Object { ($_ -split "\s+")[0] }) } } catch {}
 
 if ($found.Count -eq 0) { Write-Host "[+] No global installs detected" -ForegroundColor Green; exit 0 }
 
 foreach ($f in $found) {
-    Write-Host "[-] $($f.Type) -- $($f.Source)" -ForegroundColor Yellow
+    Write-Host "[-] $($f.Type) — $($f.Source)" -ForegroundColor Yellow
     $f.Items | ForEach-Object { Write-Host "    $_" }
 }
 
 Write-Host ""
 Write-Host "Recommendation: Use project-local installs instead. See portable-self-contained skill." -ForegroundColor Cyan
 exit $found.Count
+
+function Test-Command { param([string]$Name) $null = Get-Command $Name -ErrorAction SilentlyContinue; return $? }

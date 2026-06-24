@@ -69,6 +69,7 @@ When spawning a subagent via `task`, include the OS info in the prompt so the su
 
 - **toolchain-fallback** — Toolchain paths and fallback strategies differ per OS; OS-aware detection is required.
 - **anti-global-install** — OS detection determines correct install paths vs global defaults.
+- **skill-loader** — Load this skill alongside os-awareness to ensure platform-aware skills (anti-global-install, portable-self-contained, toolchain-fallback) are activated for cross-platform tasks.
 
 ## Bundled OS detection script
 

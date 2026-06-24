@@ -77,3 +77,4 @@ Analyzes a task script or plan to ensure each step has explicit verification che
 - **follow-existing-patterns** — Re-verifying assumptions requires knowing what the existing patterns actually are.
 
 - **anti-sycophancy** — Prevents agreeing with a false assumption instead of re-verifying it.
+- **skill-loader** — Load this skill alongside anti-cascade-collapse to ensure cross-referenced skills (anti-premature-termination, follow-existing-patterns) are activated automatically for multi-step assumption re-verification.
