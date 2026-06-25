@@ -75,7 +75,7 @@ Central repository for AI agent skill definitions. Edit skills here, then push t
 Copies skill folders into every AI tool's **global** skill path under `%USERPROFILE%` (e.g. `C:\Users\You\.cursor\skills\`). `-ProjectRoot` has no effect on Phase 1 — it always writes to the same user-profile locations.
 
 | Tool | Path |
-|---|---|---|
+|---|---|
 | Universal / OpenCode | `~\.agents\skills` |
 | Claude Code | `~\.claude\skills` |
 | Codex CLI | `~\.codex\skills` |
@@ -137,7 +137,7 @@ The `name` and `description` are the primary match keys tools use to decide when
 ## Skill Catalog
 
 | Skill | Description | Scripts | Assets | Refs |
-|---|---|---|---|---|---|
+|---|---|---|---|---|
 | **anti-cascade-collapse** | Prevents order-gap hallucination — where the model detects a false premise when asked directly but misses it when embedded in a complex multi-step task. Enforces re-verification of assumptions at each step. | ✅ | | |
 | **anti-global-install** | Never install tools/packages into global system locations. Always detect and use the project's existing environment (venv, node_modules, target, vendor, etc.) or create a project-local one. Applies to all languages. | ✅ | | |
 | **anti-library-hallucination** | Prevents suggesting non-existent packages, fabricated library names, and invalid version pins. Also guards against typosquatting and slopsquatting risks. | ✅ | | |
