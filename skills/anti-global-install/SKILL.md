@@ -21,12 +21,34 @@ For EVERY language, detect what the project already has and use that. If no envi
 ## Language-specific protocol
 
 ### Python
+
+**Install uv** (if not already installed):
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+Installs to `~/.local\bin\` — add to PATH: `$env:Path = "$env:USERPROFILE\.local\bin;$env:Path"`
+
 | Don't | Do |
 |---|---|
 | `pip install <pkg>` (global) | `uv add <pkg>` (project, updates pyproject.toml + lockfile) |
 | `pip install -r requirements.txt` | `uv sync` or `uv pip sync requirements.txt` |
 | `python -m pip install <pkg>` | `uvx <tool>` (one-off, no install) |
 | `sudo pip install` | `uv run <cmd>` (auto-activates .venv) |
+| `pipx install <tool>` | `uv tool install <tool>` |
+| `pyenv install 3.12` | `uv python install 3.12` |
+
+**Quick reference:**
+| Task | Command |
+|---|---|
+| New project | `uv init my-project` |
+| Add dep | `uv add requests` |
+| Add dev dep | `uv add --dev pytest` |
+| Create venv | `uv venv` |
+| Run script | `uv run main.py` |
+| Format code | `uv format` |
+| Lint code | `uv check` |
+| Build dist | `uv build` |
+| Publish | `uv publish` |
 
 Detect order: `uv.lock` > `pyproject.toml` > `.venv/` > `requirements.txt` > `Pipfile`
 
@@ -113,6 +135,7 @@ If cache and project are on different drives, tools may warn about hardlink fall
 
 ## Cross-references
 
+- **uv** — Dedicated skill with full command reference, flags, and env vars for the uv Python package manager.
 - **portable-self-contained** — Both enforce using project-local environments over global installs.
 
 - **os-awareness** — OS-aware install paths are critical to avoiding global installs on Windows.
