@@ -106,4 +106,4 @@ cp <skill-path>/todo-bootstrap/scripts/todo.ps1 .ai_scripts/
 
 - **audit-project** — Audit findings should be tracked in TODO items.
 - **release-changelog** — Use a checklist for multi-step releases: bump version, write changelog, run quality gates, commit, verify CI. Track each step.
-- **skill-loader** — Load this skill alongside todo-bootstrap to ensure related skills (anti-premature-termination, project-backup-status, audit-project) are activated for structured task tracking.
+- **skill-loader** — Apply the capped selection policy when deciding which tracking and validation guardrails should also be active.

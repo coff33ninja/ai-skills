@@ -133,4 +133,4 @@ Generates a structured requirements template for a feature or task:
 - **anti-sycophancy** — Structured clarification prevents the AI from agreeing to a vague request.
 
 - **break-repetitive-patterns** — Repetitive questions often mean requirements need clarification.
-- **skill-loader** — Load this skill alongside requirements-clarify to ensure related skills (code-collaborate-qa, anti-sycophancy, break-repetitive-patterns) are activated for thorough requirements gathering.
+- **skill-loader** — Apply the capped selection policy when deciding which requirements or loop-breaking skills should also be active.

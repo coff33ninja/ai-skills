@@ -103,7 +103,7 @@ If any workflow fails, fix and re-push.
 - **anti-premature-termination** — Do not declare "release complete" until tags, CI, and docs sync have all been verified.
 - **todo-bootstrap** — If the release involves many steps (multi-repo, multiple changelogs, coordinated tags), use a checklist.
 - **audit-project** — Verify dependency health and build integrity before cutting a release.
-- **skill-loader** — Load this skill alongside release-changelog to ensure all cross-referenced skills (self-validate, verify-and-cite, etc.) are activated automatically.
+- **skill-loader** — Apply the expanded release-task cap when deciding which release and validation skills should also be active.
 - **security-best-practices** — Check for security advisories before releasing if the project has security-sensitive changes.
 
 ## CI/CD Workflow Reference (typical)

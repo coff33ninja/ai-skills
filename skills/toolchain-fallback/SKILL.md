@@ -92,7 +92,7 @@ The `-InstallMissing` flag allows the same script to work both locally (where yo
 - **audit-project** — The audit should include toolchain availability as part of environment portability checks.
 - **anti-global-install** — Fallback installs (e.g. Zig) must use project-local or user-scoped paths, never system-wide.
 - **self-validate** — Validate that the installed toolchain actually works after fallback install.
-- **skill-loader** — Load this skill alongside toolchain-fallback to ensure related skills (portable-self-contained, os-awareness, audit-project, anti-global-install, self-validate) are activated for toolchain setup tasks.
+- **skill-loader** — Apply the capped selection policy when deciding which environment and validation guardrails should also be active for toolchain setup.
 
 ## Bundled detection script
 

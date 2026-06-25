@@ -134,4 +134,4 @@ Generates a structured code review checklist for a project directory:
 - **safe-code-modifications** — Code review should verify safe modification patterns.
 
 - **follow-existing-patterns** — Code review should check against existing codebase patterns.
-- **skill-loader** — Load this skill alongside code-collaborate-qa to ensure related skills (requirements-clarify, safe-code-modifications, follow-existing-patterns) are activated for thorough code review.
+- **skill-loader** — Apply the capped selection policy when deciding which review guardrails should also be active.

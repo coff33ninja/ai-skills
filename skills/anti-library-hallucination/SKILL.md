@@ -80,4 +80,4 @@ Checks if a package name exists on npm/PyPI/Cargo/nuget/Go proxy before suggesti
 - **anti-phantom-symbols** — Both prevent invented APIs. This one covers package names; anti-phantom-symbols covers symbols within them.
 
 - **anti-rogue-actions** — Suggesting a real but wrong package can cause destructive side effects.
-- **skill-loader** — Load this skill alongside anti-library-hallucination to ensure verification skills (verify-and-cite, anti-phantom-symbols) are activated during library suggestion tasks.
+- **skill-loader** — Apply the capped selection policy when deciding which verification skills should also be active during library suggestion tasks.

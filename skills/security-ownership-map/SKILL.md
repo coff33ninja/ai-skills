@@ -237,4 +237,4 @@ python3 .ai_scripts/query_ownership.py --data-dir ownership-out summary --sectio
 - **toolchain-fallback** — Python scripts in scripts/ require an available Python toolchain.
 
 - **self-validate** — Validate that ownership map outputs are well-formed before reporting.
-- **skill-loader** — Load this skill alongside security-ownership-map to ensure related security skills (security-best-practices, security-threat-model, audit-project) are activated for ownership analysis.
+- **skill-loader** — Apply the expanded security-task cap when deciding which related security skills should also be active for ownership analysis.

@@ -118,4 +118,4 @@ powershell -ExecutionPolicy Bypass .ai_scripts/take_screenshot.ps1 -Mode temp
 - **todo-bootstrap** — Screenshots are useful for documenting progress in checklists.
 - **security-best-practices** — Screenshots may capture sensitive info on screen; handle outputs securely.
 - **os-awareness** — Platform-specific capture paths differ per OS.
-- **skill-loader** — Load this skill alongside screenshot to ensure related skills (playwright, security-best-practices, os-awareness) are activated for capture tasks.
+- **skill-loader** — Apply the capped selection policy when deciding which capture-related skills should also be active.

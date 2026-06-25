@@ -96,4 +96,4 @@ Scans a session log for correction/rejection patterns and flags when the loop th
 - **break-repetitive-patterns** — Both detect and break out of unproductive cycles.
 
 - **follow-existing-patterns** — Following patterns prevents the corrective feedback loop.
-- **skill-loader** — Load this skill alongside anti-sycophancy to ensure break-loop skills (anti-premature-termination, break-repetitive-patterns) are activated when sycophancy patterns are detected.
+- **skill-loader** — Apply the capped selection policy when deciding which break-loop skills should also be active.

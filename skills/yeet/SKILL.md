@@ -56,4 +56,4 @@ cp <skill-path>/yeet/scripts/yeet.ps1 .ai_scripts/
 - **anti-premature-termination** — Verify all completion criteria are met before opening the PR.
 
 - **follow-existing-patterns** — Follow the repo's existing commit message and PR description conventions.
-- **skill-loader** — Load this skill alongside yeet to ensure related skills (project-backup-status, anti-premature-termination, follow-existing-patterns) are activated before pushing and opening PRs.
+- **skill-loader** — Apply the capped selection policy when deciding which release-adjacent guardrails should also be active before pushing or opening PRs.

@@ -89,4 +89,4 @@ Scans a TODO.md and reports incomplete items — use before declaring a task don
 
 - **anti-tool-sprawl** — Premature termination is often caused by tool sprawl wasting context.
 - **release-changelog** — Do not declare a release complete until tags are pushed, CI passes, and versioned docs are synced. These are hard completion criteria.
-- **skill-loader** — Load this skill alongside anti-premature-termination to ensure verification and tracking skills (self-validate, project-backup-status, anti-tool-sprawl) are activated for completion criteria enforcement.
+- **skill-loader** — Apply the capped selection policy when deciding which verification and tracking skills should also be active for completion criteria enforcement.

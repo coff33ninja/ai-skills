@@ -1,65 +1,99 @@
 ---
 name: skill-loader
-description: When a skill is loaded, also loads all skills it cross-references, ensuring related instruction sets compose together automatically. Prevents gaps where a skill references another but that skill is never activated.
+description: When a skill is loaded, selectively loads the most relevant direct cross-references with strict caps. Preserves core operating discipline without letting cross-references cascade into context bloat.
 ---
 
 # Skill Loader
 
 ## Problem it solves
 
-Skills are activated individually. But skills reference each other in their `## Cross-references` sections. When skill A tells you to follow the protocol from skill B, but skill B isn't loaded, you miss half the instructions. The cross-reference system only works if both sides are actually in context.
+Skills are activated individually, but many skills rely on nearby operating discipline. For example, a code-modification skill often needs validation, symbol checks, and existing-pattern checks to prevent repeat corrections. Cross-references keep those guardrails connected after context compaction, but loading every related skill creates context bloat and weakens focus.
 
 ## Protocol
 
-### 1. On skill load, inspect cross-references
+### 1. Inspect direct cross-references
 
-Whenever you call the `skill` tool to load a skill, immediately read its `## Cross-references` section. Identify every skill name listed there (the bolded name in each bullet).
+Whenever a skill is loaded, inspect only its own `## Cross-references` section. Identify direct skill names listed in bold at the start of each bullet.
 
-### 2. Load all referenced skills
+Do not recursively inspect cross-references from referenced skills during normal work.
 
-For each referenced skill that is not already loaded in the current conversation:
+### 2. Classify references by operational value
 
-```
-skill name="<referenced-skill>"
-```
+Load a cross-referenced skill only when it changes behavior for the current task. Prefer references whose bullet explains a concrete action, such as validating edits, verifying symbols, avoiding global installs, preserving backups, or checking sources.
 
-This ensures both sides of every cross-reference are active.
+Skip references that are only broadly related, informational, or already covered by a loaded skill.
 
-### 3. Detect transitive loading
+### 3. Apply strict load caps
 
-If a referenced skill has its own cross-references, load those too — but only one level deep. Prevent infinite loops by keeping a set of already-loaded skills.
+Default cap:
 
 ```
-loaded = {initial_skill}
-for each ref in cross_references(initial_skill):
-    if ref not in loaded:
-        load(ref)
-        loaded.add(ref)
+initial skill + up to 3 direct cross-references
 ```
 
-Do NOT recurse beyond one hop. Two levels (initial + direct refs) is sufficient.
+Expanded cap for broad audit, release, security, or repo-wide maintenance tasks:
 
-### 4. When no cross-references exist
+```
+initial skill + up to 5 direct cross-references
+```
 
-Some skills have `## When NOT to use` but no cross-references. No additional loading needed.
+Only exceed these caps when the user explicitly asks for comprehensive coverage or the task cannot be done safely without the additional skills.
 
-### 5. Deduplication
+### 4. Prefer the core discipline set
 
-If multiple loaded skills all reference the same target skill, load it once.
+When choosing among relevant references, prioritize these recurring guardrails:
+
+- **self-validate** — verify that edits, generated files, and cross-reference changes actually worked.
+- **safe-code-modifications** — avoid unsafe removal or broad edits without usage checks.
+- **follow-existing-patterns** — align changes with the repository's current conventions.
+- **anti-phantom-symbols** — verify APIs, imports, methods, and file paths before relying on them.
+- **anti-premature-termination** — do not declare completion before validation and user-visible criteria are met.
+
+Use task-specific skills when they are more relevant than a core discipline skill. Examples: `uv` for Python environment work, `verify-and-cite` for factual claims, `project-backup-status` before risky repo edits, or `playwright` for browser automation.
+
+### 5. Deduplicate and avoid cycles
+
+If multiple loaded skills reference the same target skill, load it once. Never load `skill-loader` merely because another skill lists it; this skill is a policy controller, not a task skill.
+
+### 6. Preserve active discipline through compaction
+
+When summarizing work for context compaction or handoff, include a compact active discipline set:
+
+```
+Active skill discipline: self-validate, follow-existing-patterns, anti-phantom-symbols
+```
+
+This keeps the important behavioral constraints alive after memory condensing without reloading the whole graph.
+
+### 7. When no cross-references exist
+
+Some skills have no operational cross-references. No additional loading is needed.
+
+### 8. Selection checklist
+
+Before loading a cross-reference, answer:
+
+1. Does it prevent a likely failure mode in this task?
+2. Does its bullet state a concrete operational reason?
+3. Is it within the cap?
+4. Is it not already covered by an active skill?
+
+If any answer is no, skip it and continue.
 
 ## Detection triggers
 
-Activate automatically whenever you call the `skill` tool to load a skill. This is a companion protocol that runs after every skill load.
+Activate when a skill is loaded and its cross-references may materially affect the task. This is a companion protocol, not a mandate to load every related skill.
 
 ## When NOT to use
 
 - The loaded skill has no `## Cross-references` section
 - The user explicitly asks you to load only one skill
-- You're in the middle of a task and loading more skills would bloat context — use judgment
+- Loading more skills would exceed the caps without a concrete safety reason
+- The cross-reference is only conceptual or documentary
 
 ## Cross-references
 
-- **dont-kill-tokens** — Loading multiple skills consumes context. Be selective: only load cross-references that are actually relevant to the current task. If a cross-referenced skill is tangential, skip it.
-- **anti-tool-sprawl** — Each skill load is a tool call. Batch them. Don't load 10 skills one at a time.
-- **self-validate** — After loading a skill and its cross-references, validate that the combined instruction set is consistent and doesn't contradict itself.
+- **dont-kill-tokens** — Loading multiple skills consumes context. Use caps and skip tangential references.
+- **anti-tool-sprawl** — Each skill load is a tool call. Batch relevant loads and avoid graph traversal.
+- **self-validate** — After skill or cross-reference edits, validate that the instruction set is internally consistent.
 - **follow-existing-patterns** — Cross-referenced skills may have their own patterns. Follow the most specific one for the current subtask.

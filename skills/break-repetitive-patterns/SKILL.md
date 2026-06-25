@@ -150,4 +150,4 @@ Finds repeated normalized patterns in a session log — useful for detecting fix
 - **anti-sycophancy** — Both address repetitive loops. break-repetitive-patterns handles user-side patterns; anti-sycophancy handles model-side agreement loops.
 
 - **requirements-clarify** — When user asks repetitive questions, they may need requirements clarification instead.
-- **skill-loader** — Load this skill alongside break-repetitive-patterns to ensure anti-sycophancy and requirements-clarify are activated to break out of repetitive loops.
+- **skill-loader** — Apply the capped selection policy when deciding whether anti-sycophancy or requirements-clarify should also be active to break repetitive loops.

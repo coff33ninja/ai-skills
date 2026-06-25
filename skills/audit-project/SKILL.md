@@ -142,7 +142,7 @@ Activate when user says:
 - **toolchain-fallback** — Audit should check that toolchain detection is part of the project's setup and CI configuration.
 - **project-backup-status** — Audit should verify backup status and that backup scripts are in place.
 - **release-changelog** — Audit should check versioning consistency (single source of truth, version file matches changelog) and that changelog follows the project's established format.
-- **skill-loader** — Load this skill alongside audit-project to ensure all audit-relevant skills (self-validate, security-best-practices, follow-existing-patterns, verify-and-cite, toolchain-fallback, project-backup-status) are activated for a comprehensive audit pass.
+- **skill-loader** — Apply the expanded audit-task cap when deciding which audit-relevant skills should also be active.
 
 ## Bundled audit script
 

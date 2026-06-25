@@ -85,4 +85,4 @@ Pre-execution guard that flags destructive commands, missing targets, and broad 
 - **anti-phantom-symbols** — Invented APIs can cause runtime failures that cascade.
 
 - **security-best-practices** — Safety bounds and permission checks are security concerns.
-- **skill-loader** — Load this skill alongside anti-rogue-actions to ensure validation and security skills (anti-library-hallucination, anti-phantom-symbols, security-best-practices) are activated before executing actions.
+- **skill-loader** — Apply the capped selection policy when deciding which validation and security skills should also be active before executing actions.

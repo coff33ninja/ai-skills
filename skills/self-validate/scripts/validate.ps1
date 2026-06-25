@@ -13,6 +13,12 @@ Get-ChildItem -LiteralPath $SkillsDir -Recurse -Filter "SKILL.md" | ForEach-Obje
         Write-Warning "Missing frontmatter: $($skillFile.FullName)"
         $errors++
     }
+
+    $crossRefHeaders = [regex]::Matches($content, '(?m)^## Cross-references\s*$').Count
+    if ($crossRefHeaders -gt 1) {
+        Write-Warning "Duplicate Cross-references sections: $($skillFile.FullName)"
+        $errors++
+    }
 }
 
 # 2. Check all cross-references point to existing skills
