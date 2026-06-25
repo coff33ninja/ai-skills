@@ -3,3 +3,6 @@ Thumbs.db
 *.swp
 *.swo
 .DS_Store
+
+# Local safety archives
+backups/
