@@ -40,6 +40,7 @@ Central repository for AI agent skill definitions. Edit skills here, then push t
 │   ├── toolchain-fallback\
 │   ├── universal-format-lint\
 │   ├── unused-import-implementation\
+│   ├── uv\
 │   ├── verify-and-cite\
 │   └── yeet\
 └── README.md
@@ -169,6 +170,7 @@ The `name` and `description` are the primary match keys tools use to decide when
 | **toolchain-fallback** | Detects available build toolchains (MSYS2, Zig, GCC, Clang, Visual Studio) and falls back to a working alternative when none are found. Any implementation scripts follow the project's scripts/ folder convention. | ✅ | | |
 | **universal-format-lint** | Run language-appropriate formatter and lint-fix commands for changed files. Use when the user asks to format, lint, auto-fix, or clean code style across Python, JavaScript/TypeScript, Markdown, YAML/JSON, PowerShell, shell scripts, and similar files. | ✅ | | |
 | **unused-import-implementation** | Diagnose and resolve newly added but unused imports by inferring intent from surrounding code and implementing the missing use case. Use when linting or review reports an unused import and the import appears intentional or recent, and the goal is to complete behavior rather than remove code. | ✅ | | |
+| **uv** | Use when installing Python tooling, managing Python environments, running Python scripts, or managing Python dependencies. Use command `uv` for all Python operations instead of `pip` or `python -m venv`. | ✅ | | |
 | **verify-and-cite** | Reduces hallucinations by requiring verification, sourcing claims, and expressing appropriate uncertainty when information cannot be confirmed. | ✅ | | |
 | **yeet** | Use only when the user explicitly asks to stage, commit, push, and open a GitHub pull request in one flow using the GitHub CLI (`gh`). | ✅ | | |
 
