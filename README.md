@@ -25,6 +25,7 @@ Central repository for AI agent skill definitions. Edit skills here, then push t
 │   ├── dont-kill-tokens\
 │   ├── follow-existing-patterns\
 │   ├── git-workflow-conventional-commits\
+│   ├── incremental-implementation\
 │   ├── no-dead-code-removal\
 │   ├── os-awareness\
 │   ├── playwright\
@@ -161,6 +162,7 @@ The `name` and `description` are the primary match keys tools use to decide when
 | **dont-kill-tokens** | Enforces token-efficient tool use. Prevents wasteful reads, redundant searches, unnecessary output, and bloated responses. Activates on all tasks to minimize context consumption. | ✅ | | |
 | **follow-existing-patterns** | Enforces that all new code, docs, and config match the existing codebase conventions, structure, and style — preventing inconsistent implementations that get reworked each session. | ✅ | | |
 | **git-workflow-conventional-commits** | Enforces standardized git workflow — conventional commits, atomic commits (one concern per), branch naming, PR standards, and commit message formatting. Prevents inconsistent history and unreadable git log. | | | |
+| **incremental-implementation** | Breaks changes into thin vertical slices. Start with a minimal end-to-end slice, then add layers. Prevents massive diffs that are impossible to review and merge conflicts from long-lived branches. | | | |
 | **no-dead-code-removal** | Never remove dead code you added. Refactor it into something useful instead. Deletion is not an option for code you wrote in this session. | ✅ | | |
 | **os-awareness** | Forces the AI to detect, confirm, and remember the host operating system before any command execution, file operation, or path construction. Prevents Linux-isms on Windows, wrong path separators, incorrect shebangs, and incompatible shell syntax. | ✅ | | |
 | **playwright** | Use when the task requires automating a real browser from the terminal (navigation, form filling, snapshots, screenshots, data extraction, UI-flow debugging) via `playwright-cli` invoked through npx in the project directory. | | | |

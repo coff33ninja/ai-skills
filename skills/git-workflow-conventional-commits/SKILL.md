@@ -117,3 +117,4 @@ Activate when:
 - **test-driven-development** — Each commit should include tests for its change.
 
 - **anti-premature-termination** — Do not declare a merge done until commits are squashed/conventional and PR standards are met.
+- **incremental-implementation** — Use incremental slices to produce atomic commits. Each slice maps to one or more conventional commits.
