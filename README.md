@@ -33,6 +33,7 @@ Central repository for AI agent skill definitions. Edit skills here, then push t
 │   ├── incremental-implementation\
 │   ├── no-dead-code-removal\
 │   ├── os-awareness\
+│   ├── performance-optimization\
 │   ├── playwright\
 │   ├── portable-self-contained\
 │   ├── project-backup-status\
@@ -177,6 +178,7 @@ The `name` and `description` are the primary match keys tools use to decide when
 | **incremental-implementation** | Breaks changes into thin vertical slices. Start with a minimal end-to-end slice, then add layers. Prevents massive diffs that are impossible to review and merge conflicts from long-lived branches. | | | |
 | **no-dead-code-removal** | Never remove dead code you added. Refactor it into something useful instead. Deletion is not an option for code you wrote in this session. | ✅ | | |
 | **os-awareness** | Forces the AI to detect, confirm, and remember the host operating system before any command execution, file operation, or path construction. Prevents Linux-isms on Windows, wrong path separators, incorrect shebangs, and incompatible shell syntax. | ✅ | | |
+| **performance-optimization** | Measure-first approach — profile before optimizing, Core Web Vitals, bundle analysis, database query optimization. Prevents premature optimization while catching real performance issues. | | | |
 | **playwright** | Use when the task requires automating a real browser from the terminal (navigation, form filling, snapshots, screenshots, data extraction, UI-flow debugging) via `playwright-cli` invoked through npx in the project directory. | | | |
 | **portable-self-contained** | Keeps all dependencies, SDKs, virtual environments, and tooling inside the project directory. Prevents polluting the OS drive (especially C: with <30% free) by using project-local installs. Always checks disk space and documents the setup. | ✅ | | |
 | **project-backup-status** | Create a timestamped project backup and inspect the repo's current status before making changes. Use when starting work in any project, before risky edits or refactors, when the user asks to back up or safeguard a codebase, or when continuity matters and code tools should read TODO/status docs before acting. | ✅ | | |
