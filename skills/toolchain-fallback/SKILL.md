@@ -91,6 +91,7 @@ The `-InstallMissing` flag allows the same script to work both locally (where yo
 - **os-awareness** — Toolchain detection paths and fallback logic differ by OS (MSYS2 on Windows, apt/homebrew on Linux/macOS).
 - **audit-project** — The audit should include toolchain availability as part of environment portability checks.
 - **anti-global-install** — Fallback installs (e.g. Zig) must use project-local or user-scoped paths, never system-wide.
+- **project-scripts** — Install and build scripts discovered by project-scripts should use the detected toolchain for consistency.
 - **self-validate** — Validate that the installed toolchain actually works after fallback install.
 - **skill-loader** — Apply the capped selection policy when deciding which environment and validation guardrails should also be active for toolchain setup.
 

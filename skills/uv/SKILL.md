@@ -88,4 +88,5 @@ cp <skill-path>/uv/scripts/ensure-uv.ps1 .ai_scripts/
 
 - **anti-global-install** — uv is the preferred alternative to global pip installs; all Python operations should use `uv add`/`uv sync` instead of `pip install`.
 - **portable-self-contained** — uv projects keep `.venv/` in the project root; cache can be redirected off C: via `UV_CACHE_DIR`.
+- **project-scripts** — The ensure-uv.ps1 script is a project install script that project-scripts would discover and catalog.
 - **toolchain-fallback** — uv can install and manage Python versions as a fallback toolchain.

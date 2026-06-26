@@ -102,6 +102,7 @@ If any workflow fails, fix and re-push.
 - **project-backup-status** — Backup before starting the release process to guard against destructive mistakes.
 - **anti-premature-termination** — Do not declare "release complete" until tags, CI, and docs sync have all been verified.
 - **todo-bootstrap** — If the release involves many steps (multi-repo, multiple changelogs, coordinated tags), use a checklist.
+- **project-scripts** — Discover build, test, and deploy scripts before cutting a release to ensure all release automation steps are accounted for.
 - **audit-project** — Verify dependency health and build integrity before cutting a release.
 - **skill-loader** — Apply the expanded release-task cap when deciding which release and validation skills should also be active.
 - **security-best-practices** — Check for security advisories before releasing if the project has security-sensitive changes.

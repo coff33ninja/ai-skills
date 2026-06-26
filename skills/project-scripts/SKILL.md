@@ -105,3 +105,11 @@ Activate when:
 - **release-changelog** — Before cutting a release, discover build, test, and deploy scripts.
 
 - **self-validate** — After generating or modifying scripts, validate they actually run.
+
+- **project-backup-status** — Discover scripts before backup to ensure all scripts are captured in the backup scope.
+
+- **universal-format-lint** — After creating or modifying scripts, run formatters for consistent style.
+
+- **toolchain-fallback** — Install and build scripts should use the detected toolchain; this skill catalogs what exists.
+
+- **uv** — The ensure-uv.ps1 script is a project install script this skill would discover and catalog.

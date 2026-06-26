@@ -140,6 +140,7 @@ Activate when:
 
 - **toolchain-fallback** — Toolchain detection and fallback install scripts must follow the scripts/ folder convention defined in portable-self-contained section 6.
 - **playwright** — The Playwright CLI skill previously bundled its wrapper script. Per section 6, tooling scripts should live in the project's `scripts/` or `tools/` directory and be installed on-demand (via npx), not copied with the skill.
+- **project-scripts** — Complements the scripts/ folder convention by discovering and cataloging scripts wherever they are. portable-self-contained prescribes where scripts should go; project-scripts finds what actually exists.
 - **anti-global-install** — The portability checker detects global installs that violate project-local rules.
 - **skill-loader** — Apply the capped selection policy when deciding which environment-related skills should also be active for portability assessments.
 
