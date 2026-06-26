@@ -8,6 +8,7 @@ Central repository for AI agent skill definitions. Edit skills here, then push t
 .
 ├── sync-skills.ps1        # Push skills + convert to rules
 ├── skills\                # Source of truth — edit SKILL.md files here
+│   ├── adr-and-documentation\
 │   ├── anti-cascade-collapse\
 │   ├── anti-global-install\
 │   ├── anti-library-hallucination\
@@ -16,7 +17,6 @@ Central repository for AI agent skill definitions. Edit skills here, then push t
 │   ├── anti-rogue-actions\
 │   ├── anti-sycophancy\
 │   ├── anti-tool-sprawl\
-│   ├── adr-and-documentation\
 │   ├── audit-project\
 │   ├── break-repetitive-patterns\
 │   ├── code-collaborate-qa\
@@ -146,6 +146,7 @@ The `name` and `description` are the primary match keys tools use to decide when
 
 | Skill | Description | Scripts | Assets | Refs |
 |---|---|---|---|---|
+| **adr-and-documentation** | Enforces Architecture Decision Records (ADRs) and keeps docs in sync with code. Prevents "why did we do it this way?" questions six months later and stale documentation. | | | |
 | **anti-cascade-collapse** | Prevents order-gap hallucination — where the model detects a false premise when asked directly but misses it when embedded in a complex multi-step task. Enforces re-verification of assumptions at each step. | ✅ | | |
 | **anti-global-install** | Never install tools/packages into global system locations. Always detect and use the project's existing environment (venv, node_modules, target, vendor, etc.) or create a project-local one. Applies to all languages. | ✅ | | |
 | **anti-library-hallucination** | Prevents suggesting non-existent packages, fabricated library names, and invalid version pins. Also guards against typosquatting and slopsquatting risks. | ✅ | | |
@@ -154,7 +155,6 @@ The `name` and `description` are the primary match keys tools use to decide when
 | **anti-rogue-actions** | Prevents valid-looking API calls with absurd or destructive outcomes. Enforces business logic guardrails, parameter bounds, permission boundaries, and pre-execution sanity checks. | ✅ | | |
 | **anti-sycophancy** | Prevents Compensatory Sycophancy, Acknowledgment-Action Gap, and Infinite Fix Loops. Enforces hard resets after 2+ failed corrections. Ensures listening over validating. | ✅ | | |
 | **anti-tool-sprawl** | Prevents over-tooling, tool spam, context bloat, and convergence failure. Enforces lean tool selection, deduplication, step limits, and progress detection. | ✅ | | |
-| **adr-and-documentation** | Enforces Architecture Decision Records (ADRs) and keeps docs in sync with code. Prevents "why did we do it this way?" six months later and stale documentation. | | | |
 | **audit-project** | Runs a systematic audit of a project — checking dependency health, security vulnerabilities, config integrity, code consistency, disk usage, and environment portability. Produces a report with findings prioritized by severity. | ✅ | | |
 | **break-repetitive-patterns** | Detects when user is asking repetitive questions and helps break out of trained logic patterns by triggering proactive research and alternative approaches. | ✅ | | |
 | **code-collaborate-qa** | Guides code-focused Q&A for code review, bug diagnosis, and implementation suggestions. Asks about developer intent, reproduction steps, constraints, and trade-offs before writing code or giving feedback. Use when the user asks for code review, bug fix help, refactoring suggestions, performance improvements, or implementation advice. Not for requirements gathering (use requirements-clarify instead). | ✅ | | |
