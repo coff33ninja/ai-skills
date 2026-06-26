@@ -67,6 +67,7 @@ Activate when:
 - **project-scripts** — Generated scripts must match the project's existing script patterns. Run project-scripts after script creation to catalog and verify consistency.
 - **release-changelog** — Before cutting a release, read 2-3 prior changelog entries to match the project's changelog style and versioning conventions.
 - **skill-loader** — Cross-referenced skills may have their own patterns. Follow the most specific one for the current subtask.
+- **test-driven-development** — Tests must follow the project's existing test framework, naming conventions, and file layout patterns.
 
 ## Bundled pattern checker
 

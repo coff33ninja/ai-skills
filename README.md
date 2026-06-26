@@ -38,6 +38,7 @@ Central repository for AI agent skill definitions. Edit skills here, then push t
 │   ├── self-validate\
 │   ├── skill-loader\
 │   ├── spec-driven-development\
+│   ├── test-driven-development\
 │   ├── todo-bootstrap\
 │   ├── toolchain-fallback\
 │   ├── universal-format-lint\
@@ -170,6 +171,7 @@ The `name` and `description` are the primary match keys tools use to decide when
 | **self-validate** | After any batch of changes (edits, skill updates, cross-references, docs), runs systematic validation to catch inconsistencies, missing references, broken links, and syntax errors before declaring done. Prevents the need for follow-up corrections. | ✅ | | |
 | **skill-loader** | When a skill is loaded, selectively loads the most relevant direct cross-references with strict caps. Preserves core operating discipline without letting cross-references cascade into context bloat. | | | |
 | **spec-driven-development** | Forces writing a specification before any code changes. Defines goals, inputs/outputs, constraints, edge cases, and acceptance criteria before implementation. Use when starting any non-trivial feature, refactor, or bug fix. Prevents solving the wrong problem. | | | |
+| **test-driven-development** | Enforces RED-GREEN-REFACTOR cycle — write a failing test first, write minimal code to pass, then refactor. Prevents untestable code and false confidence from untested changes. | | | |
 | **todo-bootstrap** | Create or refresh a project TODO checklist using Markdown checkboxes and keep it current as work progresses. Use when a repo has no TODO tracker, when the user asks for a backlog, roadmap, status checklist, or progress board, or when docs exist but do not yet include a canonical checkbox-based task list. | ✅ | | |
 | **toolchain-fallback** | Detects available build toolchains (MSYS2, Zig, GCC, Clang, Visual Studio) and falls back to a working alternative when none are found. Any implementation scripts follow the project's scripts/ folder convention. | ✅ | | |
 | **universal-format-lint** | Run language-appropriate formatter and lint-fix commands for changed files. Use when the user asks to format, lint, auto-fix, or clean code style across Python, JavaScript/TypeScript, Markdown, YAML/JSON, PowerShell, shell scripts, and similar files. | ✅ | | |
