@@ -22,6 +22,7 @@ Central repository for AI agent skill definitions. Edit skills here, then push t
 │   ├── code-collaborate-qa\
 │   ├── code-review\
 │   ├── code-simplification\
+│   ├── context-engineering\
 │   ├── debugging-and-error-recovery\
 │   ├── detect-utf8\
 │   ├── dont-kill-tokens\
@@ -163,6 +164,7 @@ The `name` and `description` are the primary match keys tools use to decide when
 | **code-collaborate-qa** | Guides code-focused Q&A for code review, bug diagnosis, and implementation suggestions. Asks about developer intent, reproduction steps, constraints, and trade-offs before writing code or giving feedback. Use when the user asks for code review, bug fix help, refactoring suggestions, performance improvements, or implementation advice. Not for requirements gathering (use requirements-clarify instead). | ✅ | | |
 | **code-review** | Enforces systematic multi-axis code review (correctness, readability, architecture, security, performance) with severity ratings and actionable findings. Use before merging, before declaring done, or when explicitly asked to review code. Unlike code-collaborate-qa (conversational Q&A), this is a structured process with checklists. | | | |
 | **code-simplification** | Enforces simplicity — Chesterton's Fence (understand why before removing), Rule of 500 (keep functions/files under 500 lines), Occam's Razor for code. Counteracts the natural tendency to add unnecessary abstraction layers. | | | |
+| **context-engineering** | Token-aware context management — selects what context to include, when to load reference files, how to use progressive disclosure. Prevents context bloat while ensuring the right information is available. | | | |
 | **debugging-and-error-recovery** | Enforces structured debugging workflow — reproduce, localize, reduce, fix, guard. No fix until root cause is identified with file:line evidence. One-change-at-a-time hypothesis testing. Prevents surface-level fixes and random guessing. | | | |
 | **detect-utf8** | Detects whether the terminal, console, or device supports UTF-8 encoding. Checks code page, .NET encoding defaults, environment locale, and verifies with a round-trip test of Unicode characters. | ✅ | | |
 | **dont-kill-tokens** | Enforces token-efficient tool use. Prevents wasteful reads, redundant searches, unnecessary output, and bloated responses. Activates on all tasks to minimize context consumption. | ✅ | | |
