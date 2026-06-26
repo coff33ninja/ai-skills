@@ -106,6 +106,7 @@ If any workflow fails, fix and re-push.
 - **audit-project** — Verify dependency health and build integrity before cutting a release.
 - **skill-loader** — Apply the expanded release-task cap when deciding which release and validation skills should also be active.
 - **security-best-practices** — Check for security advisories before releasing if the project has security-sensitive changes.
+- **git-workflow-conventional-commits** — Conventional commit types determine changelog sections (feat→Added, fix→Fixed, etc.). Ensure commits follow conventions for automatic changelog generation.
 
 ## CI/CD Workflow Reference (typical)
 

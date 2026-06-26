@@ -126,3 +126,4 @@ Activate when:
 - **receiving-code-review** — When receiving review feedback, use receiving-code-review to respond properly instead of blindly agreeing.
 
 - **anti-premature-termination** — Code review is a completion gate. Do not declare done until review findings are resolved.
+- **git-workflow-conventional-commits** — Review should verify commit messages follow conventional format and commits are atomic.

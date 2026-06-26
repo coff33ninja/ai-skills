@@ -57,3 +57,4 @@ cp <skill-path>/yeet/scripts/yeet.ps1 .ai_scripts/
 
 - **follow-existing-patterns** — Follow the repo's existing commit message and PR description conventions.
 - **skill-loader** — Apply the capped selection policy when deciding which release-adjacent guardrails should also be active before pushing or opening PRs.
+- **git-workflow-conventional-commits** — Ensure commits follow conventional format and are atomic before yeeting.
