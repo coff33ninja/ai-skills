@@ -68,6 +68,7 @@ Activate when:
 - **release-changelog** — Before cutting a release, read 2-3 prior changelog entries to match the project's changelog style and versioning conventions.
 - **skill-loader** — Cross-referenced skills may have their own patterns. Follow the most specific one for the current subtask.
 - **test-driven-development** — Tests must follow the project's existing test framework, naming conventions, and file layout patterns.
+- **code-review** — Review checks that new code matches the project's existing patterns as part of the architecture axis.
 
 ## Bundled pattern checker
 

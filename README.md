@@ -19,6 +19,7 @@ Central repository for AI agent skill definitions. Edit skills here, then push t
 │   ├── audit-project\
 │   ├── break-repetitive-patterns\
 │   ├── code-collaborate-qa\
+│   ├── code-review\
 │   ├── detect-utf8\
 │   ├── dont-kill-tokens\
 │   ├── follow-existing-patterns\
@@ -152,6 +153,7 @@ The `name` and `description` are the primary match keys tools use to decide when
 | **audit-project** | Runs a systematic audit of a project — checking dependency health, security vulnerabilities, config integrity, code consistency, disk usage, and environment portability. Produces a report with findings prioritized by severity. | ✅ | | |
 | **break-repetitive-patterns** | Detects when user is asking repetitive questions and helps break out of trained logic patterns by triggering proactive research and alternative approaches. | ✅ | | |
 | **code-collaborate-qa** | Guides code-focused Q&A for code review, bug diagnosis, and implementation suggestions. Asks about developer intent, reproduction steps, constraints, and trade-offs before writing code or giving feedback. Use when the user asks for code review, bug fix help, refactoring suggestions, performance improvements, or implementation advice. Not for requirements gathering (use requirements-clarify instead). | ✅ | | |
+| **code-review** | Enforces systematic multi-axis code review (correctness, readability, architecture, security, performance) with severity ratings and actionable findings. Use before merging, before declaring done, or when explicitly asked to review code. | | | |
 | **detect-utf8** | Detects whether the terminal, console, or device supports UTF-8 encoding. Checks code page, .NET encoding defaults, environment locale, and verifies with a round-trip test of Unicode characters. | ✅ | | |
 | **dont-kill-tokens** | Enforces token-efficient tool use. Prevents wasteful reads, redundant searches, unnecessary output, and bloated responses. Activates on all tasks to minimize context consumption. | ✅ | | |
 | **follow-existing-patterns** | Enforces that all new code, docs, and config match the existing codebase conventions, structure, and style — preventing inconsistent implementations that get reworked each session. | ✅ | | |
