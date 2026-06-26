@@ -51,6 +51,7 @@ Central repository for AI agent skill definitions. Edit skills here, then push t
 │   ├── unused-import-implementation\
 │   ├── uv\
 │   ├── verify-and-cite\
+│   ├── writing-quality-anti-slop\
 │   └── yeet\
 └── README.md
 ```
@@ -190,6 +191,7 @@ The `name` and `description` are the primary match keys tools use to decide when
 | **unused-import-implementation** | Diagnose and resolve newly added but unused imports by inferring intent from surrounding code and implementing the missing use case. Use when linting or review reports an unused import and the import appears intentional or recent, and the goal is to complete behavior rather than remove code. | ✅ | | |
 | **uv** | Use when installing Python tooling, managing Python environments, running Python scripts, or managing Python dependencies. Use command `uv` for all Python operations instead of `pip` or `python -m venv`. | ✅ | | |
 | **verify-and-cite** | Reduces hallucinations by requiring verification, sourcing claims, and expressing appropriate uncertainty when information cannot be confirmed. | ✅ | | |
+| **writing-quality-anti-slop** | Kill-list of overused AI vocabulary and structural tells. Prevents robotic AI-generated prose in documentation, READMEs, blog posts, and user-facing text. | | | |
 | **yeet** | Use only when the user explicitly asks to stage, commit, push, and open a GitHub pull request in one flow using the GitHub CLI (`gh`). | ✅ | | |
 
 ## ⚠️ The Fine Print — Read or Regret
