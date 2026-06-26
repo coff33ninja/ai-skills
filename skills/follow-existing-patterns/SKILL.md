@@ -69,6 +69,14 @@ Activate when:
 - **skill-loader** — Cross-referenced skills may have their own patterns. Follow the most specific one for the current subtask.
 - **test-driven-development** — Tests must follow the project's existing test framework, naming conventions, and file layout patterns.
 - **code-review** — Review checks that new code matches the project's existing patterns as part of the architecture axis.
+- **incremental-implementation** — Each slice must follow the project's existing patterns. Don't start with perfect patterns — refactor toward them across slices.
+- **adr-and-documentation** — ADRs must match the project's existing ADR format and numbering scheme.
+- **receiving-code-review** — When implementing review feedback, check that the change follows existing patterns.
+- **writing-quality-anti-slop** — Writing style should match the project's existing documentation voice and tone.
+- **code-simplification** — Simplicity is relative to the project. Don't simplify a complex pattern if it's the project's established style.
+- **context-engineering** — Reading existing patterns is a context engineering decision. Load 2-3 examples, not all of them.
+- **api-contract-design** — API contracts must match the project's existing API conventions (naming, versioning, error format).
+- **performance-optimization** — Performance optimizations should match the project's existing approach (caching strategy, query patterns, etc.).
 
 ## Bundled pattern checker
 

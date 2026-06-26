@@ -136,3 +136,4 @@ Generates a structured code review checklist for a project directory:
 - **follow-existing-patterns** — Code review should check against existing codebase patterns.
 - **skill-loader** — Apply the capped selection policy when deciding which review guardrails should also be active.
 - **code-review** — Use for structured multi-axis review. code-collaborate-qa is for conversational Q&A; code-review is for systematic multi-axis review with severity ratings.
+- **receiving-code-review** — Use together. code-review gives reviews; receiving-code-review teaches how to respond to them.

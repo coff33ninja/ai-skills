@@ -103,6 +103,7 @@ Activate automatically after:
 - **project-scripts** — After generating or modifying scripts via project-scripts, validate they execute correctly and are properly cataloged.
 - **release-changelog** — Validate release artifacts after cutting: version bump in the right file, changelog date/format correct, tag exists on remote, CI triggered.
 - **skill-loader** — After loading a skill and its cross-references, validate the combined instruction set is consistent.
+- **writing-quality-anti-slop** — After writing, self-validate against the kill-list before presenting to the user.
 
 ## Bundled validation script
 

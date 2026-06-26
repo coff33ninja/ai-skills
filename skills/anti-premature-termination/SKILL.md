@@ -92,3 +92,10 @@ Scans a TODO.md and reports incomplete items — use before declaring a task don
 - **skill-loader** — Apply the capped selection policy when deciding which verification and tracking skills should also be active for completion criteria enforcement.
 - **test-driven-development** — Passing tests are explicit completion criteria. Do not declare done until tests pass.
 - **code-review** — Passing code review is a completion gate. Do not declare done until review findings are resolved.
+- **incremental-implementation** — Each slice merged is a completion milestone. Do not declare the feature done until all slices are merged.
+- **adr-and-documentation** — Documentation updates are a completion criterion. Do not declare done until ADRs and docs are updated.
+- **receiving-code-review** — Review feedback must be resolved before declaring done. Each comment verified, each change tested.
+- **code-simplification** — "Simplified" is not "done". Verify the simplification didn't break anything.
+- **ci-cd-automation** — CI passing is a completion criterion. Do not declare done until the pipeline is green.
+- **performance-optimization** — "Optimized" is not done until measured improvement is confirmed.
+- **shipping-and-launch** — Do not declare launch complete until the monitoring period passes and rollback plan is verified.

@@ -128,3 +128,4 @@ cp <skill-path>/project-backup-status/scripts/backup.ps1 .ai_scripts/
 - **toolchain-fallback** — Backups safeguard state before toolchain detection/install steps.
 - **release-changelog** — Backup before starting a release to guard against accidental version bumps or destructive changelog rewrites.
 - **skill-loader** — Apply the capped selection policy when deciding which validation or audit guardrails should also be active before and after backup operations.
+- **shipping-and-launch** — Backup before launch to safeguard against destructive deployment mistakes.

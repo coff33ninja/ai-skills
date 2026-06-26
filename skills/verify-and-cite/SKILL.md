@@ -156,3 +156,5 @@ Verifies a claim against a file or URL and returns confidence level:
 - **audit-project** — Audit findings must cite specific evidence.
 - **release-changelog** — Before declaring a release done, verify the version number matches across the version file, changelog header, and CI configs. Cite each location.
 - **skill-loader** — Apply the capped selection policy when deciding which verification skills should also be active for fact-checking tasks.
+- **adr-and-documentation** — Verify documentation claims against actual code behavior before committing.
+- **receiving-code-review** — Verify review claims before implementing. Don't assume the reviewer is right.

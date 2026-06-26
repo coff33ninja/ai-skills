@@ -97,3 +97,5 @@ Scans a session log for correction/rejection patterns and flags when the loop th
 
 - **follow-existing-patterns** — Following patterns prevents the corrective feedback loop.
 - **skill-loader** — Apply the capped selection policy when deciding which break-loop skills should also be active.
+- **receiving-code-review** — Performative agreement is a form of sycophancy. Verify before agreeing with review feedback.
+- **writing-quality-anti-slop** — Sycophantic openers and performative enthusiasm are forms of sycophancy. This skill provides the vocabulary kill-list.

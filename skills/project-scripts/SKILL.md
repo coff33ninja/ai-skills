@@ -113,3 +113,4 @@ Activate when:
 - **toolchain-fallback** — Install and build scripts should use the detected toolchain; this skill catalogs what exists.
 
 - **uv** — The ensure-uv.ps1 script is a project install script this skill would discover and catalog.
+- **ci-cd-automation** — Use to discover existing build/test/deploy scripts before writing the pipeline configuration.

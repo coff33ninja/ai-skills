@@ -97,3 +97,4 @@ Activate when a skill is loaded and its cross-references may materially affect t
 - **anti-tool-sprawl** — Each skill load is a tool call. Batch relevant loads and avoid graph traversal.
 - **self-validate** — After skill or cross-reference edits, validate that the instruction set is internally consistent.
 - **follow-existing-patterns** — Cross-referenced skills may have their own patterns. Follow the most specific one for the current subtask.
+- **context-engineering** — Use together. skill-loader handles which skills to load; context engineering handles which project files to load.

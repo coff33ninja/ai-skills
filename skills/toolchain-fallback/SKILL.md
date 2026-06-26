@@ -94,6 +94,7 @@ The `-InstallMissing` flag allows the same script to work both locally (where yo
 - **project-scripts** — Install and build scripts discovered by project-scripts should use the detected toolchain for consistency.
 - **self-validate** — Validate that the installed toolchain actually works after fallback install.
 - **skill-loader** — Apply the capped selection policy when deciding which environment and validation guardrails should also be active for toolchain setup.
+- **ci-cd-automation** — Use together to detect available toolchains before writing pipeline configs. toolchain-fallback detects tools; ci-cd-automation wires them into pipelines.
 
 ## Bundled detection script
 

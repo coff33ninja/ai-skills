@@ -93,3 +93,4 @@ Estimates token count for a file and flags if it exceeds budget:
 
 - **universal-format-lint** — Formatting is best batched to save tokens.
 - **skill-loader** — Loading multiple cross-referenced skills consumes context. Be selective and batch loads.
+- **context-engineering** — Token efficiency is the goal. context-engineering provides the strategy; dont-kill-tokens enforces the discipline.

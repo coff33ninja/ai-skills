@@ -85,3 +85,4 @@ Analyzes a session log for excessive or redundant tool calls:
 
 - **self-validate** — Validation after operations catches failures caused by over-tooling.
 - **skill-loader** — Loading cross-referenced skills is a tool call. Batch them to avoid sprawl.
+- **context-engineering** — Tool sprawl wastes context. Context engineering helps select the right tools for the current task.

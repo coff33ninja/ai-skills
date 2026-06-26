@@ -107,6 +107,8 @@ If any workflow fails, fix and re-push.
 - **skill-loader** — Apply the expanded release-task cap when deciding which release and validation skills should also be active.
 - **security-best-practices** — Check for security advisories before releasing if the project has security-sensitive changes.
 - **git-workflow-conventional-commits** — Conventional commit types determine changelog sections (feat→Added, fix→Fixed, etc.). Ensure commits follow conventions for automatic changelog generation.
+- **ci-cd-automation** — CI/CD pipelines should trigger release workflows. release-changelog defines the release process; CI/CD automates it.
+- **shipping-and-launch** — Run release-changelog first (version bump, changelog, tag), then shipping-and-launch (deploy, rollout, monitor).
 
 ## CI/CD Workflow Reference (typical)
 

@@ -115,3 +115,5 @@ Scans the project for hardcoded secrets, code execution risks, SQL injection pat
 
 - **follow-existing-patterns** — Security fixes must match the project's existing code style and patterns.
 - **release-changelog** — Document security fixes under `### Security` in the changelog to make them visible to downstream users who need to prioritize patching.
+- **ci-cd-automation** — Integrate security scanning into the pipeline (dependency audit, SAST, secrets scan).
+- **api-contract-design** — API security (auth, rate limiting, input validation) should be designed into the contract, not added later.
