@@ -17,6 +17,7 @@ Central repository for AI agent skill definitions. Edit skills here, then push t
 │   ├── anti-rogue-actions\
 │   ├── anti-sycophancy\
 │   ├── anti-tool-sprawl\
+│   ├── api-contract-design\
 │   ├── audit-project\
 │   ├── break-repetitive-patterns\
 │   ├── ci-cd-automation\
@@ -160,6 +161,7 @@ The `name` and `description` are the primary match keys tools use to decide when
 | **anti-rogue-actions** | Prevents valid-looking API calls with absurd or destructive outcomes. Enforces business logic guardrails, parameter bounds, permission boundaries, and pre-execution sanity checks. | ✅ | | |
 | **anti-sycophancy** | Prevents Compensatory Sycophancy, Acknowledgment-Action Gap, and Infinite Fix Loops. Enforces hard resets after 2+ failed corrections. Ensures listening over validating. | ✅ | | |
 | **anti-tool-sprawl** | Prevents over-tooling, tool spam, context bloat, and convergence failure. Enforces lean tool selection, deduplication, step limits, and progress detection. | ✅ | | |
+| **api-contract-design** | Contract-first API development — error semantics, status codes, request/response design, OpenAPI/Swagger standards. Prevents inconsistent APIs and breaking changes without migration paths. | | | |
 | **audit-project** | Runs a systematic audit of a project — checking dependency health, security vulnerabilities, config integrity, code consistency, disk usage, and environment portability. Produces a report with findings prioritized by severity. | ✅ | | |
 | **break-repetitive-patterns** | Detects when user is asking repetitive questions and helps break out of trained logic patterns by triggering proactive research and alternative approaches. | ✅ | | |
 | **ci-cd-automation** | Pipeline setup/maintenance standards, CI best practices, Shift Left principle. Broader than toolchain-fallback (toolchain detection); this covers the full CI/CD automation pipeline. Write pipelines before merging, test in CI, fail fast. | | | |
