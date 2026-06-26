@@ -19,6 +19,7 @@ Central repository for AI agent skill definitions. Edit skills here, then push t
 │   ├── anti-tool-sprawl\
 │   ├── audit-project\
 │   ├── break-repetitive-patterns\
+│   ├── ci-cd-automation\
 │   ├── code-collaborate-qa\
 │   ├── code-review\
 │   ├── code-simplification\
@@ -161,6 +162,7 @@ The `name` and `description` are the primary match keys tools use to decide when
 | **anti-tool-sprawl** | Prevents over-tooling, tool spam, context bloat, and convergence failure. Enforces lean tool selection, deduplication, step limits, and progress detection. | ✅ | | |
 | **audit-project** | Runs a systematic audit of a project — checking dependency health, security vulnerabilities, config integrity, code consistency, disk usage, and environment portability. Produces a report with findings prioritized by severity. | ✅ | | |
 | **break-repetitive-patterns** | Detects when user is asking repetitive questions and helps break out of trained logic patterns by triggering proactive research and alternative approaches. | ✅ | | |
+| **ci-cd-automation** | Pipeline setup and maintenance standards, CI best practices, Shift Left principle. Broader than toolchain-fallback (toolchain detection); covers the full CI/CD automation pipeline. | | | |
 | **code-collaborate-qa** | Guides code-focused Q&A for code review, bug diagnosis, and implementation suggestions. Asks about developer intent, reproduction steps, constraints, and trade-offs before writing code or giving feedback. Use when the user asks for code review, bug fix help, refactoring suggestions, performance improvements, or implementation advice. Not for requirements gathering (use requirements-clarify instead). | ✅ | | |
 | **code-review** | Enforces systematic multi-axis code review (correctness, readability, architecture, security, performance) with severity ratings and actionable findings. Use before merging, before declaring done, or when explicitly asked to review code. Unlike code-collaborate-qa (conversational Q&A), this is a structured process with checklists. | | | |
 | **code-simplification** | Enforces simplicity — Chesterton's Fence (understand why before removing), Rule of 500 (keep functions/files under 500 lines), Occam's Razor for code. Counteracts the natural tendency to add unnecessary abstraction layers. | | | |
