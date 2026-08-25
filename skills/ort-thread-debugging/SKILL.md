@@ -15,7 +15,7 @@ Additionally, insertion sort bugs (`j++` instead of `j--`) produce panics that l
 
 Activate when:
 - `session.Run()` crashes with access violation, index out of range, or segfault
-- Error mentions ORT, onnxruntime, or ONNX session
+- Error mentions ORT, onnxruntime, or ONNX session together with a thread-related signal, such as native access violations under concurrent use or session creation and `Run` occurring in different goroutines
 - Embedding computation works in isolation but crashes in the server
 - Panic message says `index out of range [N] with length N` (check if N matches embedding dimension or result count)
 - Embeddings work in a test binary but fail when called from MCP/HTTP handlers
