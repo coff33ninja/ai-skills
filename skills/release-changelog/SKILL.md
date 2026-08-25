@@ -117,3 +117,62 @@ If any workflow fails, fix and re-push.
 | auto-tag | push to default branch changing version file | Creates git tag `vX.Y.Z` |
 | release | tag push `v*.*.*` | Release, tests, build artifacts |
 | versioned-doc sync | tag push or version file change | Syncs version badges/docs |
+
+## CI Auto-Patch for Dependency-Only Changes
+
+When a dependency changes (`package.json`, `Cargo.toml`, `pyproject.toml`) but the version file is NOT bumped, the release workflow should NOT fire. Instead, an auto-patch workflow can detect this and ship a PATCH release automatically.
+
+### Pattern
+
+```yaml
+# .github/workflows/auto-tag.yml (excerpt)
+on:
+  push:
+    paths:
+      - 'package.json'
+      - 'bun.lock'
+
+jobs:
+  auto-patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: version-check
+        run: |
+          CURRENT=$(jq -r .version package.json)
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          TAG_VERSION=${LAST_TAG#v}
+          if [ "$CURRENT" = "$TAG_VERSION" ]; then
+            echo "dependency_only=true" >> $GITHUB_OUTPUT
+          else
+            echo "dependency_only=false" >> $GITHUB_OUTPUT
+          fi
+      - if: steps.version-check.outputs.dependency_only == 'true'
+        run: |
+          # Auto-bump patch version
+          CURRENT=$(jq -r .version package.json)
+          PATCH=$(( $(echo $CURRENT | cut -d. -f3) + 1 ))
+          NEW_VERSION=$(echo $CURRENT | sed "s/\\.[0-9]*$/.${PATCH}/")
+          jq --arg v "$NEW_VERSION" '.version = $v' package.json > tmp && mv tmp package.json
+          # Add changelog entry
+          sed -i "/^## \\[Unreleased\\]/a \\n## [$NEW_VERSION] - $(date +%Y-%m-%d)\\n\\n### Changed\\n- Dependency updates" CHANGELOG.md
+          # Commit, tag, push
+          git add package.json CHANGELOG.md
+          git commit -m "chore: v${NEW_VERSION} (dependency updates)"
+          git tag "v${NEW_VERSION}"
+          git push && git push --tags
+```
+
+### Key decisions
+
+- **Detect**: Compare version file against latest git tag. If equal + dependency files changed = dependency-only update.
+- **Bump**: Only patch version. Never auto-bump minor/major for dependency changes.
+- **Changelog**: Add a "Dependency updates" entry. List specific packages if possible.
+- **Verify**: The auto-tag workflow must NOT fire for dependency-only changes (it should only trigger on version file changes). The auto-patch workflow handles this case separately.
+
+### When NOT to auto-patch
+
+- README-only changes (should not trigger any release)
+- Dev dependency changes (only auto-patch runtime dependencies)
+- When the project has no test suite (dependency updates without tests are risky)
+- When the version bump would be minor/major (always manual for breaking changes)

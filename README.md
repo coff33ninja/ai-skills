@@ -26,14 +26,16 @@ Central repository for AI agent skill definitions. Edit skills here, then push t
 │   ├── code-simplification\
 │   ├── context-engineering\
 │   ├── debugging-and-error-recovery\
+│   ├── dependency-version-conflict\
 │   ├── detect-utf8\
 │   ├── dont-kill-tokens\
 │   ├── follow-existing-patterns\
 │   ├── git-workflow-conventional-commits\
 │   ├── incremental-implementation\
+│   ├── ml-training-pipeline\
 │   ├── no-dead-code-removal\
-│   ├── os-awareness\
 │   ├── ort-thread-debugging\
+│   ├── os-awareness\
 │   ├── performance-optimization\
 │   ├── playwright\
 │   ├── portable-self-contained\
@@ -52,9 +54,11 @@ Central repository for AI agent skill definitions. Edit skills here, then push t
 │   ├── skill-design-assistant\
 │   ├── skill-loader\
 │   ├── spec-driven-development\
+│   ├── sql-orm-safety\
 │   ├── test-driven-development\
 │   ├── todo-bootstrap\
 │   ├── toolchain-fallback\
+│   ├── ui-visual-verification\
 │   ├── universal-format-lint\
 │   ├── unused-import-implementation\
 │   ├── uv\
@@ -174,14 +178,16 @@ The `name` and `description` are the primary match keys tools use to decide when
 | **code-simplification** | Enforces simplicity — Chesterton's Fence (understand why before removing), Rule of 500 (keep functions/files under 500 lines), Occam's Razor for code. Counteracts the natural tendency to add unnecessary abstraction layers. | | | |
 | **context-engineering** | Token-aware context management — selects what context to include, when to load reference files, how to use progressive disclosure. Prevents context bloat while ensuring the right information is available. | | | |
 | **debugging-and-error-recovery** | Enforces structured debugging workflow — reproduce, localize, reduce, fix, guard. No fix until root cause is identified with file:line evidence. One-change-at-a-time hypothesis testing. Prevents surface-level fixes and random guessing. | | | |
+| **dependency-version-conflict** | Debug cascading version incompatibilities across package dependency chains. | | | |
 | **detect-utf8** | Detects whether the terminal, console, or device supports UTF-8 encoding. Checks code page, .NET encoding defaults, environment locale, and verifies with a round-trip test of Unicode characters. | ✅ | | |
 | **dont-kill-tokens** | Enforces token-efficient tool use. Prevents wasteful reads, redundant searches, unnecessary output, and bloated responses. Activates on all tasks to minimize context consumption. | ✅ | | |
 | **follow-existing-patterns** | Enforces that all new code, docs, and config match the existing codebase conventions, structure, and style — preventing inconsistent implementations that get reworked each session. | ✅ | | |
 | **git-workflow-conventional-commits** | Enforces standardized git workflow — conventional commits, atomic commits (one concern per), branch naming, PR standards, and commit message formatting. Prevents inconsistent history and unreadable git log. | | | |
 | **incremental-implementation** | Breaks changes into thin vertical slices. Start with a minimal end-to-end slice, then add layers. Prevents massive diffs that are impossible to review and merge conflicts from long-lived branches. | | | |
+| **ml-training-pipeline** | Debug ML training pipelines that stop early, OOM on eval, or produce wrong epoch counts. | | | |
 | **no-dead-code-removal** | Never remove dead code you added. Refactor it into something useful instead. Deletion is not an option for code you wrote in this session. | ✅ | | |
-| **os-awareness** | Forces the AI to detect, confirm, and remember the host operating system before any command execution, file operation, or path construction. Prevents Linux-isms on Windows, wrong path separators, incorrect shebangs, and incompatible shell syntax. | ✅ | | |
 | **ort-thread-debugging** | Diagnoses ORT thread-affinity crashes and sort-direction bugs in Go MCP servers. | | | |
+| **os-awareness** | Forces the AI to detect, confirm, and remember the host operating system before any command execution, file operation, or path construction. Prevents Linux-isms on Windows, wrong path separators, incorrect shebangs, and incompatible shell syntax. | ✅ | | |
 | **performance-optimization** | Measure-first approach — profile before optimizing, Core Web Vitals, bundle analysis, database query optimization. Prevents premature optimization while catching real performance issues. | | | |
 | **playwright** | Use when the task requires automating a real browser from the terminal (navigation, form filling, snapshots, screenshots, data extraction, UI-flow debugging) via `playwright-cli` invoked through npx in the project directory. | | | |
 | **portable-self-contained** | Keeps all dependencies, SDKs, virtual environments, and tooling inside the project directory. Prevents polluting the OS drive (especially C: with <30% free) by using project-local installs. Always checks disk space and documents the setup. | ✅ | | |
@@ -197,12 +203,14 @@ The `name` and `description` are the primary match keys tools use to decide when
 | **security-threat-model** | Repository-grounded threat modeling that enumerates trust boundaries, assets, attacker capabilities, abuse paths, and mitigations, and writes a concise Markdown threat model. Trigger only when the user explicitly asks to threat model a codebase or path, enumerate threats/abuse paths, or perform AppSec threat modeling. Do not trigger for general architecture summaries, code review, or non-security design work. | ✅ | | ✅ |
 | **self-validate** | After any batch of changes (edits, skill updates, cross-references, docs), runs systematic validation to catch inconsistencies, missing references, broken links, and syntax errors before declaring done. Prevents the need for follow-up corrections. | ✅ | | |
 | **shipping-and-launch** | Pre-launch checklists, staged rollouts (canary -> 10% -> 50% -> 100%), rollback plans, feature flag verification. Complements release-changelog (version bump + changelog) by covering the actual deployment and launch process. | | | |
-| **skill-design-assistant** | Turns debugging experiences into well-structured, reusable skills. | | | |
+| **skill-design-assistant** | Turns debugging experiences into well-structured, reusable skills. | ✅ | | |
 | **skill-loader** | When a skill is loaded, selectively loads the most relevant direct cross-references with strict caps. Preserves core operating discipline without letting cross-references cascade into context bloat. | | | |
 | **spec-driven-development** | Forces writing a specification before any code changes. Defines goals, inputs/outputs, constraints, edge cases, and acceptance criteria before implementation. Use when starting any non-trivial feature, refactor, or bug fix. Prevents solving the wrong problem. | | | |
+| **sql-orm-safety** | Prevents ambiguous column errors and silent data bugs from raw SQL in ORM templates. | | | |
 | **test-driven-development** | Enforces RED-GREEN-REFACTOR cycle — write a failing test first, write minimal code to pass, then refactor. Use when implementing new features, fixing bugs, or adding regression coverage. Prevents untestable code and false confidence from untested changes. | | | |
 | **todo-bootstrap** | Create or refresh a project TODO checklist using Markdown checkboxes and keep it current as work progresses. Use when a repo has no TODO tracker, when the user asks for a backlog, roadmap, status checklist, or progress board, or when docs exist but do not yet include a canonical checkbox-based task list. | ✅ | | |
 | **toolchain-fallback** | Detects available build toolchains (MSYS2, Zig, GCC, Clang, Visual Studio) and falls back to a working alternative when none are found. Any implementation scripts follow the project's scripts/ folder convention. | ✅ | | |
+| **ui-visual-verification** | Verify UI colors and layout by pixel sampling, not OCR. Preserve chrome when fixing colors. | | | |
 | **universal-format-lint** | Run language-appropriate formatter and lint-fix commands for changed files. Use when the user asks to format, lint, auto-fix, or clean code style across Python, JavaScript/TypeScript, Markdown, YAML/JSON, PowerShell, shell scripts, and similar files. | ✅ | | |
 | **unused-import-implementation** | Diagnose and resolve newly added but unused imports by inferring intent from surrounding code and implementing the missing use case. Use when linting or review reports an unused import and the import appears intentional or recent, and the goal is to complete behavior rather than remove code. | ✅ | | |
 | **uv** | Use when installing Python tooling, managing Python environments, running Python scripts, or managing Python dependencies. Use command `uv` for all Python operations instead of `pip` or `python -m venv`. | ✅ | | |
