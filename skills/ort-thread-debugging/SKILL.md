@@ -54,7 +54,10 @@ func (e *Embedder) runLoop() {
     defer runtime.UnlockOSThread()
 
     // Create session HERE — on the locked thread
-    session, _ := ort.NewDynamicAdvancedSession(modelPath, inputs, outputs, nil)
+    session, err := ort.NewDynamicAdvancedSession(modelPath, inputs, outputs, nil)
+    if err != nil {
+        panic(err)
+    }
     defer session.Destroy()
 
     for {
