@@ -89,7 +89,7 @@ The triggers determine whether the skill loads at the right time. Vague triggers
 
 ### 5. Write the Protocol with file:line specificity
 
-Every step should reference specific code patterns, not abstract advice:
+Every step should reference concrete repository paths and line numbers when a repository is available; when no repository is available, specific code patterns are acceptable:
 
 BAD: "Check for thread safety issues"
 
