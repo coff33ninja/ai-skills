@@ -1,6 +1,6 @@
 ---
 name: skill-design-assistant
-description: Guides users through designing, iterating, and shipping new skills from real debugging experiences. Turns "I just spent 4 hours on this" into a reusable skill that prevents the next person from repeating it.
+description: Turns debugging experiences into well-structured, reusable skills.
 ---
 
 # Skill Design Assistant
@@ -144,6 +144,21 @@ Before shipping a skill, verify:
 - [ ] "When NOT to use" has at least 2 items
 - [ ] Cross-references exist (minimum 2)
 - [ ] No duplicate content with existing skills
+
+### 10. Submit to the ai-skills repo
+
+Once the skill passes the quality checklist, use the bundled script to copy it into the repo and open a PR:
+
+```powershell
+.\scripts\submit-skill.ps1 -SkillPath "C:\path\to\my-skill"
+```
+
+Options:
+- `-Draft` — opens the PR as a draft for further iteration
+- `-DryRun` — shows what would happen without making changes
+- `-RepoPath` — override the ai-skills repo location (defaults to the repo this script lives in)
+
+The script validates the SKILL.md frontmatter, copies the skill directory, runs the README catalog updater, creates a feature branch, and opens a PR via `gh`.
 
 ## When NOT to use
 

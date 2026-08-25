@@ -33,6 +33,7 @@ Central repository for AI agent skill definitions. Edit skills here, then push t
 │   ├── incremental-implementation\
 │   ├── no-dead-code-removal\
 │   ├── os-awareness\
+│   ├── ort-thread-debugging\
 │   ├── performance-optimization\
 │   ├── playwright\
 │   ├── portable-self-contained\
@@ -48,6 +49,7 @@ Central repository for AI agent skill definitions. Edit skills here, then push t
 │   ├── security-threat-model\
 │   ├── self-validate\
 │   ├── shipping-and-launch\
+│   ├── skill-design-assistant\
 │   ├── skill-loader\
 │   ├── spec-driven-development\
 │   ├── test-driven-development\
@@ -179,6 +181,7 @@ The `name` and `description` are the primary match keys tools use to decide when
 | **incremental-implementation** | Breaks changes into thin vertical slices. Start with a minimal end-to-end slice, then add layers. Prevents massive diffs that are impossible to review and merge conflicts from long-lived branches. | | | |
 | **no-dead-code-removal** | Never remove dead code you added. Refactor it into something useful instead. Deletion is not an option for code you wrote in this session. | ✅ | | |
 | **os-awareness** | Forces the AI to detect, confirm, and remember the host operating system before any command execution, file operation, or path construction. Prevents Linux-isms on Windows, wrong path separators, incorrect shebangs, and incompatible shell syntax. | ✅ | | |
+| **ort-thread-debugging** | Diagnoses ORT thread-affinity crashes and sort-direction bugs in Go MCP servers. | | | |
 | **performance-optimization** | Measure-first approach — profile before optimizing, Core Web Vitals, bundle analysis, database query optimization. Prevents premature optimization while catching real performance issues. | | | |
 | **playwright** | Use when the task requires automating a real browser from the terminal (navigation, form filling, snapshots, screenshots, data extraction, UI-flow debugging) via `playwright-cli` invoked through npx in the project directory. | | | |
 | **portable-self-contained** | Keeps all dependencies, SDKs, virtual environments, and tooling inside the project directory. Prevents polluting the OS drive (especially C: with <30% free) by using project-local installs. Always checks disk space and documents the setup. | ✅ | | |
@@ -194,6 +197,7 @@ The `name` and `description` are the primary match keys tools use to decide when
 | **security-threat-model** | Repository-grounded threat modeling that enumerates trust boundaries, assets, attacker capabilities, abuse paths, and mitigations, and writes a concise Markdown threat model. Trigger only when the user explicitly asks to threat model a codebase or path, enumerate threats/abuse paths, or perform AppSec threat modeling. Do not trigger for general architecture summaries, code review, or non-security design work. | ✅ | | ✅ |
 | **self-validate** | After any batch of changes (edits, skill updates, cross-references, docs), runs systematic validation to catch inconsistencies, missing references, broken links, and syntax errors before declaring done. Prevents the need for follow-up corrections. | ✅ | | |
 | **shipping-and-launch** | Pre-launch checklists, staged rollouts (canary -> 10% -> 50% -> 100%), rollback plans, feature flag verification. Complements release-changelog (version bump + changelog) by covering the actual deployment and launch process. | | | |
+| **skill-design-assistant** | Turns debugging experiences into well-structured, reusable skills. | | | |
 | **skill-loader** | When a skill is loaded, selectively loads the most relevant direct cross-references with strict caps. Preserves core operating discipline without letting cross-references cascade into context bloat. | | | |
 | **spec-driven-development** | Forces writing a specification before any code changes. Defines goals, inputs/outputs, constraints, edge cases, and acceptance criteria before implementation. Use when starting any non-trivial feature, refactor, or bug fix. Prevents solving the wrong problem. | | | |
 | **test-driven-development** | Enforces RED-GREEN-REFACTOR cycle — write a failing test first, write minimal code to pass, then refactor. Use when implementing new features, fixing bugs, or adding regression coverage. Prevents untestable code and false confidence from untested changes. | | | |

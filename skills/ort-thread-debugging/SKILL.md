@@ -1,6 +1,6 @@
 ---
 name: ort-thread-debugging
-description: Diagnoses ONNX Runtime thread-affinity crashes, embedding dimension mismatches, and sort-direction bugs in Go. Prevents the #1 class of ORT failures in MCP servers and long-running processes.
+description: Diagnoses ORT thread-affinity crashes and sort-direction bugs in Go MCP servers.
 ---
 
 # ORT Thread Debugging Skill
@@ -46,12 +46,14 @@ The correct pattern routes all ORT operations through a single goroutine that lo
 type Embedder struct {
     runCh  chan computeRequest
     stopCh chan struct{}
+    done   chan struct{}  // closed when runLoop exits
     // ...
 }
 
 func (e *Embedder) runLoop() {
     runtime.LockOSThread()          // Pin this goroutine to one OS thread
     defer runtime.UnlockOSThread()
+    defer close(e.done)             // Signal that runLoop has exited
 
     // Create session HERE — on the locked thread
     session, err := ort.NewDynamicAdvancedSession(modelPath, inputs, outputs, nil)
@@ -66,14 +68,26 @@ func (e *Embedder) runLoop() {
             results, err := e.runOnSession(session, req.texts)
             req.out <- computeResult{results: results, err: err}
         case <-e.stopCh:
-            return
+            // Drain queued requests so Compute callers don't block forever
+            for {
+                select {
+                case req := <-e.runCh:
+                    req.out <- computeResult{err: errors.New("embedder shutting down")}
+                default:
+                    return
+                }
+            }
         }
     }
 }
 
 func (e *Embedder) Compute(text string) ([]float32, error) {
     req := computeRequest{texts: []string{text}, out: make(chan computeResult, 1)}
-    e.runCh <- req
+    select {
+    case e.runCh <- req:
+    case <-e.done:
+        return nil, errors.New("embedder stopped")
+    }
     res := <-req.out
     return res.results, res.err
 }
@@ -84,6 +98,8 @@ Key points:
 - Session is created inside the locked goroutine, not in `InitEmbedder`
 - All compute calls route through a channel to this goroutine
 - Use a buffered channel (`make(chan computeResult, 1)`) to prevent deadlock
+- `Compute` checks the `done` channel to avoid blocking forever if `runLoop` has exited
+- `runLoop` drains queued requests on shutdown so callers get an error instead of hanging
 
 ### 3. Distinguish ORT panics from sort/logic panics
 
