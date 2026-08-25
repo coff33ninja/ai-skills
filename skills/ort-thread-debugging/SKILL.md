@@ -120,7 +120,7 @@ func main() {
 }
 ```
 
-If this crashes, the thread locking is wrong. If it succeeds, the issue is elsewhere.
+Use this test as evidence about reproducibility, then inspect the native stack, provider, model, inputs, and lifecycle independently; neither a crash nor a successful run is conclusive.
 
 ### 5. Check embedding dimensions
 
