@@ -122,21 +122,31 @@ If any workflow fails, fix and re-push.
 
 When a dependency changes (`package.json`, `Cargo.toml`, `pyproject.toml`) but the version file is NOT bumped, the release workflow should NOT fire. Instead, an auto-patch workflow can detect this and ship a PATCH release automatically.
 
-### Pattern
+### Pattern (Node.js example)
+
+Adapt the version-extraction command for your ecosystem (`jq` for JSON, `grep` for TOML, etc.).
 
 ```yaml
-# .github/workflows/auto-tag.yml (excerpt)
+# .github/workflows/auto-patch.yml
+name: Auto-patch dependency updates
 on:
   push:
+    branches: [main]
     paths:
       - 'package.json'
       - 'bun.lock'
+
+permissions:
+  contents: write
 
 jobs:
   auto-patch:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # full history needed for git describe --tags
+
       - id: version-check
         run: |
           CURRENT=$(jq -r .version package.json)
@@ -147,16 +157,19 @@ jobs:
           else
             echo "dependency_only=false" >> $GITHUB_OUTPUT
           fi
+
       - if: steps.version-check.outputs.dependency_only == 'true'
         run: |
-          # Auto-bump patch version
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           CURRENT=$(jq -r .version package.json)
           PATCH=$(( $(echo $CURRENT | cut -d. -f3) + 1 ))
           NEW_VERSION=$(echo $CURRENT | sed "s/\\.[0-9]*$/.${PATCH}/")
           jq --arg v "$NEW_VERSION" '.version = $v' package.json > tmp && mv tmp package.json
-          # Add changelog entry
+
           sed -i "/^## \\[Unreleased\\]/a \\n## [$NEW_VERSION] - $(date +%Y-%m-%d)\\n\\n### Changed\\n- Dependency updates" CHANGELOG.md
-          # Commit, tag, push
+
           git add package.json CHANGELOG.md
           git commit -m "chore: v${NEW_VERSION} (dependency updates)"
           git tag "v${NEW_VERSION}"

@@ -7,7 +7,7 @@ description: Prevents ambiguous column errors and silent data bugs from raw SQL 
 
 ## Problem it solves
 
-ORMs like Drizzle, Sequelize, and TypeORM let you write raw SQL inside template literals. These templates silently strip table qualifications when rendered, producing queries with ambiguous column names that crash at runtime. The bug is invisible during development (single-table queries work fine) and only appears when joins or subqueries involve multiple tables with overlapping column names like `id`, `name`, or `created_at`.
+ORMs like Drizzle, Sequelize, and TypeORM let you write raw SQL inside template literals. When these fragments appear in subqueries or complex joins, the developer must manually qualify all column references — the ORM can't resolve unqualified column names in raw SQL context. This creates ambiguous column errors that are invisible during development (single-table queries work fine) and only appear when joins or subqueries involve multiple tables with overlapping column names like `id`, `name`, or `created_at`.
 
 ## Detection triggers
 
@@ -49,7 +49,7 @@ JOIN stock_movements ON stock_movements.inventory_id = inventory.id
 
 ### 3. Replace correlated subqueries with separate aggregates
 
-ORM `sql()` template fragments lose table context. Instead of embedding subqueries, run separate queries and join in application code:
+ORM `sql()` template fragments inside subqueries require manual qualification of every column reference. Instead of embedding complex subqueries, run separate queries and join in application code:
 ```typescript
 // BAD — sql() template strips table qualification inside subquery
 const items = await db.select({
@@ -106,6 +106,6 @@ await db.insert(purchases).values({
 ## Lessons learned
 
 Real bugs caught by this skill:
-1. Drizzle `sql()` template strips table qualification inside subqueries → "ambiguous column name: id" only appears after adding a second table
+1. Raw SQL fragments in ORM subqueries require manual column qualification — missing qualifiers cause "ambiguous column name" errors only after adding a second table
 2. Legacy `NOT NULL` display columns must be backfilled from new FK on every write path — missing one creates constraint violations
 3. Separate aggregate queries + application-code Map joins are more reliable than correlated subqueries in ORM templates

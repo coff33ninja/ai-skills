@@ -7,7 +7,7 @@ description: Debug ML training pipelines that stop early, OOM on eval, or produc
 
 ## Problem it solves
 
-ML training frameworks have silent failure modes that look like model bugs but are actually pipeline infrastructure issues. TensorFlow's ` keras.utils.Sequence` adapter doesn't loop sequences (stops after 1 epoch), epoch-end evaluation spikes memory and silently kills the process on small GPUs, and virtual environment Python executables are redirector stubs that report wrong PIDs. These issues waste hours because the error messages point at the model, not the pipeline.
+ML training frameworks have silent failure modes that look like model bugs but are actually pipeline infrastructure issues. TensorFlow's ` keras.utils.Sequence` adapter may produce too few batches per epoch when `__len__` is small, epoch-end evaluation spikes memory and silently kills the process on small GPUs, and virtual environment Python executables are redirector stubs that report wrong PIDs. These issues waste hours because the error messages point at the model, not the pipeline.
 
 ## Detection triggers
 
@@ -23,24 +23,24 @@ Activate when:
 
 ### 1. Check if the data adapter loops
 
-TensorFlow 2.10 `KerasSequenceAdapter` enumerates `range(len(sequence))` then raises `StopIteration`. It does NOT loop.
+TensorFlow's `model.fit` iterates the adapter once per epoch. If `__len__` returns a small number, you get few batches per epoch and the training appears to stall. If `__len__` is `sys.maxsize` and `shuffle=True`, the adapter does `list(range(len))` and OOMs.
 
 Verify:
 ```python
-# Check if your Sequence class actually loops
 import tensorflow as tf
-print(f"Adapter type: {type(model.fit_generator_ARGS['sequences']).__name__}")
-# If it's KerasSequenceAdapter, it won't loop
+# Check your Sequence's __len__ — is it reasonable?
+seq = YourSequence()
+print(f"__len__ = {len(seq)}")  # Should be ~samples/batch_size
 ```
 
-Fix — make `__len__` return a large finite multiple and wrap `__getitem__`:
+Fix — make `__len__` return a moderate multiple and wrap `__getitem__`:
 ```python
 class LoopingSequence(tf.keras.utils.Sequence):
     def __init__(self, original):
         self.original = original
 
     def __len__(self):
-        # Large finite multiple — NOT sys.maxsize (adapter does list(range(len)))
+        # Moderate multiple — NOT sys.maxsize (causes OOM with shuffle=True)
         return len(self.original) * 1000
 
     def __getitem__(self, idx):
@@ -73,8 +73,10 @@ Virtual environment `python.exe` on Windows is a redirector stub. `Start-Process
 # BAD — this kills the stub, not the trainer
 Stop-Process -Id $stubPid
 
-# GOOD — find and kill the actual python process
-Get-Process python | Where-Object {$_.CPU -gt 0} | Stop-Process
+# GOOD — find the actual trainer by its child relationship
+$stub = Get-Process -Id $stubPid -ErrorAction SilentlyContinue
+$trainer = Get-CimInstance Win32_Process -Filter "ParentProcessId=$($stub.Id)" | Where-Object { $_.Name -eq "python.exe" }
+if ($trainer) { Stop-Process -Id $trainer.ProcessId }
 ```
 
 ### 4. Verify multi-epoch completion
@@ -115,7 +117,7 @@ Mismatched dimensions cause silent accuracy degradation, not crashes.
 ## Lessons learned
 
 Real bugs caught by this skill:
-1. TF 2.10 `KerasSequenceAdapter` does NOT loop — make `__len__` return `len(seq)*1000` and wrap `__getitem__` with modulo + `on_epoch_end`
+1. TF `KerasSequenceAdapter` produces few batches when `__len__` is small — make `__len__` return `len(seq)*1000` and wrap `__getitem__` with modulo + `on_epoch_end`
 2. `sys.maxsize` as `__len__` causes OOM — the adapter does `list(range(len))` when `shuffle=True`
 3. Per-epoch evaluation silently kills the process on 6GB GPUs — use `--no-evaluation` and evaluate once after training
 4. venv `python.exe` on Windows is a redirector stub — the real PID is the child process

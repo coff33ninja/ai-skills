@@ -7,7 +7,7 @@ description: Debug cascading version incompatibilities across package dependency
 
 ## Problem it solves
 
-Package managers report metadata-level compatibility, but the real conflict is inside the wheel/jar/artifact. A package declares `protobuf>=3.20` but its generated `_pb2.py` imports `google.protobuf.internal.builder` which only exists in 3.20.x — not 3.19, not 3.21, not 4.x. Pip says "all satisfied" while the runtime crashes with `ImportError`. These cascading chains are the hardest dependency bugs to diagnose because each package looks fine in isolation.
+Package managers report metadata-level compatibility, but the real conflict is inside the wheel/jar/artifact. A package declares `protobuf>=3.20` but its generated `_pb2.py` imports `google.protobuf.internal.builder` which may not exist in older versions. Pip says "all satisfied" while the runtime crashes with `ImportError`. These cascading chains are the hardest dependency bugs to diagnose because each package looks fine in isolation.
 
 ## Detection triggers
 
