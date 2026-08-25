@@ -92,7 +92,7 @@ When you see `index out of range [N] with length N`:
 - If N equals the number of results/skills: likely insertion sort bug (`j++` instead of `j--`)
 - If N is random: likely memory corruption from cross-thread ORT access
 
-Check the stack trace line number. If it's in a sort function, fix the sort direction. If it's in `runBatch` slicing output tensors, it's a thread affinity issue.
+Check the stack trace line number. If it's in a sort function, fix the sort direction. If it's in `runBatch` slicing output tensors, investigate the tensor shape and slice indices. Diagnose thread-affinity issues only when session creation and execution occur on different locked OS threads or when native ORT failures provide evidence.
 
 ### 4. Verify with isolated test
 
