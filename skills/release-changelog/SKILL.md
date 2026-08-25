@@ -135,6 +135,10 @@ on:
     paths:
       - 'package.json'
       - 'bun.lock'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+      - 'pyproject.toml'
+      - 'poetry.lock'
 
 permissions:
   contents: write
